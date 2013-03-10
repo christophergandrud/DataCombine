@@ -1,6 +1,6 @@
 \name{FillIn}
 \alias{FillIn}
-\title{An R function for filling in missing values of a variable from one data frame with the values from another variable.}
+\title{A function for filling in missing values of a variable from one data frame with the values from another variable.}
 \usage{
   FillIn(D1, D2, Var1, Var2 = NULL,
     KeyVar = c("iso2c", "year"))

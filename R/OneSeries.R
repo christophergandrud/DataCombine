@@ -4,11 +4,11 @@
 #'
 #' @param data a data frame object
 #' @param Var1 a character string of the column identifying the observations.
-#' @param Var2 a character of the column identifying 
+#' @param Var2 a character of the column identifying the time variable to use to select when to use each of the units. 
 #'
 #'
 #'
 #'
 #' @export
 
-OneSeries <- function(data, Var1, Var2,  )
+# OneSeries <- function(data, Var1, Var2,  )

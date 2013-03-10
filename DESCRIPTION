@@ -14,5 +14,5 @@ Depends:
 Imports:
     data.table
 Collate:
-    'FillIn.R',
-    'OneSeries.R'
+    'MoveFront.R'
+    'FillIn.R'
