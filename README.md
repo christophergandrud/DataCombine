@@ -5,6 +5,6 @@ DataCombine
 
 ### Version 0.01
 
-### Note: **DataCombine** is in beta. Please report any bugs at <https://github.com/christophergandrud/DataCombine/issues>.
+### Note: **DataCombine** is in beta. Please report any bugs at: <https://github.com/christophergandrud/DataCombine/issues>.
 
 ---

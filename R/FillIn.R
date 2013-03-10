@@ -22,6 +22,8 @@
 #' # Fill in missing f's from naDF with values from fillDF
 #' FilledInData <- FillIn(naDF, fillDF, Var1 = "fNA", Var2 = "fFull", KeyVar = c("a", "b"))
 #'
+#' @import data.table
+#' @export
 
 FillIn <- function(D1, D2, Var1, Var2 = NULL, KeyVar = c("iso2c", "year"))
 {
