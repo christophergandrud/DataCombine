@@ -1,4 +1,4 @@
-#' An R function for filling in missing values of a variable from one data frame with the values from another variable.
+#' A function for filling in missing values of a variable from one data frame with the values from another variable.
 #'
 #' \code{FillIn} uses values of a variable from one data set to fill in missing values in another.
 #' 
