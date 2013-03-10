@@ -1,9 +1,18 @@
 Package: DataCombine
 Type: Package
 Title: What the package does (short line)
-Version: 1.0
+Version: 0.01
 Date: 2013-03-10
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Christopher Gandrud
+Maintainer: Christopher Gandrud <christopher.gandrud@gmail.com>
+Description: R tools for combining data sets.
+License: GPL (>= 2)
+URL: http://christophergandrud.github.com/DataCombine/
+BugReports: https://github.com/christophergandrud/DataCombine/issues
+Depends:
+    R (>= 2.15.2)
+
+Imports:
+	data.table
+Collate:
+	'FillIn.R'
