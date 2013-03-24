@@ -3,7 +3,7 @@ DataCombine
 
 ### Christopher Gandrud
 
-### Version 0.01
+### Version 0.1.1
 
 ### Note: **DataCombine** is in beta. Please report any bugs at: <https://github.com/christophergandrud/DataCombine/issues>.
 

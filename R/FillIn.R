@@ -7,6 +7,7 @@
 #' @param Var1 a character string of the name of the variable in \code{D1} you want to fill in.
 #' @param Var2 an optional character string of variable name in \code{D2} that you would like to use to fill in.
 #' @param KeyVar a character vector of variable names that are shared by \code{D1} and \code{D2} that can be used to join the data frames.
+#' @param allow.cartesian logical. See the \code{\link{data.table}} documentation for more details.
 #' 
 #' @examples 
 #' # Create data set with missing values
@@ -25,7 +26,7 @@
 #' @import data.table
 #' @export
 
-FillIn <- function(D1, D2, Var1, Var2 = NULL, KeyVar = c("iso2c", "year"))
+FillIn <- function(D1, D2, Var1, Var2 = NULL, KeyVar = c("iso2c", "year"), allow.cartesian = FALSE)
 {
   # Give Var2 the same name as var1 if Var2 is NULL
   if (is.null(Var2)){

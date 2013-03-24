@@ -3,7 +3,7 @@
 \title{A function for filling in missing values of a variable from one data frame with the values from another variable.}
 \usage{
   FillIn(D1, D2, Var1, Var2 = NULL,
-    KeyVar = c("iso2c", "year"))
+    KeyVar = c("iso2c", "year"), allow.cartesian = FALSE)
 }
 \arguments{
   \item{D1}{the data frame with the variable you would like
@@ -21,6 +21,9 @@
   \item{KeyVar}{a character vector of variable names that
   are shared by \code{D1} and \code{D2} that can be used to
   join the data frames.}
+
+  \item{allow.cartesian}{logical. See the
+  \code{\link{data.table}} documentation for more details.}
 }
 \description{
   \code{FillIn} uses values of a variable from one data set
