@@ -1,6 +1,6 @@
 Version 0.01.2
 
-Minor documentation changes.
+Stop message for `MoveFront` when variable does not exists. Other minor documentation changes.
 
 Version 0.1.1 
 

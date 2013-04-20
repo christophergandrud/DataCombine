@@ -20,7 +20,14 @@
 
 MoveFront <- function(data, Var)
 {
-	col_idx <- grep(Var, names(data))
+  # Determine if Var exists in data
+  DataNames <- names(data)
+  TestExist <- Var %in% DataNames
+  if (!isTRUE(TestExist)){
+    stop(paste(Var, "was not found in the data frame."))
+  }
+  
+	col_idx <- grep(Var, DataNames)
 	MovedData <- data[, c(col_idx, (1:ncol(data))[-col_idx])]
 	MovedData
 }
