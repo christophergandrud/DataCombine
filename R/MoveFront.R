@@ -2,8 +2,8 @@
 #'
 #' \code{MoveFront} moves a specified variable to the front of a data frame. 
 #'
-#' @param data a data frame object
-#' @param Var the variable you would like to move to the front of the data frame.
+#' @param data a data frame object containing the variable you want to move.
+#' @param Var a character string naming the variable you would like to move to the front of the data frame.
 #'
 #' @examples 
 #' # Create dummy data
