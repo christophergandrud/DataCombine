@@ -11,9 +11,9 @@
 #' 
 #' @examples 
 #' # Create data set with missing values
-#' naDF <- data.frame(a = sample(c(1,2), 100, rep=TRUE), 
-#'                    b = sample(c(3,4), 100, rep=TRUE), 
-#'                    fNA = sample(c(100, 200, 300, 400, NA), 100, rep=TRUE))
+#' naDF <- data.frame(a = sample(c(1,2), 100, rep = TRUE), 
+#'                    b = sample(c(3,4), 100, rep = TRUE), 
+#'                    fNA = sample(c(100, 200, 300, 400, NA), 100, rep = TRUE))
 #'
 #' # Created full data set
 #' fillDF <- data.frame(a = c(1,2,1,2), 
@@ -26,8 +26,10 @@
 #' @import data.table
 #' @export
 
-FillIn <- function(D1, D2, Var1, Var2 = NULL, KeyVar = c("iso2c", "year"), allow.cartesian = FALSE)
+FillIn <- function(D1, D2, Var1 = NULL, Var2 = NULL, KeyVar = c("iso2c", "year"), allow.cartesian = FALSE)
 {
+  VarGen = VarGen.1 = NULL
+
   # Give Var2 the same name as var1 if Var2 is NULL
   if (is.null(Var2)){
     Var2 <- Var1

@@ -1,5 +1,5 @@
 Package: DataCombine
-Title: R tools for combining data sets.
+Title: R tools for making it easier to combine and clean data sets.
 Description: R tools for combining data sets, including filling in missing
     observations with data from another data frame.
 Version: 0.1.3
@@ -7,7 +7,7 @@ Date: 2013-05-16
 Author: Christopher Gandrud
 Maintainer: Christopher Gandrud <christopher.gandrud@gmail.com>
 License: GPL (>= 2)
-URL: http://christophergandrud.github.com/DataCombine/
+URL: http://christophergandrud.github.io/DataCombine/
 BugReports: https://github.com/christophergandrud/DataCombine/issues
 Depends:
     R (>= 2.15.3)
