@@ -2,8 +2,8 @@ Package: DataCombine
 Title: R tools for combining data sets.
 Description: R tools for combining data sets, including filling in missing
     observations with data from another data frame.
-Version: 0.1.2
-Date: 2013-04-20
+Version: 0.1.3
+Date: 2013-05-16
 Author: Christopher Gandrud
 Maintainer: Christopher Gandrud <christopher.gandrud@gmail.com>
 License: GPL (>= 2)
@@ -14,5 +14,6 @@ Depends:
 Imports:
     data.table
 Collate:
+    'DropNA.R'
     'MoveFront.R'
     'FillIn.R'

@@ -1,3 +1,4 @@
+export(DropNA)
 export(FillIn)
 export(MoveFront)
 import(data.table)

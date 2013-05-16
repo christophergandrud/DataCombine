@@ -3,7 +3,7 @@ DataCombine
 
 ### Christopher Gandrud
 
-### Version 0.1.2
+### Version 0.1.3
 
 ### Note: **DataCombine** is in beta. Please report any bugs at: <https://github.com/christophergandrud/DataCombine/issues>.
 
@@ -14,6 +14,8 @@ DataCombine
 - `FillIn`: a function for filling in missing values of a variable from one data frame with the values from another variable.
 
 - `MoveFront`: a simple function for moving a variable to the front of a data frame. This can be useful if you have a data frame with many variables and just want to move one variable to the front.
+
+- `DropNA`: a function that drops rows from a data frame when they have missing (NA) values on a given variable(s).
 
 I will continue to add to the package as I build data sets and run across other pesky tasks I do repeatedly that would be simpler if they were turned into a function.
 
