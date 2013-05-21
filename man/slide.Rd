@@ -56,11 +56,11 @@
  Data <- data.frame(ID, A, B, C)
 
  # Lead the variable by two time units
- DataSlid1 <- slide(Data, Var = "A", NewVar = "ALag", shiftBy = 2)
+ DataSlid1 <- slide(Data, Var = "A", NewVar = "ALag", slideBy = 2)
 
  # Lag the variable one time unit by ID group
  DataSlid2 <- slide(data = Data, Var = "B", GroupVar = "ID",
-                NewVar = "BLag", shiftBy = -1)
+                NewVar = "BLag", slideBy = -1)
 }
 \seealso{
   \code{\link{shift}}, \code{\link{ddply}}
