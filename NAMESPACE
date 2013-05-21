@@ -1,4 +1,8 @@
 export(DropNA)
 export(FillIn)
 export(MoveFront)
+export(shift)
+export(slide)
 import(data.table)
+importFrom(plyr,ddply)
+importFrom(plyr,mutate)

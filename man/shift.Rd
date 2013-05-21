@@ -1,0 +1,34 @@
+\name{shift}
+\alias{shift}
+\title{A function for creating lag and lead variables.}
+\source{
+  Largely based on TszKin Julian's \code{shift} function:
+  http://ctszkin.com/2012/03/11/generating-a-laglead-variables/
+}
+\usage{
+  shift(VarVect, shiftBy)
+}
+\arguments{
+  \item{VarVect}{a character string naming the variable you
+  would like to shift (create lag or lead).}
+
+  \item{shiftBy}{numeric value specifying how many rows
+  (time units) to shift the data by. Negative values shift
+  the data down--lag the data. Positive values shift the
+  data up--lead the data.}
+}
+\description{
+  The function shifts a vector up or down to create lag or
+  lead variables. Note: your data needs to be sorted by
+  date. The date should be ascending (i.e. increasing as it
+  moves down the rows).
+}
+\details{
+  \code{shift} a function for creating lag and lead
+  variables, including for time-series cross-sectional
+  data.
+}
+\seealso{
+  \code{\link{slide}}
+}
+
