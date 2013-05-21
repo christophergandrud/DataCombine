@@ -44,6 +44,19 @@
   variables, including for time-series cross-sectional
   data.
 }
+\examples{
+# Create dummy data
+ A <- B <- C <- 1:20
+ ID <- sort(rep(seq(1:4), 5))
+ Data <- data.frame(ID, A, B, C)
+
+ # Lead the variable by two time units
+ DataSlid1 <- slide(Data, Var = "A", NewVar = "ALag", shiftBy = 2)
+
+ # Lag the variable one time unit by ID group
+ DataSlid2 <- slide(data = Data, Var = "B", GroupVar = "ID",
+                NewVar = "BLag", shiftBy = -1)
+}
 \seealso{
   \code{\link{shift}}, \code{\link{ddply}}
 }

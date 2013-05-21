@@ -8,6 +8,19 @@
 #' @param NewVar a character string specifying the name for the new variable to place the slid data in.
 #' @param shiftBy numeric value specifying how many rows (time units) to shift the data by. Negative values slide the data down--lag the data. Positive values shift the data up--lead the data.
 #'  
+#'  @examples
+#'  # Create dummy data
+#'  A <- B <- C <- 1:20
+#'  ID <- sort(rep(seq(1:4), 5))
+#'  Data <- data.frame(ID, A, B, C)
+#'  
+#'  # Lead the variable by two time units 
+#'  DataSlid1 <- slide(Data, Var = "A", NewVar = "ALag", shiftBy = 2)
+#'  
+#'  # Lag the variable one time unit by ID group 
+#'  DataSlid2 <- slide(data = Data, Var = "B", GroupVar = "ID",
+#'                 NewVar = "BLag", shiftBy = -1)
+#'  
 #' @description The function slides a column up or down to create lag or lead variables. If \code{GroupVar} is specified it will slide \code{Var} for each group. This is important for time-series cross-section data where  The slid data is placed in a new variable. in the original data frame. 
 #' Note: your data needs to be sorted by date. The date should be ascending (i.e. increasing as it moves down the rows). Also, the time difference between rows should be constant, e.g. days, months, years.
 #' 

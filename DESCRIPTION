@@ -12,7 +12,8 @@ BugReports: https://github.com/christophergandrud/DataCombine/issues
 Depends:
     R (>= 2.15.3)
 Imports:
-    data.table
+    data.table,
+    plyr
 Collate:
     'DropNA.R'
     'MoveFront.R'
