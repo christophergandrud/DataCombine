@@ -17,13 +17,15 @@ DataCombine
 
 - `DropNA`: a function that drops rows from a data frame when they have missing (NA) values on a given variable(s).
 
-- `slide`: a function for creating lag and lead variables, including for time-series cross-sectional data.
+- `slide`: a function for creating lag and lead variables, including for time-series cross-sectional data. The slid variable are added to the original data frame.
+
+- `shift`: a function for creating lag and lead variables, including for time-series cross-sectional data. The shifted variable is returned to a new vector.
 
 ---
 
 ## Updates
 
-I will continue to add to the package as I build data sets and run across other pesky tasks I do repeatedly that would be simpler if they were turned into a function.
+I will continue to add to the package as I build data sets and run across other pesky tasks I do repeatedly that would be simpler if they were a function.
 
 ---
 

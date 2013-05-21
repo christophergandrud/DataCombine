@@ -9,13 +9,16 @@
   shift(VarVect, shiftBy)
 }
 \arguments{
-  \item{VarVect}{a character string naming the variable you
-  would like to shift (create lag or lead).}
+  \item{VarVect}{a vector you would like to shift (create
+  lag or lead).}
 
   \item{shiftBy}{numeric value specifying how many rows
   (time units) to shift the data by. Negative values shift
   the data down--lag the data. Positive values shift the
   data up--lead the data.}
+}
+\value{
+  a vector
 }
 \description{
   The function shifts a vector up or down to create lag or

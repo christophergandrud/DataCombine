@@ -18,7 +18,9 @@
   \item{GroupVar}{a character string naming the variable
   grouping the units within which \code{Var} will be slid.
   If \code{GroupVar = NULL} then the whole variable is slid
-  up or down.}
+  up or down. This is similar to \code{\link{shift}},
+  though \code{shift} returns the slid data to a new vector
+  rather than the original data frame.}
 
   \item{NewVar}{a character string specifying the name for
   the new variable to place the slid data in.}
@@ -27,6 +29,9 @@
   (time units) to shift the data by. Negative values slide
   the data down--lag the data. Positive values shift the
   data up--lead the data.}
+}
+\value{
+  a data frame
 }
 \description{
   The function slides a column up or down to create lag or
