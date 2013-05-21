@@ -6,7 +6,7 @@
 #' @param Var a character string naming the variable you would like to slide (create lag or lead).
 #' @param GroupVar a character string naming the variable grouping the units within which \code{Var} will be slid. If \code{GroupVar = NULL} then the whole variable is slid up or down. This is similar to \code{\link{shift}}, though \code{shift} returns the slid data to a new vector rather than the original data frame.
 #' @param NewVar a character string specifying the name for the new variable to place the slid data in.
-#' @param shiftBy numeric value specifying how many rows (time units) to shift the data by. Negative values slide the data down--lag the data. Positive values shift the data up--lead the data.
+#' @param slideBy numeric value specifying how many rows (time units) to shift the data by. Negative values slide the data down--lag the data. Positive values shift the data up--lead the data.
 #'  
 #'  @examples
 #'  # Create dummy data
@@ -34,20 +34,20 @@
 #' @importFrom plyr ddply
 #' @export
 
-slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, shiftBy = -1){
+slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1){
 
   VarVect <- data[, Var]
 
   if (is.null(NULL)){
-    NewVar <- paste0(Var, shiftBy)
+    NewVar <- paste0(Var, slideBy)
   }
 
   # Create lags/leads
   if (is.null(GroupVar)){
-    data[, NewVar] <- shift(VarVect = VarVect, shiftBy = shiftBy)
+    data[, NewVar] <- shift(VarVect = VarVect, shiftBy = slideBy)
   }
   else if (!is.null(GroupVar)){
-    data <- eval(parse(text = paste0("ddply(data, GroupVar, transform, NewVarX = shift(", Var, ",", shiftBy, "))")))
+    data <- eval(parse(text = paste0("ddply(data, GroupVar, transform, NewVarX = shift(", Var, ",", slideBy, "))")))
   }
 
   return(data)

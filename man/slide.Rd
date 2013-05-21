@@ -7,7 +7,7 @@
 }
 \usage{
   slide(data, Var, GroupVar = NULL, NewVar = NULL,
-    shiftBy = -1)
+    slideBy = -1)
 }
 \arguments{
   \item{data}{a data frame object.}
@@ -25,7 +25,7 @@
   \item{NewVar}{a character string specifying the name for
   the new variable to place the slid data in.}
 
-  \item{shiftBy}{numeric value specifying how many rows
+  \item{slideBy}{numeric value specifying how many rows
   (time units) to shift the data by. Negative values slide
   the data down--lag the data. Positive values shift the
   data up--lead the data.}
