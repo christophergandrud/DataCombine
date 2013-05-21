@@ -16,7 +16,7 @@
     <div class="wrapper">
       <header>
         <h1>Datacombine</h1>
-        <p>R tools for combining data sets. </p>
+        <p>R tools for combining and cleaning data sets. </p>
 
         <p class="view"><a href="https://github.com/christophergandrud/DataCombine">View the Project on GitHub <small>christophergandrud/DataCombine</small></a></p>
 
@@ -32,7 +32,7 @@
 
 <h3>Christopher Gandrud</h3>
 
-<h3>Version 0.1.4</h3>
+<h3>Version 0.1.5</h3>
 
 <h3>Note: <strong>DataCombine</strong> is in beta. Please report any bugs at: <a href="https://github.com/christophergandrud/DataCombine/issues">https://github.com/christophergandrud/DataCombine/issues</a>.</h3>
 
@@ -40,12 +40,13 @@
 
 <ul>
 <li><p><code>FillIn</code>: a function for filling in missing values of a variable from one data frame with the values from another variable.</p></li>
-<li><p><code>MoveFront</code>: a simple function for moving a variable to the front of a data frame. This can be useful if you have a data frame with many variables and just want to move one variable to the front.</p></li>
+<li><p><code>MoveFront</code>: moves variables to the front of a data frame. This can be useful if you have a data frame with many variables and want to move a variable or variables to the front.</p></li>
 <li><p><code>DropNA</code>: a function that drops rows from a data frame when they have missing (NA) values on a given variable(s).</p></li>
-<li><p><code>slide</code>: a function for creating lag and lead variables, including for time-series cross-sectional data.</p></li>
+<li><p><code>slide</code>: a function for creating lag and lead variables, including for time-series cross-sectional data. The slid variable are added to the original data frame.</p></li>
+<li><p><code>shift</code>: a function for creating lag and lead variables, including for time-series cross-sectional data. The shifted variable is returned to a new vector. This function is largely based on TszKin Julian's <code>shift</code> function: <a href="http://ctszkin.com/2012/03/11/generating-a-laglead-variables/">http://ctszkin.com/2012/03/11/generating-a-laglead-variables/</a>.</p></li>
 </ul><hr><h2>Updates</h2>
 
-<p>I will continue to add to the package as I build data sets and run across other pesky tasks I do repeatedly that would be simpler if they were turned into a function.</p>
+<p>I will continue to add to the package as I build data sets and run across other pesky tasks I do repeatedly that would be simpler if they were a function.</p>
 
 <hr><h2>Installation</h2>
 
