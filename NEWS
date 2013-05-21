@@ -1,6 +1,8 @@
-Versopm 0.1.5
+Versopm 0.1.5.1
 
 `MoveFront` can now move more than one variable to the front of a data frame.
+
+Bug fix for `slide` argument `NewVar`.
 
 Documentation improvements.
 

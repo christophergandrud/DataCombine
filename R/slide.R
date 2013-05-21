@@ -31,7 +31,7 @@
 #' @source Partially based on TszKin Julian's \code{shift} function: http://ctszkin.com/2012/03/11/generating-a-laglead-variables/
 #'
 #'
-#' @importFrom plyr ddply
+#' @importFrom plyr ddply rename
 #' @export
 
 slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1)
@@ -45,7 +45,7 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1)
 
   VarVect <- data[, Var]
 
-  if (is.null(NULL)){
+  if (is.null(NewVar)){
     NewVar <- paste0(Var, slideBy)
   }
 
@@ -55,6 +55,7 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1)
   }
   else if (!is.null(GroupVar)){
     data <- eval(parse(text = paste0("ddply(data, GroupVar, transform, NewVarX = shift(", Var, ",", slideBy, "))")))
+    data <- rename(data, c("NewVarX" = NewVar)) 
   }
 
   return(data)
