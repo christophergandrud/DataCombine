@@ -34,7 +34,14 @@
 #' @importFrom plyr ddply
 #' @export
 
-slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1){
+slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1)
+{
+  # Determine if Var exists in data
+  DataNames <- names(data)
+  TestExist <- Var %in% DataNames
+  if (!isTRUE(TestExist)){
+    stop(paste(Var, "was not found in the data frame."))
+  }
 
   VarVect <- data[, Var]
 
