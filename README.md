@@ -23,9 +23,9 @@ I will continue to add to the package as I build data sets and run across other 
 
 ## Installation
 
-**DataCombine** is in beta and so is not currently on CRAN. 
+**DataCombine** is on [CRAN](http://cran.r-project.org/). 
 
-To install the package use `install_github` from the [devtools](https://github.com/hadley/devtools):
+You can also install the most recent stable version with `install_github` from the [devtools](https://github.com/hadley/devtools):
 
 ```
 devtools::install_github("DataCombine", "christophergandrud")
