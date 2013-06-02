@@ -3,7 +3,8 @@
 \title{A function for filling in missing values of a variable from one data frame with the values from another variable.}
 \usage{
   FillIn(D1, D2, Var1 = NULL, Var2 = NULL,
-    KeyVar = c("iso2c", "year"), allow.cartesian = FALSE)
+    KeyVar = c("iso2c", "year"), allow.cartesian = FALSE,
+    KeepD2Vars = FALSE)
 }
 \arguments{
   \item{D1}{the data frame with the variable you would like
@@ -24,6 +25,13 @@
 
   \item{allow.cartesian}{logical. See the
   \code{\link{data.table}} documentation for more details.}
+
+  \item{KeepD2Vars}{logical, indicating whether or not to
+  keep the variables from D2 in the output data frame. The
+  default is \code{KeepD2Vars = FALSE}. Hint: avoid having
+  variables in your \code{D2} data frame that share names
+  with variables in \code{D1} other than the
+  \code{KeyVar}s}
 }
 \description{
   \code{FillIn} uses values of a variable from one data set
@@ -36,11 +44,13 @@ naDF <- data.frame(a = sample(c(1,2), 100, rep = TRUE),
                    fNA = sample(c(100, 200, 300, 400, NA), 100, rep = TRUE))
 
 # Created full data set
-fillDF <- data.frame(a = c(1,2,1,2),
-                     b = c(3,3,4,4),
+fillDF <- data.frame(a = c(1, 2, 1, 2),
+                     b = c(3, 3, 4, 4),
+                     j = c(5, 5, 5, 5),
                      fFull = c(100, 200, 300, 400))
 
 # Fill in missing f's from naDF with values from fillDF
-FilledInData <- FillIn(naDF, fillDF, Var1 = "fNA", Var2 = "fFull", KeyVar = c("a", "b"))
+FilledInData <- FillIn(naDF, fillDF, Var1 = "fNA",
+                       Var2 = "fFull", KeyVar = c("a", "b"))
 }
 

@@ -1,3 +1,7 @@
+Version 0.1.5.2 
+
+`FillIn` now allows you to drop variables from `D2` in the resulting data set.
+
 Version 0.1.5.1
 
 `MoveFront` can now move more than one variable to the front of a data frame.
