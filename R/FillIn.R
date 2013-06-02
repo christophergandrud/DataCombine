@@ -46,7 +46,7 @@ FillIn <- function(D1, D2, Var1 = NULL, Var2 = NULL, KeyVar = c("iso2c", "year")
   D2Temp <- data.table::data.table(D2, key = KeyVar)
   
   # Merge data.tables
-  OutDT <- D2Temp[D1Temp]
+  OutDT <- D2Temp[D1Temp, allow.cartesian = allow.cartesian]
   
   # Tell the user how many values will be filled in
   SubNA <- OutDT[, list(VarGen, VarGen.1)]
@@ -60,10 +60,12 @@ FillIn <- function(D1, D2, Var1 = NULL, Var2 = NULL, KeyVar = c("iso2c", "year")
   OutDF <- data.frame(OutDT)
   
   # Tell the user what the correlation coefficient is between the variables
-  SubNoNA <- subset(OutDF, !is.na(VarGen) & !is.na(VarGen.1))
-  HowMany <- nrow(SubNoNA)
-  CORR <- cor(SubNoNA$VarGen, SubNoNA$VarGen.1, use = "complete.obs")
-  print(paste("The correlation between", Var1, "and", Var2, "is", round(CORR, digits = 3), "based on", HowMany, "shared observations." ))
+  if (is.numeric(OutDT$VarGen)){
+    SubNoNA <- subset(OutDF, !is.na(VarGen) & !is.na(VarGen.1))
+    HowMany <- nrow(SubNoNA)
+    CORR <- cor(SubNoNA$VarGen, SubNoNA$VarGen.1, use = "complete.obs")
+    print(paste("The correlation between", Var1, "and", Var2, "is", round(CORR, digits = 3), "based on", HowMany, "shared observations." ))
+  }
   
   # Remove uncombined variable and return main variable's name
   names(OutDF)[match("VarGen", names(OutDF))] <- Var1

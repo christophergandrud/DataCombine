@@ -1,12 +1,14 @@
-Versopm 0.1.5.1
+Version 0.1.5.1
 
 `MoveFront` can now move more than one variable to the front of a data frame.
+
+Minor bug fixes in `FillIn`.
 
 Bug fix for `slide` argument `NewVar`.
 
 Documentation improvements.
 
-Version 0.1.4
+Version 0.1.5
 
 Added `slide` and `shift` functions for lagging and leading variables. `shift` is largely based on TszKin Julian's `shift` function: <http://ctszkin.com/2012/03/11/generating-a-laglead-variables/>.
 
