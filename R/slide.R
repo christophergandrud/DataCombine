@@ -42,22 +42,22 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1)
   if (!isTRUE(TestExist)){
     stop(paste(Var, "was not found in the data frame."))
   }
-
+  
   VarVect <- data[, Var]
-
+  
   if (is.null(NewVar)){
     NewVar <- paste0(Var, slideBy)
   }
-
+  
   # Create lags/leads
   if (is.null(GroupVar)){
     data[, NewVar] <- shift(VarVect = VarVect, shiftBy = slideBy)
   }
   else if (!is.null(GroupVar)){
-    data <- eval(parse(text = paste0("ddply(data, GroupVar, transform, NewVarX = shift(", Var, ",", slideBy, "))")))
-    data <- rename(data, c("NewVarX" = NewVar)) 
+    vars <- eval(parse(text = paste0("ddply(data[, c(GroupVar, Var)], GroupVar, transform, NewVarX = shift(", Var, ",", slideBy, "))")))
+    data[, NewVar] <- vars$NewVarX
   }
-
+  
   return(data)
 }
 
