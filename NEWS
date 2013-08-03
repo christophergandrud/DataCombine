@@ -1,3 +1,7 @@
+Version 0.1.6
+
+Speed improvements made to `slide`. Thanks to briatte.
+
 Version 0.1.5.2 
 
 `FillIn` now allows you to drop variables from `D2` in the resulting data set.
