@@ -5,11 +5,11 @@ DataCombine
 
 ### Version 0.1.7
 
-### Note: **DataCombine** is in beta. Please report any bugs at: <https://github.com/christophergandrud/DataCombine/issues>.
+### Please report any bugs or suggestions for improvement at: <https://github.com/christophergandrud/DataCombine/issues>.
 
 ---
 
-**DataCombine** is intended for making combining data sets--especially time-series cross-section data--easier. The package is in the very very early stages of development. It includes two functions:
+**DataCombine** is a set of miscellaneous tools intended to make combining data sets--especially time-series cross-section data--easier. The package is continually being developed as I turn lines of code that I frequently use into single functions. It currently includes the following functions:
 
 - `FillIn`: a function for filling in missing values of a variable from one data frame with the values from another variable.
 
