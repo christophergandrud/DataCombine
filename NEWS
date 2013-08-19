@@ -1,3 +1,7 @@
+Version 0.1.7
+
+Added the utility `rmExcept` for removing all objects from a workspace except for those specified by the user.
+
 Version 0.1.6
 
 Speed improvements made to `slide`. Thanks to briatte.
