@@ -1,3 +1,7 @@
+Version 0.1.8
+
+Added `grepl.sub` function to subset a data frame if a specified pattern is found in a character string.
+
 Version 0.1.7
 
 Added the utility `rmExcept` for removing all objects from a workspace except for those specified by the user.
