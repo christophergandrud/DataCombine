@@ -49,6 +49,7 @@ rmExcept <- function(keepers, envir = globalenv(), message = TRUE){
 #' @export
  
 grepl.sub <- function(data, patterns, Var, keep.found = TRUE, useBytes = TRUE){
+  y <- NULL
   data$y <- grepl(pattern = paste0(patterns, collapse="|"), x = data[, Var], useBytes = useBytes)
   subdata <- subset(data, y == keep.found)
   subdata$y <- NULL

@@ -23,7 +23,7 @@
 #'  
 #' @return a data frame
 #'  
-#' @description The function slides a column up or down to create lag or lead variables. If \code{GroupVar} is specified it will slide \code{Var} for each group. This is important for time-series cross-section data where  The slid data is placed in a new variable. in the original data frame. 
+#' @description The function slides a column up or down to create lag or lead variables. If \code{GroupVar} is specified it will slide \code{Var} for each group. This is important for time-series cross-section data. The slid data is placed in a new variable in the original data frame. 
 #' Note: your data needs to be sorted by date. The date should be ascending (i.e. increasing as it moves down the rows). Also, the time difference between rows should be constant, e.g. days, months, years.
 #' 
 #' @seealso \code{\link{shift}}, \code{\link{ddply}}
@@ -90,7 +90,7 @@ shift <- function(VarVect, shiftBy){
   abs_shiftBy = abs(shiftBy)
   
   if (shiftBy > 0){
-    out <- c(tail(VarVect, -abs_shiftBy),rep(NA, abs_shiftBy))
+    out <- c(tail(VarVect, -abs_shiftBy), rep(NA, abs_shiftBy))
   } else if (shiftBy < 0) {
     out <- c(rep(NA, abs_shiftBy), head(VarVect, -abs_shiftBy))
   } else {

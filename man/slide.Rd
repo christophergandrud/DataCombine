@@ -37,11 +37,11 @@
   The function slides a column up or down to create lag or
   lead variables. If \code{GroupVar} is specified it will
   slide \code{Var} for each group. This is important for
-  time-series cross-section data where The slid data is
-  placed in a new variable. in the original data frame.
-  Note: your data needs to be sorted by date. The date
-  should be ascending (i.e. increasing as it moves down the
-  rows). Also, the time difference between rows should be
+  time-series cross-section data. The slid data is placed
+  in a new variable in the original data frame. Note: your
+  data needs to be sorted by date. The date should be
+  ascending (i.e. increasing as it moves down the rows).
+  Also, the time difference between rows should be
   constant, e.g. days, months, years.
 }
 \details{
