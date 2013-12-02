@@ -63,6 +63,7 @@ grepl.sub <- function(data, patterns, Var, keep.found = TRUE, useBytes = TRUE){
 #' @param replaceData a data frame with at least two columns. One contains the patterns to replace and the other contains their replacement. Note: the pattern and its replacement must be in the same row.
 #' @param from character string naming the column with the patterns you would like to replace.
 #' @param to character string naming the column with the the pattern replacements.
+#' @param exact logical. Indicates whether to only replace exact pattern matches (\code{TRUE}) or not (\code{FALSE})
 #' 
 #' @examples
 #' # Create original data
@@ -74,14 +75,19 @@ grepl.sub <- function(data, patterns, Var, keep.found = TRUE, useBytes = TRUE){
 #' 
 #' # Replace patterns
 #' ABNew <- FindReplace(data = ABData, Var = "a", replaceData = Replaces, 
-#'                      from = "from", to = "to")
+#'                      from = "from", to = "to", exact = FALSE)
 #' 
 #' @export
 
-FindReplace <- function(data, Var, replaceData, from, to){
+FindReplace <- function(data, Var, replaceData, from, to, exact = TRUE){
   ReplaceNRows <- nrow(replaceData)
   for (i in 1:ReplaceNRows){
-    data[, Var] <- gsub(pattern = replaceData[i, from], replacement = replaceData[i, to], data[, Var])
+    if(isTRUE(exact)){
+      data[, Var] <- gsub(pattern = paste0("^", replaceData[i, from], "$"), replacement = replaceData[i, to], data[, Var])
+    }
+    if(!isTRUE(exact)){
+      data[, Var] <- gsub(pattern = replaceData[i, from], replacement = replaceData[i, to], data[, Var])
+    }
   }
   return(data)
 }
