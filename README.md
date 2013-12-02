@@ -3,7 +3,7 @@ DataCombine
 
 ### Christopher Gandrud
 
-### Version 0.1.8
+### Version 0.1.10
 
 ### Please report any bugs or suggestions for improvement at: <https://github.com/christophergandrud/DataCombine/issues>.
 
@@ -14,6 +14,8 @@ DataCombine
 - `DropNA`: a function that drops rows from a data frame when they have missing (NA) values on a given variable(s).
 
 - `FillIn`: a function for filling in missing values of a variable from one data frame with the values from another variable.
+
+- `FindReplace`: a function to replace multiple patterns found in a character string column of a data frame.
 
 - `grepl.sub`: a function to subset a data frame if a specified pattern is found in a character string.
 

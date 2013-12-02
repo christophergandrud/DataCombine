@@ -38,13 +38,11 @@ rmExcept <- function(keepers, envir = globalenv(), message = TRUE){
 #'
 #' @examples
 #' # Create data frame
-#' a <- c("London, UK", "Oxford, UK", "Berlin, DE", "Hamburg, DE", "Oslo, NO")
-#' b <- c(8, 0.1, 3, 2, 1)
-#' ABData <- data.frame(a, b)
+#' ABData <- data.frame(a = c("London, UK", "Oxford, UK", "Berlin, DE", "Hamburg, DE", "Oslo, NO"), 
+#'                      b = c(8, 0.1, 3, 2, 1))
 #'
 #' # Keep only data from Germany (DE)
 #' ABGermany <- grepl.sub(data = ABData, patterns = "DE", Var = "a")
-#'
 #'
 #' @export
  
@@ -54,4 +52,36 @@ grepl.sub <- function(data, patterns, Var, keep.found = TRUE, useBytes = TRUE){
   subdata <- subset(data, y == keep.found)
   subdata$y <- NULL
   subdata
+}
+
+#' Replace multiple patterns found in a character string column of a data frame
+#' 
+#' \code{FindReplace} allows you to find and replace multiple character string patterns in a data frame's column.
+#' 
+#' @param data data frame with the column you would like to replace string patterns.
+#' @param Var character string naming the column you would like to replace string patterns.
+#' @param replaceData a data frame with at least two columns. One contains the patterns to replace and the other contains their replacement. Note: the pattern and its replacement must be in the same row.
+#' @param from character string naming the column with the patterns you would like to replace.
+#' @param to character string naming the column with the the pattern replacements.
+#' 
+#' @examples
+#' # Create original data
+#' ABData <- data.frame(a = c("London, UK", "Oxford, UK", "Berlin, DE", "Hamburg, DE", "Oslo, NO"), 
+#'                      b = c(8, 0.1, 3, 2, 1))
+#' 
+#' # Create replacements data frame                     
+#' Replaces <- data.frame(from = c("UK", "DE"), to = c("England", "Germany"))
+#' 
+#' # Replace patterns
+#' ABNew <- FindReplace(data = ABData, Var = "a", replaceData = Replaces, 
+#'                      from = "from", to = "to")
+#' 
+#' @export
+
+FindReplace <- function(data, Var, replaceData, from, to){
+  ReplaceNRows <- nrow(replaceData)
+  for (i in 1:ReplaceNRows){
+    data[, Var] <- gsub(pattern = replaceData[i, from], replacement = replaceData[i, to], data[, Var])
+  }
+  return(data)
 }

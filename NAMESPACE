@@ -1,5 +1,6 @@
 export(DropNA)
 export(FillIn)
+export(FindReplace)
 export(MoveFront)
 export(grepl.sub)
 export(rmExcept)

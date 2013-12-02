@@ -28,9 +28,8 @@
 }
 \examples{
 # Create data frame
-a <- c("London, UK", "Oxford, UK", "Berlin, DE", "Hamburg, DE", "Oslo, NO")
-b <- c(8, 0.1, 3, 2, 1)
-ABData <- data.frame(a, b)
+ABData <- data.frame(a = c("London, UK", "Oxford, UK", "Berlin, DE", "Hamburg, DE", "Oslo, NO"),
+                     b = c(8, 0.1, 3, 2, 1))
 
 # Keep only data from Germany (DE)
 ABGermany <- grepl.sub(data = ABData, patterns = "DE", Var = "a")

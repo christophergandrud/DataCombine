@@ -1,3 +1,7 @@
+Version 0.1.10
+
+Added `FindReplace` function to replace multiple patterns found in a character string column of a data frame
+
 Version 0.1.9
 
 Minor documentation improvements.
