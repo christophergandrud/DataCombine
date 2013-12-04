@@ -59,7 +59,7 @@ grepl.sub <- function(data, patterns, Var, keep.found = TRUE, useBytes = TRUE){
 #' \code{FindReplace} allows you to find and replace multiple character string patterns in a data frame's column.
 #' 
 #' @param data data frame with the column you would like to replace string patterns.
-#' @param Var character string naming the column you would like to replace string patterns.
+#' @param Var character string naming the column you would like to replace string patterns. The column must be of class \code{character} or \code{factor}.
 #' @param replaceData a data frame with at least two columns. One contains the patterns to replace and the other contains their replacement. Note: the pattern and its replacement must be in the same row.
 #' @param from character string naming the column with the patterns you would like to replace.
 #' @param to character string naming the column with the the pattern replacements.
@@ -81,7 +81,7 @@ grepl.sub <- function(data, patterns, Var, keep.found = TRUE, useBytes = TRUE){
 
 FindReplace <- function(data, Var, replaceData, from, to, exact = TRUE){
   if(!(class(data[, Var]) %in% c('character', 'factor'))){
-    stop(paste(Var, 'is not a character string. Please convert to a character string and then rerun.'))
+    stop(paste(Var, 'is not a character string or factor. Please convert to a character string or factor and then rerun.'))
   }
   ReplaceNRows <- nrow(replaceData)
   for (i in 1:ReplaceNRows){

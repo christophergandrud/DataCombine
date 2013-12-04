@@ -10,7 +10,8 @@
   replace string patterns.}
 
   \item{Var}{character string naming the column you would
-  like to replace string patterns.}
+  like to replace string patterns. The column must be of
+  class \code{character} or \code{factor}.}
 
   \item{replaceData}{a data frame with at least two
   columns. One contains the patterns to replace and the
