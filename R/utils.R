@@ -80,6 +80,9 @@ grepl.sub <- function(data, patterns, Var, keep.found = TRUE, useBytes = TRUE){
 #' @export
 
 FindReplace <- function(data, Var, replaceData, from, to, exact = TRUE){
+  if(!(class(data[, Var]) %in% c('character', 'factor'))){
+    stop(paste(Var, 'is not a character string. Please convert to a character string and then rerun.'))
+  }
   ReplaceNRows <- nrow(replaceData)
   for (i in 1:ReplaceNRows){
     if(isTRUE(exact)){
