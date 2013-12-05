@@ -1,6 +1,6 @@
 Version 0.1.11
 
-Added `exact` argument to `FindReplace` to only replace exact pattern matches.
+Added `exact` argument to `FindReplace` to only replace exact pattern matches. Also added argument `vector` to return a vector of the replacement variable rather than the whole data frame.
 
 Improved warnings for `FindReplace`.
 

@@ -3,7 +3,7 @@
 \title{Replace multiple patterns found in a character string column of a data frame}
 \usage{
   FindReplace(data, Var, replaceData, from, to,
-    exact = TRUE)
+    exact = TRUE, vector = FALSE)
 }
 \arguments{
   \item{data}{data frame with the column you would like to
@@ -26,7 +26,11 @@
 
   \item{exact}{logical. Indicates whether to only replace
   exact pattern matches (\code{TRUE}) or not
-  (\code{FALSE})}
+  (\code{FALSE}).}
+
+  \item{vector}{logical. If \code{TRUE} then the
+  replacement is returned as a single vector. If
+  \code{FALSE} then the whole data frame is returned.}
 }
 \description{
   \code{FindReplace} allows you to find and replace
@@ -41,8 +45,12 @@ ABData <- data.frame(a = c("London, UK", "Oxford, UK", "Berlin, DE", "Hamburg, D
 # Create replacements data frame
 Replaces <- data.frame(from = c("UK", "DE"), to = c("England", "Germany"))
 
-# Replace patterns
-ABNew <- FindReplace(data = ABData, Var = "a", replaceData = Replaces,
+# Replace patterns and return full data frame
+ABNewDF <- FindReplace(data = ABData, Var = "a", replaceData = Replaces,
                      from = "from", to = "to", exact = FALSE)
+
+# Replace patterns and return the Var as a vector
+ABNewVector <- FindReplace(data = ABData, Var = "a", replaceData = Replaces,
+                     from = "from", to = "to", exact = TRUE, vector = TRUE)
 }
 
