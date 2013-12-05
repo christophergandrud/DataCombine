@@ -80,7 +80,7 @@ grepl.sub <- function(data, patterns, Var, keep.found = TRUE, useBytes = TRUE){
 #'                      
 #' # Replace patterns and return the Var as a vector
 #' ABNewVector <- FindReplace(data = ABData, Var = "a", replaceData = Replaces, 
-#'                      from = "from", to = "to", exact = TRUE, vector = TRUE)
+#'                      from = "from", to = "to", vector = TRUE)
 #' 
 #' @export
 

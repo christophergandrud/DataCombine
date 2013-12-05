@@ -51,6 +51,6 @@ ABNewDF <- FindReplace(data = ABData, Var = "a", replaceData = Replaces,
 
 # Replace patterns and return the Var as a vector
 ABNewVector <- FindReplace(data = ABData, Var = "a", replaceData = Replaces,
-                     from = "from", to = "to", exact = TRUE, vector = TRUE)
+                     from = "from", to = "to", vector = TRUE)
 }
 
