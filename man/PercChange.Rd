@@ -1,8 +1,8 @@
-\name{PropChange}
-\alias{PropChange}
+\name{PercChange}
+\alias{PercChange}
 \title{Calculate the percentage change from a specified lag, including withing group}
 \usage{
-PropChange(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
+PercChange(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
   type = "percent")
 }
 \arguments{
@@ -48,7 +48,7 @@ B <- c(1:10)
 Data <- data.frame(A, B)
 
 # Find percentage change from two periods before
-Out <- PropChange(Data, Var = 'B', GroupVar = NULL,
+Out <- PercChange(Data, Var = 'B', GroupVar = NULL,
          type = 'proportion', NewVar = 'PercentChange', slideBy = -2)
 
 Out

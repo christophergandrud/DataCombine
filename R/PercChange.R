@@ -17,13 +17,13 @@
 #' Data <- data.frame(A, B)
 #' 
 #' # Find percentage change from two periods before
-#' Out <- PropChange(Data, Var = 'B', GroupVar = NULL, 
+#' Out <- PercChange(Data, Var = 'B', GroupVar = NULL, 
 #'          type = 'proportion', NewVar = 'PercentChange', slideBy = -2)
 #' 
 #' Out
 #' @export
 
-PropChange <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, type = "percent"){
+PercChange <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, type = "percent"){
   if (!(type %in% c('proportion', 'percent'))){
     stop("type must be either 'proportion' or 'percent'." )
   }

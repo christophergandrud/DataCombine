@@ -1,6 +1,6 @@
 Version 0.1.12
 
-Added `PropChange` for calculating the percentage change from a specified lag, including within groups.
+Added `PercChange` for calculating the percentage change from a specified lag, including within groups.
 
 Version 0.1.11
 
