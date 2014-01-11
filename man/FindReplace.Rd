@@ -2,8 +2,7 @@
 \alias{FindReplace}
 \title{Replace multiple patterns found in a character string column of a data frame}
 \usage{
-  FindReplace(data, Var, replaceData, from, to,
-    exact = TRUE, vector = FALSE)
+FindReplace(data, Var, replaceData, from, to, exact = TRUE, vector = FALSE)
 }
 \arguments{
   \item{data}{data frame with the column you would like to
@@ -33,9 +32,8 @@
   \code{FALSE} then the whole data frame is returned.}
 }
 \description{
-  \code{FindReplace} allows you to find and replace
-  multiple character string patterns in a data frame's
-  column.
+\code{FindReplace} allows you to find and replace multiple
+character string patterns in a data frame's column.
 }
 \examples{
 # Create original data

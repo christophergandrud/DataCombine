@@ -2,8 +2,7 @@
 \alias{grepl.sub}
 \title{Subset a data frame if a specified pattern is found in a character string}
 \usage{
-  grepl.sub(data, patterns, Var, keep.found = TRUE,
-    useBytes = TRUE)
+grepl.sub(data, patterns, Var, keep.found = TRUE, useBytes = TRUE)
 }
 \arguments{
   \item{data}{data frame.}
@@ -23,8 +22,8 @@
   \code{\link{grep}}.}
 }
 \description{
-  Subset a data frame if a specified pattern is found in a
-  character string
+Subset a data frame if a specified pattern is found in a
+character string
 }
 \examples{
 # Create data frame

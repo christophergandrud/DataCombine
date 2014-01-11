@@ -3,7 +3,7 @@ DataCombine
 
 ### Christopher Gandrud
 
-### Version 0.1.11
+### Version 0.1.12
 
 ### Please report any bugs or suggestions for improvement at: <https://github.com/christophergandrud/DataCombine/issues>.
 
@@ -20,6 +20,8 @@ DataCombine
 - `grepl.sub`: a function to subset a data frame if a specified pattern is found in a character string.
 
 - `MoveFront`: moves variables to the front of a data frame. This can be useful if you have a data frame with many variables and want to move a variable or variables to the front.
+
+- `PropChange`: calculates the percentage change from a specified lag, including within groups.
 
 - `shift`: a function for creating lag and lead variables, including for time-series cross-sectional data. The shifted variable is returned to a new vector. This function is largely based on TszKin Julian's `shift` function: <http://ctszkin.com/2012/03/11/generating-a-laglead-variables/>.
 

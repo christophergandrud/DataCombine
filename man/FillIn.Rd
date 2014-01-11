@@ -2,9 +2,8 @@
 \alias{FillIn}
 \title{A function for filling in missing values of a variable from one data frame with the values from another variable.}
 \usage{
-  FillIn(D1, D2, Var1 = NULL, Var2 = NULL,
-    KeyVar = c("iso2c", "year"), allow.cartesian = FALSE,
-    KeepD2Vars = FALSE)
+FillIn(D1, D2, Var1 = NULL, Var2 = NULL, KeyVar = c("iso2c", "year"),
+  allow.cartesian = FALSE, KeepD2Vars = FALSE)
 }
 \arguments{
   \item{D1}{the data frame with the variable you would like
@@ -34,8 +33,8 @@
   \code{KeyVar}s}
 }
 \description{
-  \code{FillIn} uses values of a variable from one data set
-  to fill in missing values in another.
+\code{FillIn} uses values of a variable from one data set
+to fill in missing values in another.
 }
 \examples{
 # Create data set with missing values

@@ -2,11 +2,11 @@
 \alias{shift}
 \title{A function for creating lag and lead variables.}
 \source{
-  Largely based on TszKin Julian's \code{shift} function:
-  http://ctszkin.com/2012/03/11/generating-a-laglead-variables/
+Largely based on TszKin Julian's \code{shift} function:
+http://ctszkin.com/2012/03/11/generating-a-laglead-variables/
 }
 \usage{
-  shift(VarVect, shiftBy)
+shift(VarVect, shiftBy)
 }
 \arguments{
   \item{VarVect}{a vector you would like to shift (create
@@ -18,20 +18,19 @@
   data up--lead the data.}
 }
 \value{
-  a vector
+a vector
 }
 \description{
-  The function shifts a vector up or down to create lag or
-  lead variables. Note: your data needs to be sorted by
-  date. The date should be ascending (i.e. increasing as it
-  moves down the rows).
+The function shifts a vector up or down to create lag or
+lead variables. Note: your data needs to be sorted by date.
+The date should be ascending (i.e. increasing as it moves
+down the rows).
 }
 \details{
-  \code{shift} a function for creating lag and lead
-  variables, including for time-series cross-sectional
-  data.
+\code{shift} a function for creating lag and lead
+variables, including for time-series cross-sectional data.
 }
 \seealso{
-  \code{\link{slide}}
+\code{\link{slide}}
 }
 

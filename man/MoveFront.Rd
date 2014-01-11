@@ -2,11 +2,11 @@
 \alias{MoveFront}
 \title{Move variables to the front of a data frame.}
 \source{
-  Based on a Stack Overflow answer written by rcs:
-  <http://stackoverflow.com/questions/3369959/moving-columns-within-a-data-frame-without-retyping>
+Based on a Stack Overflow answer written by rcs:
+<http://stackoverflow.com/questions/3369959/moving-columns-within-a-data-frame-without-retyping>
 }
 \usage{
-  MoveFront(data, Var)
+MoveFront(data, Var)
 }
 \arguments{
   \item{data}{a data frame object containing the variable
@@ -20,8 +20,8 @@
   frame.}
 }
 \description{
-  \code{MoveFront} moves variables to the front of a data
-  frame.
+\code{MoveFront} moves variables to the front of a data
+frame.
 }
 \examples{
 # Create dummy data

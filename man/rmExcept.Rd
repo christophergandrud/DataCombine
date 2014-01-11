@@ -2,7 +2,7 @@
 \alias{rmExcept}
 \title{Remove all objects from a workspace except those specified by the user.}
 \usage{
-  rmExcept(keepers, envir = globalenv(), message = TRUE)
+rmExcept(keepers, envir = globalenv(), message = TRUE)
 }
 \arguments{
   \item{keepers}{a character vector of the names of object
@@ -17,8 +17,8 @@
   removed.}
 }
 \description{
-  \code{rmExcept} removes all objects from a workspace
-  except those specified by the user.
+\code{rmExcept} removes all objects from a workspace except
+those specified by the user.
 }
 \examples{
 # Create objects

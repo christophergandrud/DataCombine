@@ -2,12 +2,12 @@
 \alias{DropNA}
 \title{Drop rows from a data frame with missing values on a given variable(s).}
 \source{
-  Partially based on Stack Overflow answer written by
-  donshikin:
-  http://stackoverflow.com/questions/4862178/remove-rows-with-nas-in-data-frame
+Partially based on Stack Overflow answer written by
+donshikin:
+http://stackoverflow.com/questions/4862178/remove-rows-with-nas-in-data-frame
 }
 \usage{
-  DropNA(data, Var)
+DropNA(data, Var)
 }
 \arguments{
   \item{data}{a data frame object.}
@@ -16,8 +16,8 @@
   would like to have only non-missing (NA) values.}
 }
 \description{
-  \code{DropNA} drops rows from a data frame when they have
-  missing (NA) values on a given variable(s).
+\code{DropNA} drops rows from a data frame when they have
+missing (NA) values on a given variable(s).
 }
 \examples{
 # Create data frame

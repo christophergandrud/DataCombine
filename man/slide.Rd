@@ -2,12 +2,11 @@
 \alias{slide}
 \title{A function for creating lag and lead variables, including for time-series cross-sectional data.}
 \source{
-  Partially based on TszKin Julian's \code{shift} function:
-  http://ctszkin.com/2012/03/11/generating-a-laglead-variables/
+Partially based on TszKin Julian's \code{shift} function:
+http://ctszkin.com/2012/03/11/generating-a-laglead-variables/
 }
 \usage{
-  slide(data, Var, GroupVar = NULL, NewVar = NULL,
-    slideBy = -1)
+slide(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1)
 }
 \arguments{
   \item{data}{a data frame object.}
@@ -31,23 +30,22 @@
   data up--lead the data.}
 }
 \value{
-  a data frame
+a data frame
 }
 \description{
-  The function slides a column up or down to create lag or
-  lead variables. If \code{GroupVar} is specified it will
-  slide \code{Var} for each group. This is important for
-  time-series cross-section data. The slid data is placed
-  in a new variable in the original data frame. Note: your
-  data needs to be sorted by date. The date should be
-  ascending (i.e. increasing as it moves down the rows).
-  Also, the time difference between rows should be
-  constant, e.g. days, months, years.
+The function slides a column up or down to create lag or
+lead variables. If \code{GroupVar} is specified it will
+slide \code{Var} for each group. This is important for
+time-series cross-section data. The slid data is placed in
+a new variable in the original data frame. Note: your data
+needs to be sorted by date. The date should be ascending
+(i.e. increasing as it moves down the rows). Also, the time
+difference between rows should be constant, e.g. days,
+months, years.
 }
 \details{
-  \code{slide} a function for creating lag and lead
-  variables, including for time-series cross-sectional
-  data.
+\code{slide} a function for creating lag and lead
+variables, including for time-series cross-sectional data.
 }
 \examples{
 # Create dummy data
@@ -63,6 +61,6 @@
                 NewVar = "BLag", slideBy = -1)
 }
 \seealso{
-  \code{\link{shift}}, \code{\link{ddply}}
+\code{\link{shift}}, \code{\link{ddply}}
 }
 
