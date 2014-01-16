@@ -36,7 +36,7 @@
 #'
 #'  names(df)
 #'  
-#' @source Based primarily on a Stack Overflow answer written by rcs: <http://stackoverflow.com/questions/3369959/moving-columns-within-a-data-frame-without-retyping>. 
+#' @source Based primarily on a Stack Overflow answer written by rcs: \url{http://stackoverflow.com/questions/3369959/moving-columns-within-a-data-frame-without-retyping}. 
 #'
 #' @export
 

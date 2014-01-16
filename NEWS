@@ -2,6 +2,8 @@ Version 0.1.13
 
 Added `exact`, `ignore.case`, and `fixed` arguments to `MoveFront` for more flexible variable name matching. Thanks to Felix Haas for the suggestion.
 
+Minor documentation improvements.
+
 Version 0.1.12
 
 Added `PercChange` for calculating the percentage change from a specified lag, including within groups.
