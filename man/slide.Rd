@@ -6,7 +6,8 @@ Partially based on TszKin Julian's \code{shift} function:
 http://ctszkin.com/2012/03/11/generating-a-laglead-variables/
 }
 \usage{
-slide(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1)
+slide(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
+  reminder = TRUE)
 }
 \arguments{
   \item{data}{a data frame object.}
@@ -28,6 +29,10 @@ slide(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1)
   (time units) to shift the data by. Negative values slide
   the data down--lag the data. Positive values shift the
   data up--lead the data.}
+
+  \item{reminder}{logical. Whether or not to remind you to
+  order your data by the \code{GroupVar} and time variable
+  before running \code{slide}.}
 }
 \value{
 a data frame

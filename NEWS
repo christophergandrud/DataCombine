@@ -1,3 +1,7 @@
+Version 0.1.14
+
+Improve messages for `slide`.
+
 Version 0.1.13
 
 Added `exact`, `ignore.case`, and `fixed` arguments to `MoveFront` for more flexible variable name matching. Thanks to Felix Haas for the suggestion.
