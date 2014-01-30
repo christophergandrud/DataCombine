@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Datacombine by christophergandrud</title>
+    <title>DataCombine by christophergandrud</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -15,7 +15,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Datacombine</h1>
+        <h1>DataCombine</h1>
         <p>R tools for combining and cleaning data sets. </p>
 
         <p class="view"><a href="https://github.com/christophergandrud/DataCombine">View the Project on GitHub <small>christophergandrud/DataCombine</small></a></p>
@@ -43,14 +43,15 @@
 <hr><p><strong>DataCombine</strong> is a set of miscellaneous tools intended to make combining data sets--especially time-series cross-section data--easier. The package is continually being developed as I turn lines of code that I frequently use into single functions. It currently includes the following functions:</p>
 
 <ul>
-<li><p><code>DropNA</code>: a function that drops rows from a data frame when they have missing (NA) values on a given variable(s).</p></li>
-<li><p><code>FillIn</code>: a function for filling in missing values of a variable from one data frame with the values from another variable.</p></li>
-<li><p><code>FindReplace</code>: a function to replace multiple patterns found in a character string column of a data frame.</p></li>
-<li><p><code>grepl.sub</code>: a function to subset a data frame if a specified pattern is found in a character string.</p></li>
+<li><p><code>dMerge</code>: merges 2 data frames and report/drop/keeps only duplicates.</p></li>
+<li><p><code>DropNA</code>: drops rows from a data frame when they have missing (NA) values on a given variable(s).</p></li>
+<li><p><code>FillIn</code>: fills in missing values of a variable from one data frame with the values from another variable.</p></li>
+<li><p><code>FindReplace</code>: replaces multiple patterns found in a character string column of a data frame.</p></li>
+<li><p><code>grepl.sub</code>: subsets a data frame if a specified pattern is found in a character string.</p></li>
 <li><p><code>MoveFront</code>: moves variables to the front of a data frame. This can be useful if you have a data frame with many variables and want to move a variable or variables to the front.</p></li>
 <li><p><code>PercChange</code>: calculates the percentage change from a specified lag, including within groups.</p></li>
-<li><p><code>shift</code>: a function for creating lag and lead variables, including for time-series cross-sectional data. The shifted variable is returned to a new vector. This function is largely based on TszKin Julian's <code>shift</code> function: <a href="http://ctszkin.com/2012/03/11/generating-a-laglead-variables/">http://ctszkin.com/2012/03/11/generating-a-laglead-variables/</a>.</p></li>
-<li><p><code>slide</code>: a function for creating lag and lead variables, including for time-series cross-sectional data. The slid variable are added to the original data frame. This expands the capabilities of <code>shift</code>.</p></li>
+<li><p><code>shift</code>: creates lag and lead variables, including for time-series cross-sectional data. The shifted variable is returned to a new vector. This function is largely based on TszKin Julian's <code>shift</code> function: <a href="http://ctszkin.com/2012/03/11/generating-a-laglead-variables/">http://ctszkin.com/2012/03/11/generating-a-laglead-variables/</a>.</p></li>
+<li><p><code>slide</code>: creates lag and lead variables, including for time-series cross-sectional data. The slid variable are added to the original data frame. This expands the capabilities of <code>shift</code>.</p></li>
 <li><p><code>rmExcept</code>: removes all objects from a workspace except those specified by the user.</p></li>
 <li><p><code>VarDrop</code>: drops one or more variables from a data frame.</p></li>
 </ul><hr><h2>
