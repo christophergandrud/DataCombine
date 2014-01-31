@@ -106,7 +106,7 @@ FindReplace <- function(data, Var, replaceData, from, to, exact = TRUE, vector =
 
 #' Drop one or more variables from a data frame.
 #' 
-#' \code{VarDrop} drops one or more variables from a data frame..
+#' \code{VarDrop} drops one or more variables from a data frame.
 #' 
 #' @param data a data frame.
 #' @param Var character vector containing the names of the variables to drop.
@@ -131,3 +131,66 @@ VarDrop <- function(data, Var){
   data <- data[, !(names(data) %in% Var)]
   return(data)
 }
+
+#' Merges 2 data frames and report/drop/keeps only duplicates.
+#' 
+#' \code{dMerge} merges 2 data frames and reports/drops/keeps only duplicates.
+#' 
+#' @param data1 a data frame. The first data frame to merge.
+#' @param data2 a data frame. The second data frame to merge.
+#' @param Var character vector containing the names of the variables merge by. See \code{\link{merge}}.
+#' @param dropDups logical. Whether or not to drop duplicated rows based on \code{Var}. If \code{dropDups = FALSE} then it gives a count of the duplicated rows.
+#' @param dupsOut logical. If \code{TRUE} then a data frame only containing duplicated values is returned and \code{dropDups} is ignored.
+#' @param fromLast logical indicating if duplication should be considered from the reverse side, i.e., the last identical elements would correspond to \code{duplicated = FALSE}. Only relevant if \code{dropDups = TRUE}.
+#' @param all logical; all = L is shorthand for all.x = L and all.y = L, where L is either TRUE or FALSE.
+#' @param all.x logical; if TRUE, then extra rows will be added to the output, one for each row in x that has no matching row in y. These rows will have NAs in those columns that are usually filled with values from y. The default is FALSE, so that only rows with data from both x and y are included in the output.
+#' @param all.y logical; analogous to all.x.
+#' @param sort logical. Should the result be sorted on the by columns?
+#' @param suffixes	a character vector of length 2 specifying the suffixes to be used for making unique the names of columns in the result which not used for merging (appearing in by etc).
+#' @param incomparables	values which cannot be matched. See \code{\link{match}}.
+#'  
+#' 
+#' @seealso \code{\link{duplicated}}, \code{\link{merge}}
+#' 
+#' @export
+
+dMerge <- function(data1, data2, Var, dropDups = TRUE, dupsOut = FALSE, fromLast = FALSE, all = FALSE, all.x = all, all.y = all,
+      sort = TRUE, suffixes = c(".x",".y"),
+      incomparables = NULL){
+  if (isTRUE(dropDups) & isTRUE(dupsOut)){
+    message("dropDups ignored")
+    dropDups = FALSE
+  }
+
+  # Perform basic merge
+  Comb <- merge(data1, data2, by = Var, all = all, all.x = all.x, all.y = all.y,
+      sort = TRUE, suffixes = c(".x",".y"),
+      incomparables = incomparables)
+
+  # Find duplicated 
+  DupDF <- Comb[duplicated(Comb[, Var]), ]
+
+  # Inform user of duplicates and drop if requested
+  if (is.null(DupDF)){
+    message('There are no duplicated rows.')
+    if (isTRUE(dupsOut)){
+      message('Full data set returned.')
+    }
+  } 
+  else if (!is.null(DupDF)){
+    Count <- nrow(DupDF)
+    if (!isTRUE(dropDups) & !isTRUE(dupsOut)){
+      message(paste('There are', Count, 'duplicated rows.'))
+    }
+    else if (isTRUE(dropDups) & !isTRUE(dupsOut)){
+      Comb <- Comb[!duplicated(Comb[, Var], fromLast = fromLast), ]
+      message(paste(Count, 'duplicated rows were dropped.'))
+    }
+    else if (!isTRUE(dropDups) & isTRUE(dupsOut)){
+      message(paste('There are', Count, 'duplicated rows.'))
+      Comb <- DupDF
+    }
+  }
+  return(Comb)
+}
+

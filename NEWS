@@ -2,6 +2,8 @@ Version 0.1.15
 
 Added `VarDrop` for dropping one or more variables from a data frame.
 
+Added `dMerge` which merges 2 data frames and reports/drops/keeps only duplicates.
+
 Version 0.1.14
 
 Improve messages for `slide`.

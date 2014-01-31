@@ -11,21 +11,23 @@ DataCombine
 
 **DataCombine** is a set of miscellaneous tools intended to make combining data sets--especially time-series cross-section data--easier. The package is continually being developed as I turn lines of code that I frequently use into single functions. It currently includes the following functions:
 
-- `DropNA`: a function that drops rows from a data frame when they have missing (NA) values on a given variable(s).
+- `dMerge`: merges 2 data frames and report/drop/keeps only duplicates.
 
-- `FillIn`: a function for filling in missing values of a variable from one data frame with the values from another variable.
+- `DropNA`: drops rows from a data frame when they have missing (NA) values on a given variable(s).
 
-- `FindReplace`: a function to replace multiple patterns found in a character string column of a data frame.
+- `FillIn`: fills in missing values of a variable from one data frame with the values from another variable.
 
-- `grepl.sub`: a function to subset a data frame if a specified pattern is found in a character string.
+- `FindReplace`: replaces multiple patterns found in a character string column of a data frame.
+
+- `grepl.sub`: subsets a data frame if a specified pattern is found in a character string.
 
 - `MoveFront`: moves variables to the front of a data frame. This can be useful if you have a data frame with many variables and want to move a variable or variables to the front.
 
 - `PercChange`: calculates the percentage change from a specified lag, including within groups.
 
-- `shift`: a function for creating lag and lead variables, including for time-series cross-sectional data. The shifted variable is returned to a new vector. This function is largely based on TszKin Julian's `shift` function: <http://ctszkin.com/2012/03/11/generating-a-laglead-variables/>.
+- `shift`: creates lag and lead variables, including for time-series cross-sectional data. The shifted variable is returned to a new vector. This function is largely based on TszKin Julian's `shift` function: <http://ctszkin.com/2012/03/11/generating-a-laglead-variables/>.
 
-- `slide`: a function for creating lag and lead variables, including for time-series cross-sectional data. The slid variable are added to the original data frame. This expands the capabilities of `shift`.
+- `slide`: creates lag and lead variables, including for time-series cross-sectional data. The slid variable are added to the original data frame. This expands the capabilities of `shift`.
 
 - `rmExcept`: removes all objects from a workspace except those specified by the user.
 

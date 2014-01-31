@@ -12,7 +12,7 @@ VarDrop(data, Var)
 }
 \description{
 \code{VarDrop} drops one or more variables from a data
-frame..
+frame.
 }
 \examples{
 # Create dummy data
