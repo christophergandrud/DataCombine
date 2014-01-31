@@ -1,3 +1,7 @@
+Version 0.1.15
+
+Added `VarDrop` for dropping one or more variables from a data frame.
+
 Version 0.1.14
 
 Improve messages for `slide`.

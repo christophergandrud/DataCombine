@@ -103,3 +103,31 @@ FindReplace <- function(data, Var, replaceData, from, to, exact = TRUE, vector =
   }
   return(data)
 }
+
+#' Drop one or more variables from a data frame.
+#' 
+#' \code{VarDrop} drops one or more variables from a data frame..
+#' 
+#' @param data a data frame.
+#' @param Var character vector containing the names of the variables to drop.
+#' 
+#' @examples
+#' # Create dummy data
+#' a <- c(1, 2, 3, 4, NA)
+#' b <- c( 1, NA, 3, 4, 5) 
+#' c <- c(1:5)
+#' d <- c(1:5)
+#' ABCData <- data.frame(a, b, c, d)
+#'  
+#' # Drop a and b
+#' DroppedData <- VarDrop(ABCData, c('b', 'c'))  
+#' 
+#' @export
+
+VarDrop <- function(data, Var){
+  if (!all(Var %in% names(data))){
+    message('At least one of the specified variables to drop is not found.')
+  }
+  data <- data[, !(names(data) %in% Var)]
+  return(data)
+}
