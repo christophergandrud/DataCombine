@@ -25,9 +25,8 @@ dMerge(data1, data2, Var, dropDups = TRUE, dupsOut = FALSE,
   \code{dropDups} is ignored.}
 
   \item{fromLast}{logical indicating if duplication should
-  be considered from the reverse side, i.e., the last
-  identical elements would correspond to \code{duplicated =
-  FALSE}. Only relevant if \code{dropDups = TRUE}.}
+  be considered from the reverse side. Only relevant if
+  \code{dropDups = TRUE}.}
 
   \item{all}{logical; all = L is shorthand for all.x = L
   and all.y = L, where L is either TRUE or FALSE.}

@@ -141,7 +141,7 @@ VarDrop <- function(data, Var){
 #' @param Var character vector containing the names of the variables merge by. See \code{\link{merge}}.
 #' @param dropDups logical. Whether or not to drop duplicated rows based on \code{Var}. If \code{dropDups = FALSE} then it gives a count of the duplicated rows.
 #' @param dupsOut logical. If \code{TRUE} then a data frame only containing duplicated values is returned and \code{dropDups} is ignored.
-#' @param fromLast logical indicating if duplication should be considered from the reverse side, i.e., the last identical elements would correspond to \code{duplicated = FALSE}. Only relevant if \code{dropDups = TRUE}.
+#' @param fromLast logical indicating if duplication should be considered from the reverse side. Only relevant if \code{dropDups = TRUE}.
 #' @param all logical; all = L is shorthand for all.x = L and all.y = L, where L is either TRUE or FALSE.
 #' @param all.x logical; if TRUE, then extra rows will be added to the output, one for each row in x that has no matching row in y. These rows will have NAs in those columns that are usually filled with values from y. The default is FALSE, so that only rows with data from both x and y are included in the output.
 #' @param all.y logical; analogous to all.x.
@@ -160,7 +160,7 @@ dMerge <- function(data1, data2, Var, dropDups = TRUE, dupsOut = FALSE, fromLast
   if (isTRUE(dropDups) & isTRUE(dupsOut)){
     message("dropDups ignored")
     dropDups = FALSE
-  }
+  }  
 
   # Perform basic merge
   Comb <- merge(data1, data2, by = Var, all = all, all.x = all.x, all.y = all.y,
