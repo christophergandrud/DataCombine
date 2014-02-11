@@ -1,3 +1,7 @@
+Version 0.1.16
+
+Added `message` option to `DropNA`. Allows the user to turn of the drop message.
+
 Version 0.1.15
 
 Added `VarDrop` for dropping one or more variables from a data frame.
