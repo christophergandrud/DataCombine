@@ -32,10 +32,12 @@ TimeFill <- function(data, GroupVar, StartVar, EndVar, NewVar = 'TimeFilled', Ne
   # Warnings
   if (class(data[, StartVar]) != 'numeric'){
     message(paste0('Converting', deparse(substitute(StartVar)), ' to numeric. Things might get wacky. Please check.'))
+    data[, StartVar] <- as.character(data[, StartVar])
     data[, StartVar] <- as.numeric(data[, StartVar])
   }
   if (class(data[, EndVar]) != 'numeric'){
     message(paste0('Converting ', deparse(substitute(EndVar)), ' to numeric. Things might get wacky. Please check.'))
+    data[, EndVar] <- as.character(data[, EndVar])
     data[, EndVar] <- as.numeric(data[, EndVar])
   }
   
