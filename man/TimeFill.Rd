@@ -1,0 +1,61 @@
+\name{TimeFill}
+\alias{TimeFill}
+\title{Creates a continuous Unit-Time-Dummy data frame from a data frame with Unit-Start-End times}
+\usage{
+TimeFill(data, GroupVar, StartVar, EndVar, NewVar = "TimeFilled",
+  NewTimeVar = "Time", KeepStartStop = FALSE)
+}
+\arguments{
+  \item{data}{a data frame with a Group, Start, and End
+  variables.}
+
+  \item{GroupVar}{a character string naming the variable
+  grouping the units within which the new dummy variable
+  will be found.}
+
+  \item{StartVar}{a character string indicating the
+  variable with the starting times of some series.}
+
+  \item{EndVar}{a character string indicating the variable
+  with the ending times of some series.}
+
+  \item{NewVar}{a character string specifying the name of
+  the new dummy variable for the series. The default is
+  \code{TimeFilled}.}
+
+  \item{NewTimeVar}{a character string specifying the name
+  of the new time variable. The default is \code{Time}.}
+
+  \item{KeepStartStop}{logical indicating whether or not to
+  keep the \code{StartVar} and \code{EndVar} variables in
+  the output data frame.}
+}
+\value{
+Returns a data frame with at least three columns, with the
+\code{GroupVar}, \code{NewTimeVar}, and a new dummy
+variable with the name specified by \code{NewVar}. This
+variable is \code{1} for every time increment between and
+including \code{StartVar} and \code{EndVar}. It is \code{0}
+otherwise.
+}
+\description{
+Creates a continuous Unit-Time-Dummy data frame from a data
+frame with Unit-Start-End times
+}
+\examples{
+# Create fake data
+
+Country = c('Panama', 'Korea', 'Korea', 'Germany', 'Finland')
+Start = c(1995, 1980, 2004, 2000, 2012)
+End = c(1995, 2001, 2010, 2002, 2014)
+
+Data <- data.frame(Country, Start, End)
+
+# TimeFill
+FilledData <- TimeFill(Data, GroupVar = 'Country',
+                 StartVar = 'Start', EndVar = 'End')
+
+# Show selection from TimeFill-ed data
+FilledData[90:100, ]
+}
+

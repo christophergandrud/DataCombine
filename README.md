@@ -3,7 +3,7 @@ DataCombine
 
 ### Christopher Gandrud
 
-### Version 0.1.16
+### Version 0.1.17
 
 ### Please report any bugs or suggestions for improvement at: <https://github.com/christophergandrud/DataCombine/issues>.
 
@@ -30,6 +30,8 @@ DataCombine
 - `slide`: creates lag and lead variables, including for time-series cross-sectional data. The slid variable are added to the original data frame. This expands the capabilities of `shift`.
 
 - `rmExcept`: removes all objects from a workspace except those specified by the user.
+
+- `TimeFill`: creates a continuous `Unit`-`Time`-`Dummy` data frame from a data frame with `Unit`-`Start`-`End` times.
 
 - `VarDrop`: drops one or more variables from a data frame.
 

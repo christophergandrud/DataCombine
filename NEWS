@@ -1,3 +1,7 @@
+Version 0.1.17
+
+Added `TimeFill` for creating a continuous Unit-Time-Dummy data frame from a data frame with Unit-Start-End times.
+
 Version 0.1.16
 
 Added `message` option to `DropNA`. Allows the user to turn of the drop message.
