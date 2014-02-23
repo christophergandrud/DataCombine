@@ -25,7 +25,7 @@ DataCombine
 
 - `PercChange`: calculates the percentage change from a specified lag, including within groups.
 
-- `shift`: creates lag and lead variables, including for time-series cross-sectional data. The shifted variable is returned to a new vector. This function is largely based on TszKin Julian's `shift` function: <http://ctszkin.com/2012/03/11/generating-a-laglead-variables/>.
+- `shift`: creates lag and lead variables, including for time-series cross-sectional data. The shifted variable is returned to a new vector. This function is largely based on [TszKin Julian's shift function](http://ctszkin.com/2012/03/11/generating-a-laglead-variables/).
 
 - `slide`: creates lag and lead variables, including for time-series cross-sectional data. The slid variable are added to the original data frame. This expands the capabilities of `shift`.
 
