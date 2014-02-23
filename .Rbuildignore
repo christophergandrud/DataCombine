@@ -1,2 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+
+# Git related
+./.git*
+
+# Travis scripts
+.travis.yml
