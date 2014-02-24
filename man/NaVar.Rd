@@ -33,9 +33,10 @@ a <- c(1, 2, 3, 4, NA)
 b <- c( 1, NA, 3, 4, 5)
 ABData <- data.frame(a, b)
 
-# Create varible indicating missing values in column a
-ABData1 <- NaVar(ABData, Var = 'a')
+# Create varibles indicating missing values in columns a and b
+ABData1 <- NaVar(ABData, Var = c('a', 'b'))
 
+# Create varible indicating missing values in columns a with reversed dummy
 ABData2 <- NaVar(ABData, Var = 'a', reverse = TRUE, message = FALSE)
 }
 

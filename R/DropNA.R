@@ -67,9 +67,10 @@ DropNA <- function(data, Var, message = TRUE)
 #' b <- c( 1, NA, 3, 4, 5) 
 #' ABData <- data.frame(a, b)
 #' 
-#' # Create varible indicating missing values in column a
-#' ABData1 <- NaVar(ABData, Var = 'a')
+#' # Create varibles indicating missing values in columns a and b
+#' ABData1 <- NaVar(ABData, Var = c('a', 'b'))
 #' 
+#' # Create varible indicating missing values in columns a with reversed dummy
 #' ABData2 <- NaVar(ABData, Var = 'a', reverse = TRUE, message = FALSE)
 #'
 #' @export
@@ -81,6 +82,7 @@ NaVar <- function(data, Var, Stub = 'Miss_', reverse = FALSE, message = TRUE){
     stop("Variable(s) not found in the data frame.")
   }
 
+  MissNames <- vector()
   for (i in Var){
     data[, paste0(Stub, i)] <- 1
     if (!isTRUE(reverse)){
@@ -88,11 +90,11 @@ NaVar <- function(data, Var, Stub = 'Miss_', reverse = FALSE, message = TRUE){
     } else if (isTRUE(reverse)){
       data[, paste0(Stub, i)][is.na(data[, i])] <- 0
     }
-    MissNames <- paste0(Stub, i)
-    if (isTRUE(message)){
-      message('The following missingness variable(s) were created:\n')
-      message(paste(MissNames, collapse = ', '))
-    }
-    return(data)
+    MissNames <- append(MissNames, paste0(Stub, i))
   }
+  if (isTRUE(message)){
+    message('The following missingness variable(s) were created:\n')
+    message(paste(MissNames, collapse = ', '))
+  }
+  return(data)
 }
