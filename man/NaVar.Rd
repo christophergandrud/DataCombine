@@ -1,0 +1,41 @@
+\name{NaVar}
+\alias{NaVar}
+\title{Create new variable(s) indicating if there are missing values in other variable(s)}
+\usage{
+NaVar(data, Var, Stub = "Miss_", reverse = FALSE, message = TRUE)
+}
+\arguments{
+  \item{data}{a data frame object.}
+
+  \item{Var}{a character vector naming the variable(s)
+  within which you would like to identify missing values.}
+
+  \item{Stub}{a character string indicating the stub you
+  would like to append to the new variables' name(s).}
+
+  \item{reverse}{logical. If \code{reverse = FALSE} then
+  missing values are coded as \code{1} and non-missing
+  values are coded as \code{0}. If \code{reverse = TRUE}
+  then missing values are coded as \code{0} and non-missing
+  values are coded as \code{1}.}
+
+  \item{message}{logical. Whether or not to give you a
+  message about the names of the new variables that are
+  created.}
+}
+\description{
+Create new variable(s) indicating if there are missing
+values in other variable(s)
+}
+\examples{
+# Create data frame
+a <- c(1, 2, 3, 4, NA)
+b <- c( 1, NA, 3, 4, 5)
+ABData <- data.frame(a, b)
+
+# Create varible indicating missing values in column a
+ABData1 <- NaVar(ABData, Var = 'a')
+
+ABData2 <- NaVar(ABData, Var = 'a', reverse = TRUE, message = FALSE)
+}
+

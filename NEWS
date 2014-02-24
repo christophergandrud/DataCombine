@@ -1,3 +1,9 @@
+Version 0.1.18
+
+Added `NaVar` for creating new variable(s) indicating if there are missing values in other variable(s).
+
+Minor internal improvements to `rmExcept`.
+
 Version 0.1.17
 
 Added `TimeFill` for creating a continuous Unit-Time-Dummy data frame from a data frame with Unit-Start-End times.

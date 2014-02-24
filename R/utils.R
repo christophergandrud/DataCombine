@@ -22,7 +22,7 @@ rmExcept <- function(keepers, envir = globalenv(), message = TRUE){
   DeleteObj <- setdiff(ls(envir = envir), keepers)
   rm(list = DeleteObj, envir = envir)
   if (isTRUE(message)){
-    message(paste("Removed the following objects:"))
+    message("Removed the following objects:\n")
     message(paste(DeleteObj, collapse = ", "))
   }
 } 

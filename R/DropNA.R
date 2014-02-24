@@ -51,3 +51,48 @@ DropNA <- function(data, Var, message = TRUE)
   }
 	return(DataNoNA)
 }
+
+#' Create new variable(s) indicating if there are missing values in other variable(s)
+#'
+#' @param data a data frame object.
+#' @param Var a character vector naming the variable(s) within which you would like to identify missing values.
+#' @param Stub a character string indicating the stub you would like to append to the new variables' name(s).
+#' @param reverse logical. If \code{reverse = FALSE} then missing values are coded as \code{1} and non-missing values are coded as \code{0}. If \code{reverse = TRUE} then missing values are coded as \code{0} and non-missing values are coded as \code{1}.
+#' @param message logical. Whether or not to give you a message about the names of the new variables that are created.
+
+#' 
+#' @examples
+#' # Create data frame
+#' a <- c(1, 2, 3, 4, NA)
+#' b <- c( 1, NA, 3, 4, 5) 
+#' ABData <- data.frame(a, b)
+#' 
+#' # Create varible indicating missing values in column a
+#' ABData1 <- NaVar(ABData, Var = 'a')
+#' 
+#' ABData2 <- NaVar(ABData, Var = 'a', reverse = TRUE, message = FALSE)
+#'
+#' @export
+
+NaVar <- function(data, Var, Stub = 'Miss_', reverse = FALSE, message = TRUE){
+  DataNames <- names(data)
+  TestExist <- Var %in% DataNames
+  if (!all(TestExist)){
+    stop("Variable(s) not found in the data frame.")
+  }
+
+  for (i in Var){
+    data[, paste0(Stub, i)] <- 1
+    if (!isTRUE(reverse)){
+      data[, paste0(Stub, i)][!is.na(data[, i])] <- 0
+    } else if (isTRUE(reverse)){
+      data[, paste0(Stub, i)][is.na(data[, i])] <- 0
+    }
+    MissNames <- paste0(Stub, i)
+    if (isTRUE(message)){
+      message('The following missingness variable(s) were created:\n')
+      message(paste(MissNames, collapse = ', '))
+    }
+    return(data)
+  }
+}
