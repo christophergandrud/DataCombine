@@ -164,7 +164,7 @@ slideMA <- function(data, Var, GroupVar = NULL, periodBound = -3, offset = 1, Ne
   VarVect <- data[, Var]
   
   if (is.null(NewVar)){
-    NewVar <- paste0(Var, 'MA', slideBy, '_', offset)
+    NewVar <- paste0(Var, 'MA', periodBound, '_', offset)
   }
   
   Abs = abs(periodBound)
