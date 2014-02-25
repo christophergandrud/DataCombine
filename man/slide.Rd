@@ -59,7 +59,7 @@ variables, including for time-series cross-sectional data.
  Data <- data.frame(ID, A, B, C)
 
  # Lead the variable by two time units
- DataSlid1 <- slide(Data, Var = "A", NewVar = "ALag", slideBy = 2)
+ DataSlid1 <- slide(Data, Var = "A", NewVar = "ALead", slideBy = 2)
 
  # Lag the variable one time unit by ID group
  DataSlid2 <- slide(data = Data, Var = "B", GroupVar = "ID",

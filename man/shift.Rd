@@ -6,7 +6,7 @@ Largely based on TszKin Julian's \code{shift} function:
 http://ctszkin.com/2012/03/11/generating-a-laglead-variables/
 }
 \usage{
-shift(VarVect, shiftBy)
+shift(VarVect, shiftBy, reminder = TRUE)
 }
 \arguments{
   \item{VarVect}{a vector you would like to shift (create
@@ -16,6 +16,10 @@ shift(VarVect, shiftBy)
   (time units) to shift the data by. Negative values shift
   the data down--lag the data. Positive values shift the
   data up--lead the data.}
+
+  \item{reminder}{logical. Whether or not to remind you to
+  order your data by the \code{GroupVar} and time variable
+  before running \code{shift}.}
 }
 \value{
 a vector

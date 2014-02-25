@@ -3,7 +3,7 @@ DataCombine
 
 ### Christopher Gandrud
 
-### Version 0.1.18
+### Version 0.1.19
 
 ### Please report any bugs or suggestions for improvement at: <https://github.com/christophergandrud/DataCombine/issues>.
 
@@ -30,6 +30,8 @@ DataCombine
 - `shift`: creates lag and lead variables, including for time-series cross-sectional data. The shifted variable is returned to a new vector. This function is largely based on [TszKin Julian's shift function](http://ctszkin.com/2012/03/11/generating-a-laglead-variables/).
 
 - `slide`: creates lag and lead variables, including for time-series cross-sectional data. The slid variable are added to the original data frame. This expands the capabilities of `shift`.
+
+- `slideMA`: creates a moving average for a period before or after each time point for a given variable.
 
 - `rmExcept`: removes all objects from a workspace except those specified by the user.
 

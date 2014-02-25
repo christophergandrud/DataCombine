@@ -1,3 +1,9 @@
+Version 0.1.19
+
+Added `slideMA` for creating a moving average for a period before or after each time point for a given variable.
+
+Message improvements to `shift`
+
 Version 0.1.18
 
 Added `NaVar` for creating new variable(s) indicating if there are missing values in other variable(s).
