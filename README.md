@@ -33,6 +33,8 @@ DataCombine
 
 - `slideMA`: creates a moving average for a period before or after each time point for a given variable.
 
+- `SpreadDummy`: spread a dummy variable (1's and 0') over a specified time period and for specified groups.
+
 - `rmExcept`: removes all objects from a workspace except those specified by the user.
 
 - `TimeFill`: creates a continuous `Unit`-`Time`-`Dummy` data frame from a data frame with `Unit`-`Start`-`End` times.

@@ -32,17 +32,18 @@
 #' @source Partially based on TszKin Julian's \code{shift} function: http://ctszkin.com/2012/03/11/generating-a-laglead-variables/
 #'
 #'
-#' @importFrom plyr ddply rename
+#' @importFrom plyr ddply rename summarize
 #' @export
 
 slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, reminder = TRUE)
 {  
+  fake <- total <- NULL
   if (isTRUE(reminder)){
     if (is.null(GroupVar)){
-      message(paste('Remember to put', deparse(substitute(data)), 'in time order before running slide.'))      
+      message(paste('\nRemember to put', deparse(substitute(data)), 'in time order before running.\n'))      
     }
     if (!is.null(GroupVar)){
-      message(paste('Remember to order', deparse(substitute(data)), 'by', GroupVar, 'and the time variable before running slide.'))
+      message(paste('\nRemember to order', deparse(substitute(data)), 'by', GroupVar, 'and the time variable before running.\n'))
     }
   }  
   
@@ -58,17 +59,29 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, remin
   if (is.null(NewVar)){
     NewVar <- paste0(Var, slideBy)
   }
+
+  # Drop if there are not enough observations per group to slide
+  if (!is.null(GroupVar)){
+    data$fake <- 1
+    Summed <- ddply(data, GroupVar, summarize, total = sum(fake))
+    SubSummed <- subset(Summed, total <= abs(slideBy))
+    if (nrow(SubSummed) > 0){
+        Dropping <- SubSummed[, GroupVar]
+        data <- data[!(data[, GroupVar] %in% Dropping), ]
+
+        message(paste0('Warning: the following groups have ', abs(slideBy), ' or fewer observations.\nNo reasonable lag/lead can be created, so they are dropped:\n'))
+        message(paste(Dropping, collapse = "\n"))
+    }
+  }
   
   # Create lags/leads
-  tryCatch({
-      if (is.null(GroupVar)){
-        data[, NewVar] <- shift(VarVect = VarVect, shiftBy = slideBy, reminder = FALSE)
-      }
-      else if (!is.null(GroupVar)){
-        vars <- eval(parse(text = paste0("ddply(data[, c(GroupVar, Var)], GroupVar, transform, NewVarX = shift(", Var, ",", slideBy, ", reminder = FALSE))")))
-        data[, NewVar] <- vars$NewVarX
-      }
-  }, error = function(e){cat('Warning: at least one of the groups has fewer rows than slideBy. This group(s) was not slid.\n')})
+  if (is.null(GroupVar)){
+    data[, NewVar] <- shift(VarVect = VarVect, shiftBy = slideBy, reminder = FALSE)
+  }
+  else if (!is.null(GroupVar)){
+    vars <- eval(parse(text = paste0("ddply(data[, c(GroupVar, Var)], GroupVar, transform, NewVarX = shift(", Var, ",", slideBy, ", reminder = FALSE))")))
+    data[, NewVar] <- vars$NewVarX
+  }
   
   return(data)
 }
@@ -205,4 +218,93 @@ shiftMA <- function(x, shiftBy = slideBy, Abs = Abs, reminder = reminder){
   slideBy <- NULL
   x <- shift(x, shiftBy, reminder = reminder)
   ma(x, Abs, centre = FALSE)
+}
+
+#' Spread a dummy variable (1's and 0') over a specified time period and for specified groups
+#' 
+#' @param data a data frame object.
+#' @param Var a character string naming the numeric dummy variable with values 0 and 1 that you would like to spread. Can be either spread as a lag or lead.
+#' @param GroupVar a character string naming the variable grouping the units within which \code{Var} will be spread If \code{GroupVar = NULL} then the whole variable is spread up or down. This is similar to \code{\link{shift}}, though \code{shift} slides the data and returns it to a new vector rather than the original data frame.
+#' @param NewVar a character string specifying the name for the new variable to place the spread dummy data in.
+#' @param spreadBy numeric value specifying how many rows (time units) to spread the data over. Negative values spread the data down--lag the data. Positive values spread the data up--lead the data.
+#' @param reminder logical. Whether or not to remind you to order your data by the \code{GroupVar} and time variable before running \code{SpreadDummy}. 
+#' 
+#' @examples
+#' # Create dummy data
+#' ID <- sort(rep(seq(1:4), 5))
+#' NotVar <- rep(1:5, 4)
+#' Dummy <-  sample(c(0, 1), size = 20, replace = TRUE)
+#' Data <- data.frame(ID, NotVar, Dummy)
+#' 
+#' # Spread 
+#' DataSpread1 <- SpreadDummy(data = Data, Var = 'Dummy', 
+#'                            spreadBy = 2, reminder = FALSE)
+#'                            
+#' DataSpread2 <- SpreadDummy(data = Data, Var = 'Dummy', GroupVar = 'ID',
+#'                            spreadBy = -2)
+#'                  
+#' 
+#' @seealso \code{\link{slide}}
+#' 
+#' @importFrom plyr ddply summarize
+#' @export
+
+SpreadDummy <- function(data, Var, GroupVar = NULL, NewVar = NULL, spreadBy = -2, reminder = TRUE){
+    # Check if variable is numeric dummy
+    if (class(data[, Var]) != 'numeric'){
+        stop(paste(Var, 'must be a numeric dummy variable.'))
+    }
+
+    if (is.null(NewVar)){
+        NewVar <- paste0(Var, 'Spread', spreadBy)
+    }
+
+    if (spreadBy < 0){
+        start = -1
+    } else if (spreadBy > 0){
+        start = 1
+    }
+
+    for (i in start:spreadBy){
+        NewTemp <- paste0(NewVar, i)
+        if (isTRUE(reminder) & abs(i) == 1){
+          if (!is.null(GroupVar)){
+            temp <- slide(data, Var = Var, GroupVar = GroupVar, 
+                          NewVar = NewTemp, slideBy = i)
+          }
+          else if (is.null(GroupVar)){
+            temp <- slide(data, Var = Var, NewVar = NewTemp, 
+                          slideBy = i)            
+          }         
+        }
+        else if (!is.null(GroupVar)){
+        temp <- slide(data, Var = Var, GroupVar = GroupVar, 
+            NewVar = NewTemp, slideBy = i, reminder = FALSE)
+        }
+        else if (is.null(GroupVar)){
+        temp <- slide(data, Var = Var, NewVar = NewTemp, 
+            slideBy = i, reminder = FALSE)            
+        }
+      
+      MainNames <- names(data)
+      if (nrow(temp) != nrow(data)){
+        data <- data[(data[, GroupVar] %in% temp[, GroupVar]), ]
+      }
+      temp <- temp[, NewTemp]
+      
+      data <- data.frame(data, temp)
+      names(data) <- c(MainNames, NewTemp)
+    }
+
+    tempNames <- Var
+    for (i in start:spreadBy){
+      temp <- paste0(NewVar, i)
+      tempNames <- append(tempNames, temp)
+    }
+    data[, NewVar] <- data[, Var]
+    for (i in tempNames){
+      data[, NewVar][data[, i] == 1] <- 1
+    }
+    data <- VarDrop(data, tempNames[-1])
+    return(data)
 }

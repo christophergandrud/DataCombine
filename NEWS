@@ -1,5 +1,7 @@
 Version 0.1.20
 
+Added `SpreadDummy` to spread a dummy variable (1's and 0') over a specified time period and for specified groups.
+
 Improved error handling in `slide` for when the number of rows in a group is smaller than the argument set with `slideBy`.
 
 Version 0.1.19
