@@ -35,7 +35,7 @@
 <a name="christopher-gandrud" class="anchor" href="#christopher-gandrud"><span class="octicon octicon-link"></span></a>Christopher Gandrud</h3>
 
 <h3>
-<a name="version-0117" class="anchor" href="#version-0117"><span class="octicon octicon-link"></span></a>Version 0.1.17</h3>
+<a name="version-0120" class="anchor" href="#version-0120"><span class="octicon octicon-link"></span></a>Version 0.1.20</h3>
 
 <h3>
 <a name="please-report-any-bugs-or-suggestions-for-improvement-at-httpsgithubcomchristophergandruddatacombineissues" class="anchor" href="#please-report-any-bugs-or-suggestions-for-improvement-at-httpsgithubcomchristophergandruddatacombineissues"><span class="octicon octicon-link"></span></a>Please report any bugs or suggestions for improvement at: <a href="https://github.com/christophergandrud/DataCombine/issues">https://github.com/christophergandrud/DataCombine/issues</a>.</h3>
@@ -49,9 +49,12 @@
 <li><p><code>FindReplace</code>: replaces multiple patterns found in a character string column of a data frame.</p></li>
 <li><p><code>grepl.sub</code>: subsets a data frame if a specified pattern is found in a character string.</p></li>
 <li><p><code>MoveFront</code>: moves variables to the front of a data frame. This can be useful if you have a data frame with many variables and want to move a variable or variables to the front.</p></li>
+<li><p><code>NaVar</code>: create new variable(s) indicating if there are missing values in other variable(s).</p></li>
 <li><p><code>PercChange</code>: calculates the percentage change from a specified lag, including within groups.</p></li>
-<li><p><code>shift</code>: creates lag and lead variables, including for time-series cross-sectional data. The shifted variable is returned to a new vector. This function is largely based on TszKin Julian's <code>shift</code> function: <a href="http://ctszkin.com/2012/03/11/generating-a-laglead-variables/">http://ctszkin.com/2012/03/11/generating-a-laglead-variables/</a>.</p></li>
+<li><p><code>shift</code>: creates lag and lead variables, including for time-series cross-sectional data. The shifted variable is returned to a new vector. This function is largely based on <a href="http://ctszkin.com/2012/03/11/generating-a-laglead-variables/">TszKin Julian's shift function</a>.</p></li>
 <li><p><code>slide</code>: creates lag and lead variables, including for time-series cross-sectional data. The slid variable are added to the original data frame. This expands the capabilities of <code>shift</code>.</p></li>
+<li><p><code>slideMA</code>: creates a moving average for a period before or after each time point for a given variable.</p></li>
+<li><p><code>SpreadDummy</code>: spread a dummy variable (1's and 0') over a specified time period and for specified groups.</p></li>
 <li><p><code>rmExcept</code>: removes all objects from a workspace except those specified by the user.</p></li>
 <li><p><code>TimeFill</code>: creates a continuous <code>Unit</code>-<code>Time</code>-<code>Dummy</code> data frame from a data frame with <code>Unit</code>-<code>Start</code>-<code>End</code> times.</p></li>
 <li><p><code>VarDrop</code>: drops one or more variables from a data frame.</p></li>
