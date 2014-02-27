@@ -60,13 +60,15 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, remin
   }
   
   # Create lags/leads
-  if (is.null(GroupVar)){
-    data[, NewVar] <- shift(VarVect = VarVect, shiftBy = slideBy, reminder = FALSE)
-  }
-  else if (!is.null(GroupVar)){
-    vars <- eval(parse(text = paste0("ddply(data[, c(GroupVar, Var)], GroupVar, transform, NewVarX = shift(", Var, ",", slideBy, ", reminder = FALSE))")))
-    data[, NewVar] <- vars$NewVarX
-  }
+  tryCatch({
+      if (is.null(GroupVar)){
+        data[, NewVar] <- shift(VarVect = VarVect, shiftBy = slideBy, reminder = FALSE)
+      }
+      else if (!is.null(GroupVar)){
+        vars <- eval(parse(text = paste0("ddply(data[, c(GroupVar, Var)], GroupVar, transform, NewVarX = shift(", Var, ",", slideBy, ", reminder = FALSE))")))
+        data[, NewVar] <- vars$NewVarX
+      }
+  }, error = function(e){cat('Warning: at least one of the groups has fewer rows than slideBy. This group(s) was not slid.\n')})
   
   return(data)
 }
@@ -91,11 +93,13 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, remin
 #' @export
 
 shift <- function(VarVect, shiftBy, reminder = TRUE){
-  stopifnot(is.numeric(shiftBy))
-  #stopifnot(is.numeric(VarVect))
+  if(!is.numeric(shiftBy)){
+    stop(paste(shiftBy, 'must be numeric.'))
+  }
   if (isTRUE(reminder)){
       message(paste('Remember to put', deparse(substitute(data)), 'in time order before running shift.'))      
   }
+
 
   if (length(shiftBy) > 1)
     return(sapply(shiftBy, shift, Var = VarVect))

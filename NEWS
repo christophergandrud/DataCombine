@@ -1,3 +1,7 @@
+Version 0.1.20
+
+Improved error handling in `slide` for when the number of rows in a group is smaller than the argument set with `slideBy`.
+
 Version 0.1.19
 
 Added `slideMA` for creating a moving average for a period before or after each time point for a given variable.
