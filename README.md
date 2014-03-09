@@ -3,7 +3,7 @@ DataCombine
 
 ### Christopher Gandrud
 
-### Version 0.1.20
+### Version 0.1.20 [![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine)
 
 ### Please report any bugs or suggestions for improvement at: <https://github.com/christophergandrud/DataCombine/issues>.
 
@@ -55,6 +55,6 @@ I will continue to add to the package as I build data sets and run across other 
 
 You can also install the most recent stable version with `install_github` from the [devtools](https://github.com/hadley/devtools):
 
-```
-devtools::install_github("DataCombine", "christophergandrud")
+```{S}
+devtools::install_github('DataCombine/christophergandrud')
 ```
