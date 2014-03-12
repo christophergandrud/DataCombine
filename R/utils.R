@@ -19,6 +19,9 @@
 #' @export
 
 rmExcept <- function(keepers, envir = globalenv(), message = TRUE){
+  if (class(keepers) != 'character'){
+    stop('The keepers argument must be a character vector.', call. = FALSE)
+  }
   DeleteObj <- setdiff(ls(envir = envir), keepers)
   rm(list = DeleteObj, envir = envir)
   if (isTRUE(message)){
