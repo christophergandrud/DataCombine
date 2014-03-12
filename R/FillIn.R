@@ -59,7 +59,7 @@ FillIn <- function(D1, D2, Var1 = NULL, Var2 = NULL, KeyVar = c("iso2c", "year")
   # Tell the user how many values will be filled in
   SubNA <- OutDT[, list(VarGen, VarGen.1)]
   SubNA <- subset(SubNA, is.na(VarGen) & !is.na(VarGen.1))
-  print(paste(nrow(SubNA), "NAs were replaced."))
+  message(paste(nrow(SubNA), "NAs were replaced."))
   
   # Fill in missing values from D1 with values from D2
   OutDT <- OutDT[is.na(VarGen), VarGen := VarGen.1]
