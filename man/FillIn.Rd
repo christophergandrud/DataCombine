@@ -16,7 +16,8 @@ FillIn(D1, D2, Var1 = NULL, Var2 = NULL, KeyVar = c("iso2c", "year"),
   variable in \code{D1} you want to fill in.}
 
   \item{Var2}{an optional character string of variable name
-  in \code{D2} that you would like to use to fill in.}
+  in \code{D2} that you would like to use to fill in. Note:
+  must be of the same class as \code{Var1}.}
 
   \item{KeyVar}{a character vector of variable names that
   are shared by \code{D1} and \code{D2} that can be used to

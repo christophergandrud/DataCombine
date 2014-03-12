@@ -1,3 +1,9 @@
+### Version 0.1.2
+
+Small improvement to `FillIn` so that it doesn't attempt to find correlations if Var2 is not numeric.
+
+Error message improvements.
+
 ### Version 0.1.20
 
 Added `SpreadDummy` to spread a dummy variable (1's and 0') over a specified time period and for specified groups.

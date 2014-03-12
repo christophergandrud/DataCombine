@@ -51,7 +51,7 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, remin
   DataNames <- names(data)
   TestExist <- Var %in% DataNames
   if (!isTRUE(TestExist)){
-    stop(paste(Var, "was not found in the data frame."))
+    stop(paste(Var, "was not found in the data frame."), call. = FALSE)
   }
   
   VarVect <- data[, Var]
@@ -107,7 +107,7 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, remin
 
 shift <- function(VarVect, shiftBy, reminder = TRUE){
   if(!is.numeric(shiftBy)){
-    stop(paste(shiftBy, 'must be numeric.'))
+    stop(paste(shiftBy, 'must be numeric.'), call. = FALSE)
   }
   if (isTRUE(reminder)){
       message(paste('Remember to put', deparse(substitute(data)), 'in time order before running shift.'))      
@@ -175,7 +175,7 @@ slideMA <- function(data, Var, GroupVar = NULL, periodBound = -3, offset = 1, Ne
   DataNames <- names(data)
   TestExist <- Var %in% DataNames
   if (!isTRUE(TestExist)){
-    stop(paste(Var, "was not found in the data frame."))
+    stop(paste(Var, "was not found in the data frame."), call. = FALSE)
   }
   
   VarVect <- data[, Var]
@@ -252,7 +252,7 @@ shiftMA <- function(x, shiftBy = slideBy, Abs = Abs, reminder = reminder){
 SpreadDummy <- function(data, Var, GroupVar = NULL, NewVar = NULL, spreadBy = -2, reminder = TRUE){
     # Check if variable is numeric dummy
     if (class(data[, Var]) != 'numeric'){
-        stop(paste(Var, 'must be a numeric dummy variable.'))
+        stop(paste(Var, 'must be a numeric dummy variable.'), call. = FALSE)
     }
 
     if (is.null(NewVar)){

@@ -28,7 +28,7 @@ DropNA <- function(data, Var, message = TRUE)
 	DataNames <- names(data)
 	TestExist <- Var %in% DataNames
 	if (!all(TestExist)){
-		stop("Variable(s) not found in the data frame.")
+		stop("Variable(s) not found in the data frame.", call. = FALSE)
 	}
 
 	# Drop if NA
@@ -79,7 +79,7 @@ NaVar <- function(data, Var, Stub = 'Miss_', reverse = FALSE, message = TRUE){
   DataNames <- names(data)
   TestExist <- Var %in% DataNames
   if (!all(TestExist)){
-    stop("Variable(s) not found in the data frame.")
+    stop("Variable(s) not found in the data frame.", call. = FALSE)
   }
 
   MissNames <- vector()

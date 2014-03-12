@@ -5,7 +5,7 @@
 #' @param D1 the data frame with the variable you would like to fill in.
 #' @param D2 the data frame with the variable you would like to use to fill in \code{D1}.
 #' @param Var1 a character string of the name of the variable in \code{D1} you want to fill in.
-#' @param Var2 an optional character string of variable name in \code{D2} that you would like to use to fill in.
+#' @param Var2 an optional character string of variable name in \code{D2} that you would like to use to fill in. Note: must be of the same class as \code{Var1}.
 #' @param KeyVar a character vector of variable names that are shared by \code{D1} and \code{D2} that can be used to join the data frames.
 #' @param allow.cartesian logical. See the \code{\link{data.table}} documentation for more details.
 #' @param KeepD2Vars logical, indicating whether or not to keep the variables from D2 in the output data frame. The default is \code{KeepD2Vars = FALSE}. Hint: avoid having variables in your \code{D2} data frame that share names with variables in \code{D1} other than the \code{KeyVar}s 
@@ -32,6 +32,11 @@
 FillIn <- function(D1, D2, Var1 = NULL, Var2 = NULL, KeyVar = c("iso2c", "year"), allow.cartesian = FALSE, KeepD2Vars = FALSE)
 {
   VarGen = VarGen.1 = NULL
+  
+  # Ensure that Var1 and Var2 are of the same class
+  if (class(D1[, Var1]) != class(D2[, Var2])){
+    stop(paste('Var1 and Var2 need to have the same class.'), call. = FALSE)
+  }
 
   # Give Var2 the same name as var1 if Var2 is NULL
   if (is.null(Var2)){
@@ -63,7 +68,7 @@ FillIn <- function(D1, D2, Var1 = NULL, Var2 = NULL, KeyVar = c("iso2c", "year")
   OutDF <- data.frame(OutDT)
   
   # Tell the user what the correlation coefficient is between the variables
-  if (is.numeric(OutDT$VarGen)){
+  if (is.numeric(OutDT$VarGen) & is.numeric(VarGen.1)){
     SubNoNA <- subset(OutDF, !is.na(VarGen) & !is.na(VarGen.1))
     HowMany <- nrow(SubNoNA)
     CORR <- cor(SubNoNA$VarGen, SubNoNA$VarGen.1, use = "complete.obs")
