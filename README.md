@@ -56,5 +56,5 @@ I will continue to add to the package as I build data sets and run across other 
 You can also install the most recent stable version with `install_github` from the [devtools](https://github.com/hadley/devtools):
 
 ```{S}
-devtools::install_github('DataCombine/christophergandrud')
+devtools::install_github('christophergandrud/DataCombine')
 ```
