@@ -72,6 +72,7 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, remin
         message(paste0('Warning: the following groups have ', abs(slideBy), ' or fewer observations.\nNo reasonable lag/lead can be created, so they are dropped:\n'))
         message(paste(Dropping, collapse = "\n"))
     }
+    data <- VarDrop(data, 'fake')
   }
   
   # Create lags/leads

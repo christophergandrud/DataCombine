@@ -1,4 +1,8 @@
-### Version 0.1.2
+### Version 0.1.22
+
+Small improvement to `slide` to drop temporary 'fake' variable' before returning the data frame.
+
+### Version 0.1.21
 
 Small improvement to `FillIn` so that it doesn't attempt to find correlations if Var2 is not numeric.
 
