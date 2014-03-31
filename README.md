@@ -35,6 +35,8 @@ DataCombine
 
 - `SpreadDummy`: spread a dummy variable (1's and 0') over a specified time period and for specified groups.
 
+- `StartEnd`: finds the starting and ending time points of a series, including for time-series cross-sectional data.
+
 - `rmExcept`: removes all objects from a workspace except those specified by the user.
 
 - `TimeFill`: creates a continuous `Unit`-`Time`-`Dummy` data frame from a data frame with `Unit`-`Start`-`End` times.

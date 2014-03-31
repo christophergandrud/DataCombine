@@ -309,3 +309,62 @@ SpreadDummy <- function(data, Var, GroupVar = NULL, NewVar = NULL, spreadBy = -2
     data <- VarDrop(data, tempNames[-1])
     return(data)
 }
+
+#' Find the starting and ending time points of a series
+#'
+#' \code{StartEnd} finds the starting and ending time points of a series, including for time-series cross-sectional data.
+#' 
+#' @param data a data frame object.
+#' @param SpellVar a character string naming the variable you would like to slide (create lag or lead).
+#' @param GroupVar a character string naming the variable grouping the units experiencing the spells. If \code{GroupVar = NULL} then .
+#' @param SpellValue a value indicating when a unit is in a spell. If \code{SpellValue = NULL} then any change in \code{Var}'s value will be treated as the start/end of a spell.
+#' 
+#' @examples
+#' # Create fake data
+#' ID <- sort(rep(seq(1:4), 5))
+#' Time <- rep(1:5, 4)
+#' Dummy <-  sample(c(0, 1), size = 20, replace = TRUE)
+#' Data <- data.frame(ID, Time, Dummy)
+#' 
+#' # Find start/end of spells denoted by Dummy = 1
+#' DataSpell <- StartEnd(Data, SpellVar = 'Dummy', GroupVar = 'ID', 
+#'                      SpellValue = 1)
+#' 
+#' head(DataSpell)
+#'
+#' @return a data frame with two new variables:
+#' \itemize{
+#'    \item{Spell_Start: }{The start year of a given spell.}
+#'    \item{Spell_End: }{The end year of a given spell.}
+#' }
+#' @description Note: your data needs to be sorted by date. The date should be ascending (i.e. increasing as it moves down the rows).
+#' @seealso \code{\link{slide}} 
+#' @export
+
+StartEnd <- function(data, SpellVar, GroupVar, SpellValue = NULL){
+  # Find Start
+  Temp <- slide(data = data, Var = SpellVar, GroupVar = GroupVar,
+                slideBy = -1, NewVar = 'TempStart')
+  Temp$Spell_Start <- 0
+  if (is.null(SpellValue)){
+    Temp$Spell_Start[Temp[, SpellVar] != Temp[, 'TempStart']] <- 1
+  }
+  else if (!is.null(SpellValue)){
+    Temp$Spell_Start[Temp[, SpellVar] == SpellValue & 
+          Temp[, 'TempStart'] != SpellVar] <- 1
+  }
+  # Find End
+  Temp <- slide(data = Temp, Var = SpellVar, GroupVar = GroupVar,
+                slideBy = 1, NewVar = 'TempEnd', reminder = FALSE)
+  Temp$Spell_End <- 0
+  if (is.null(SpellValue)){
+    Temp$Spell_End[Temp[, SpellVar] != Temp[, 'TempEnd']] <- 1
+  }
+  else if (!is.null(SpellValue)){
+    Temp$Spell_End[Temp[, SpellVar] == SpellValue & 
+          Temp[, 'TempEnd'] != SpellVar] <- 1
+  }  
+  # Final clean
+  Temp <- VarDrop(Temp, c('TempStart', 'TempEnd'))
+  return(Temp)
+}

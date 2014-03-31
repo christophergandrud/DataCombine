@@ -1,5 +1,7 @@
 ### Version 0.1.22
 
+`StartEnd` function added. Finds the starting and ending time points of a series.
+
 Small improvement to `slide` to drop temporary 'fake' variable' before returning the data frame.
 
 ### Version 0.1.21
