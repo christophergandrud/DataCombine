@@ -345,23 +345,25 @@ StartEnd <- function(data, SpellVar, GroupVar, SpellValue = NULL){
   Temp <- slide(data = data, Var = SpellVar, GroupVar = GroupVar,
                 slideBy = -1, NewVar = 'TempStart')
   Temp$Spell_Start <- 0
+  Temp$Spell_Start[is.na(Temp[, SpellVar])] <- NA
   if (is.null(SpellValue)){
     Temp$Spell_Start[Temp[, SpellVar] != Temp[, 'TempStart']] <- 1
   }
   else if (!is.null(SpellValue)){
     Temp$Spell_Start[Temp[, SpellVar] == SpellValue & 
-          Temp[, 'TempStart'] != SpellVar] <- 1
+          Temp[, 'TempStart'] != SpellValue] <- 1
   }
   # Find End
   Temp <- slide(data = Temp, Var = SpellVar, GroupVar = GroupVar,
                 slideBy = 1, NewVar = 'TempEnd', reminder = FALSE)
   Temp$Spell_End <- 0
+  Temp$Spell_End[is.na(Temp[, SpellVar])] <- NA
   if (is.null(SpellValue)){
     Temp$Spell_End[Temp[, SpellVar] != Temp[, 'TempEnd']] <- 1
   }
   else if (!is.null(SpellValue)){
     Temp$Spell_End[Temp[, SpellVar] == SpellValue & 
-          Temp[, 'TempEnd'] != SpellVar] <- 1
+          Temp[, 'TempEnd'] != SpellValue] <- 1
   }  
   # Final clean
   Temp <- VarDrop(Temp, c('TempStart', 'TempEnd'))
