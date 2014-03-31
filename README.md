@@ -5,7 +5,7 @@ DataCombine
 
 ### Version 0.1.22 [![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine)
 
-### Please report any bugs or suggestions for improvement at: <https://github.com/christophergandrud/DataCombine/issues>.
+### Please report any bugs or suggestions at: <https://github.com/christophergandrud/DataCombine/issues>.
 
 ---
 
@@ -35,7 +35,7 @@ DataCombine
 
 - `SpreadDummy`: spread a dummy variable (1's and 0') over a specified time period and for specified groups.
 
-- `StartEnd`: finds the starting and ending time points of a series, including for time-series cross-sectional data.
+- `StartEnd`: finds the starting and ending time points of a spell, including for time-series cross-sectional data.
 
 - `rmExcept`: removes all objects from a workspace except those specified by the user.
 

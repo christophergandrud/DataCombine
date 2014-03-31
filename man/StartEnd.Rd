@@ -1,6 +1,6 @@
 \name{StartEnd}
 \alias{StartEnd}
-\title{Find the starting and ending time points of a series}
+\title{Find the starting and ending time points of a spell}
 \usage{
 StartEnd(data, SpellVar, GroupVar, SpellValue = NULL)
 }
@@ -21,17 +21,15 @@ StartEnd(data, SpellVar, GroupVar, SpellValue = NULL)
 }
 \value{
 a data frame with two new variables: \itemize{
-\item{Spell_Start: }{The start year of a given spell.}
-\item{Spell_End: }{The end year of a given spell.} }
+\item{Spell_Start: }{The time period year of a given
+spell.} \item{Spell_End: }{The end time period of a given
+spell.} }
 }
 \description{
+\code{StartEnd} finds the starting and ending time points
+of a spell, including for time-series cross-sectional data.
 Note: your data needs to be sorted by date. The date should
 be ascending (i.e. increasing as it moves down the rows).
-}
-\details{
-\code{StartEnd} finds the starting and ending time points
-of a series, including for time-series cross-sectional
-data.
 }
 \examples{
 # Create fake data

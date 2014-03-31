@@ -310,9 +310,9 @@ SpreadDummy <- function(data, Var, GroupVar = NULL, NewVar = NULL, spreadBy = -2
     return(data)
 }
 
-#' Find the starting and ending time points of a series
+#' Find the starting and ending time points of a spell
 #'
-#' \code{StartEnd} finds the starting and ending time points of a series, including for time-series cross-sectional data.
+#' \code{StartEnd} finds the starting and ending time points of a spell, including for time-series cross-sectional data. Note: your data needs to be sorted by date. The date should be ascending (i.e. increasing as it moves down the rows).
 #' 
 #' @param data a data frame object.
 #' @param SpellVar a character string naming the variable you would like to slide (create lag or lead).
@@ -334,10 +334,9 @@ SpreadDummy <- function(data, Var, GroupVar = NULL, NewVar = NULL, spreadBy = -2
 #'
 #' @return a data frame with two new variables:
 #' \itemize{
-#'    \item{Spell_Start: }{The start year of a given spell.}
-#'    \item{Spell_End: }{The end year of a given spell.}
+#'    \item{Spell_Start: }{The time period year of a given spell.}
+#'    \item{Spell_End: }{The end time period of a given spell.}
 #' }
-#' @description Note: your data needs to be sorted by date. The date should be ascending (i.e. increasing as it moves down the rows).
 #' @seealso \code{\link{slide}} 
 #' @export
 
