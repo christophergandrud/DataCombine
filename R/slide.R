@@ -35,7 +35,8 @@
 #' @importFrom dplyr summarize mutate
 #' @export
 
-slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, reminder = TRUE)
+slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, 
+                  reminder = TRUE)
 {  
   fake <- total <- NULL
   if (isTRUE(reminder)){
@@ -46,8 +47,6 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, remin
     if (!is.null(GroupVar)){
       message(paste('\nRemember to order', deparse(substitute(data)), 
                     'by', GroupVar, 'and the time variable before running.\n'))
-      # Set up groups for dplyr
-      data <- eval(parse(text = paste0('group_by(data, ', GroupVar, ')')))  
     }
   }  
   
@@ -66,14 +65,15 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, remin
 
   # Drop if there are not enough observations per group to slide
   if (!is.null(GroupVar)){
+    data <- eval(parse(text = paste0('group_by(data, ', GroupVar, ')')))  
     data$fake <- 1
+    Minimum <- abs(slideBy) - 1
     Summed <- dplyr::mutate(data, total = sum(fake))
-    #Summed <- ddply(data, GroupVar, summarize, total = sum(fake))
-    SubSummed <- subset(Summed, total <= abs(slideBy))
+    SubSummed <- subset(Summed, total <= Minimum)
     if (nrow(SubSummed) > 0){
-        Dropping <- SubSummed[, GroupVar]
+        Dropping <- unique(SubSummed[, GroupVar])
         data <- data[!(data[, GroupVar] %in% Dropping), ]
-        message(paste0('Warning: the following groups have ', abs(slideBy), 
+        message(paste0('\nWarning: the following groups have ', Minimum, 
                       ' or fewer observations.\nNo reasonable lag/lead can be created, so they are dropped:\n'))
         message(paste(Dropping, collapse = "\n"))
     }
@@ -90,7 +90,6 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, remin
                                         GroupVar,')')))
     vars <- eval(parse(text = paste0("dplyr::mutate(DataSub, NewVarX = shift(", 
                                  Var, ",", slideBy, ", reminder = FALSE))")))     
-    # vars <- eval(parse(text = paste0("ddply(data[, c(GroupVar, Var)], GroupVar, transform, NewVarX = shift(", Var, ",", slideBy, ", reminder = FALSE))")))
     data[, NewVar] <- vars$NewVarX
   }
   return(data)
@@ -216,6 +215,7 @@ slideMA <- function(data, Var, GroupVar = NULL, periodBound = -3, offset = 1,
                                     Var, ", shiftBy =", slideBy, ", Abs = ", 
                                     Abs, ", reminder = FALSE))"))) 
     data[, NewVar] <- vars$NewVarX
+    data <- data.frame(data)
   }
   return(data)
 }
