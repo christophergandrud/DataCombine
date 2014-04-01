@@ -32,7 +32,7 @@
 #' @source Partially based on TszKin Julian's \code{shift} function: http://ctszkin.com/2012/03/11/generating-a-laglead-variables/
 #'
 #'
-#' @importFrom plyr ddply rename summarize
+#' @importFrom dplyr summarize mutate
 #' @export
 
 slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, reminder = TRUE)
@@ -40,10 +40,14 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, remin
   fake <- total <- NULL
   if (isTRUE(reminder)){
     if (is.null(GroupVar)){
-      message(paste('\nRemember to put', deparse(substitute(data)), 'in time order before running.\n'))      
+      message(paste('\nRemember to put', deparse(substitute(data)), 
+                    'in time order before running.\n'))    
     }
     if (!is.null(GroupVar)){
-      message(paste('\nRemember to order', deparse(substitute(data)), 'by', GroupVar, 'and the time variable before running.\n'))
+      message(paste('\nRemember to order', deparse(substitute(data)), 
+                    'by', GroupVar, 'and the time variable before running.\n'))
+      # Set up groups for dplyr
+      data <- eval(parse(text = paste0('group_by(data, ', GroupVar, ')')))  
     }
   }  
   
@@ -63,13 +67,14 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, remin
   # Drop if there are not enough observations per group to slide
   if (!is.null(GroupVar)){
     data$fake <- 1
-    Summed <- ddply(data, GroupVar, summarize, total = sum(fake))
+    Summed <- dplyr::mutate(data, total = sum(fake))
+    #Summed <- ddply(data, GroupVar, summarize, total = sum(fake))
     SubSummed <- subset(Summed, total <= abs(slideBy))
     if (nrow(SubSummed) > 0){
         Dropping <- SubSummed[, GroupVar]
         data <- data[!(data[, GroupVar] %in% Dropping), ]
-
-        message(paste0('Warning: the following groups have ', abs(slideBy), ' or fewer observations.\nNo reasonable lag/lead can be created, so they are dropped:\n'))
+        message(paste0('Warning: the following groups have ', abs(slideBy), 
+                      ' or fewer observations.\nNo reasonable lag/lead can be created, so they are dropped:\n'))
         message(paste(Dropping, collapse = "\n"))
     }
     data <- VarDrop(data, 'fake')
@@ -77,13 +82,17 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, remin
   
   # Create lags/leads
   if (is.null(GroupVar)){
-    data[, NewVar] <- shift(VarVect = VarVect, shiftBy = slideBy, reminder = FALSE)
+    data[, NewVar] <- shift(VarVect = VarVect, shiftBy = slideBy, 
+                            reminder = FALSE)
   }
   else if (!is.null(GroupVar)){
-    vars <- eval(parse(text = paste0("ddply(data[, c(GroupVar, Var)], GroupVar, transform, NewVarX = shift(", Var, ",", slideBy, ", reminder = FALSE))")))
+    DataSub <- eval(parse(text = paste0('group_by(data[, c(GroupVar, Var)], ', 
+                                        GroupVar,')')))
+    vars <- eval(parse(text = paste0("dplyr::mutate(DataSub, NewVarX = shift(", 
+                                 Var, ",", slideBy, ", reminder = FALSE))")))     
+    # vars <- eval(parse(text = paste0("ddply(data[, c(GroupVar, Var)], GroupVar, transform, NewVarX = shift(", Var, ",", slideBy, ", reminder = FALSE))")))
     data[, NewVar] <- vars$NewVarX
   }
-  
   return(data)
 }
 
@@ -111,7 +120,8 @@ shift <- function(VarVect, shiftBy, reminder = TRUE){
     stop(paste(shiftBy, 'must be numeric.'), call. = FALSE)
   }
   if (isTRUE(reminder)){
-      message(paste('Remember to put', deparse(substitute(data)), 'in time order before running shift.'))      
+      message(paste('Remember to put', deparse(substitute(data)), 
+                    'in time order before running shift.'))      
   }
 
 
@@ -128,7 +138,7 @@ shift <- function(VarVect, shiftBy, reminder = TRUE){
   } else {
     out <- VarVect
   }
-  out
+  return(out)
 }
 
 #' Create a moving average for a period before or after each time point for a given variable
@@ -162,14 +172,17 @@ shift <- function(VarVect, shiftBy, reminder = TRUE){
 #' @importFrom forecast ma
 #' @export
 
-slideMA <- function(data, Var, GroupVar = NULL, periodBound = -3, offset = 1, NewVar = NULL, reminder = TRUE){
+slideMA <- function(data, Var, GroupVar = NULL, periodBound = -3, offset = 1, 
+                    NewVar = NULL, reminder = TRUE){
   slideBy <- NULL
   if (isTRUE(reminder)){
     if (is.null(GroupVar)){
-      message(paste('Remember to put', deparse(substitute(data)), 'in time order before running slide.'))      
+      message(paste('Remember to put', deparse(substitute(data)), 
+                    'in time order before running slide.'))      
     }
     if (!is.null(GroupVar)){
-      message(paste('Remember to order', deparse(substitute(data)), 'by', GroupVar, 'and the time variable before running slide.'))
+      message(paste('Remember to order', deparse(substitute(data)), 'by', 
+                    GroupVar, 'and the time variable before running slide.'))
     }
   }  
   # Determine if Var exists in data
@@ -200,10 +213,12 @@ slideMA <- function(data, Var, GroupVar = NULL, periodBound = -3, offset = 1, Ne
   
   # Create lags/leads moving averages
   if (is.null(GroupVar)){
-    data[, NewVar] <- shiftMA(data[, Var], shiftBy = slideBy, Abs = Abs, reminder = FALSE)
+    data[, NewVar] <- shiftMA(data[, Var], shiftBy = slideBy, Abs = Abs, 
+                              reminder = FALSE)
   }
   else if (!is.null(GroupVar)){
-    vars <- eval(parse(text = paste0("ddply(data[, c(GroupVar, Var)], GroupVar, transform, NewVarX = DataCombine:::shiftMA(", Var, ", shiftBy =", slideBy, ", Abs = ", Abs, ", reminder = FALSE))"))) 
+    vars <- eval(parse(text = paste0("ddply(data[, c(GroupVar, Var)], GroupVar, transform, NewVarX = DataCombine:::shiftMA(", Var, 
+      ", shiftBy =", slideBy, ", Abs = ", Abs, ", reminder = FALSE))"))) 
     data[, NewVar] <- vars$NewVarX
   }
   return(data)
@@ -242,15 +257,13 @@ shiftMA <- function(x, shiftBy = slideBy, Abs = Abs, reminder = reminder){
 #'                            spreadBy = 2, reminder = FALSE)
 #'                            
 #' DataSpread2 <- SpreadDummy(data = Data, Var = 'Dummy', GroupVar = 'ID',
-#'                            spreadBy = -2)
-#'                  
+#'                            spreadBy = -2)                 
 #' 
 #' @seealso \code{\link{slide}}
-#' 
-#' @importFrom plyr ddply summarize
 #' @export
 
-SpreadDummy <- function(data, Var, GroupVar = NULL, NewVar = NULL, spreadBy = -2, reminder = TRUE){
+SpreadDummy <- function(data, Var, GroupVar = NULL, NewVar = NULL, 
+                        spreadBy = -2, reminder = TRUE){
     # Check if variable is numeric dummy
     if (class(data[, Var]) != 'numeric'){
         stop(paste(Var, 'must be a numeric dummy variable.'), call. = FALSE)
