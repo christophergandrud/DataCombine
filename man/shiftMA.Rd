@@ -1,0 +1,20 @@
+\name{shiftMA}
+\alias{shiftMA}
+\title{Internal function for slideMA}
+\usage{
+shiftMA(x, shiftBy, Abs, reminder)
+}
+\arguments{
+  \item{x}{vector}
+
+  \item{shiftBy}{numeric}
+
+  \item{Abs}{numeric}
+
+  \item{reminder}{logical}
+}
+\description{
+Internal function for slideMA
+}
+\keyword{internals}
+

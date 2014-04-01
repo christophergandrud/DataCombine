@@ -54,7 +54,7 @@ variables, including for time-series cross-sectional data.
 }
 \examples{
 # Create dummy data
- A <- B <- C <- 1:20
+ A <- B <- C <- sample(1:20, size = 20, replace = TRUE)
  ID <- sort(rep(seq(1:4), 5))
  Data <- data.frame(ID, A, B, C)
 
@@ -66,6 +66,6 @@ variables, including for time-series cross-sectional data.
                 NewVar = "BLag", slideBy = -1)
 }
 \seealso{
-\code{\link{shift}}, \code{\link{ddply}}
+\code{\link{shift}}, \code{\link{dplyr}}
 }
 

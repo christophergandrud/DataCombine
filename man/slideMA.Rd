@@ -45,7 +45,7 @@ time point for a given variable
 }
 \examples{
 # Create dummy data
- A <- B <- C <- 1:20
+ A <- B <- C <- sample(1:20, size = 20, replace = TRUE)
  ID <- sort(rep(seq(1:4), 5))
  Data <- data.frame(ID, A, B, C)
 
@@ -59,6 +59,6 @@ time point for a given variable
 }
 \seealso{
 \code{\link{shift}}, \code{\link{slide}},
-\code{\link{ddply}}
+\code{\link{dplyr}}
 }
 

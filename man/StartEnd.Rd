@@ -35,7 +35,7 @@ be ascending (i.e. increasing as it moves down the rows).
 # Create fake data
 ID <- sort(rep(seq(1:4), 5))
 Time <- rep(1:5, 4)
-Dummy <-  sample(c(0, 1), size = 20, replace = TRUE)
+Dummy <-  c(1, sample(c(0, 1), size = 19, replace = TRUE))
 Data <- data.frame(ID, Time, Dummy)
 
 # Find start/end of spells denoted by Dummy = 1

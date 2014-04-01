@@ -11,7 +11,7 @@
 #'  
 #'  @examples
 #'  # Create dummy data
-#'  A <- B <- C <- 1:20
+#'  A <- B <- C <- sample(1:20, size = 20, replace = TRUE)
 #'  ID <- sort(rep(seq(1:4), 5))
 #'  Data <- data.frame(ID, A, B, C)
 #'  
@@ -27,7 +27,7 @@
 #' @description The function slides a column up or down to create lag or lead variables. If \code{GroupVar} is specified it will slide \code{Var} for each group. This is important for time-series cross-section data. The slid data is placed in a new variable in the original data frame. 
 #' Note: your data needs to be sorted by date. The date should be ascending (i.e. increasing as it moves down the rows). Also, the time difference between rows should be constant, e.g. days, months, years.
 #' 
-#' @seealso \code{\link{shift}}, \code{\link{ddply}}
+#' @seealso \code{\link{shift}}, \code{\link{dplyr}}
 #'
 #' @source Partially based on TszKin Julian's \code{shift} function: http://ctszkin.com/2012/03/11/generating-a-laglead-variables/
 #'
@@ -155,7 +155,7 @@ shift <- function(VarVect, shiftBy, reminder = TRUE){
 #' 
 #' @examples
 #'  # Create dummy data
-#'  A <- B <- C <- 1:20
+#'  A <- B <- C <- sample(1:20, size = 20, replace = TRUE)
 #'  ID <- sort(rep(seq(1:4), 5))
 #'  Data <- data.frame(ID, A, B, C)
 #'  
@@ -167,8 +167,8 @@ shift <- function(VarVect, shiftBy, reminder = TRUE){
 #'  DataSlidMA2 <- slideMA(data = Data, Var = "B", GroupVar = "ID",
 #'                 NewVar = "BLag_MA", periodBound = -3, offset = 2)
 #' 
-#' @seealso \code{\link{shift}}, \code{\link{slide}}, \code{\link{ddply}}
-#' @importFrom plyr ddply
+#' @seealso \code{\link{shift}}, \code{\link{slide}}, \code{\link{dplyr}}
+#' @importFrom dplyr group_by mutate
 #' @importFrom forecast ma
 #' @export
 
@@ -177,19 +177,19 @@ slideMA <- function(data, Var, GroupVar = NULL, periodBound = -3, offset = 1,
   slideBy <- NULL
   if (isTRUE(reminder)){
     if (is.null(GroupVar)){
-      message(paste('Remember to put', deparse(substitute(data)), 
-                    'in time order before running slide.'))      
+      message(paste('\nRemember to put', deparse(substitute(data)), 
+                    'in time order before running slide.\n'))      
     }
     if (!is.null(GroupVar)){
-      message(paste('Remember to order', deparse(substitute(data)), 'by', 
-                    GroupVar, 'and the time variable before running slide.'))
+      message(paste('\nRemember to order', deparse(substitute(data)), 'by', 
+                    GroupVar, 'and the time variable before running slide.\n'))
     }
   }  
   # Determine if Var exists in data
   DataNames <- names(data)
   TestExist <- Var %in% DataNames
   if (!isTRUE(TestExist)){
-    stop(paste(Var, "was not found in the data frame."), call. = FALSE)
+    stop(paste(Var, "was not found in the data frame.\n"), call. = FALSE)
   }
   
   VarVect <- data[, Var]
@@ -201,37 +201,35 @@ slideMA <- function(data, Var, GroupVar = NULL, periodBound = -3, offset = 1,
   Abs = abs(periodBound)
   if (periodBound < 0){
     slideBy = periodBound + abs(offset)
-  }
-  else if (periodBound > 0){
+  } else if (periodBound > 0){
     slideBy = periodBound - abs(offset)
-  }
-  
-  shiftMA <- function(x, shiftBy = slideBy, Abs = Abs, reminder = reminder){
-    x <- shift(x, shiftBy, reminder = reminder)
-    ma(x, Abs, centre = FALSE)
   }
   
   # Create lags/leads moving averages
   if (is.null(GroupVar)){
-    data[, NewVar] <- shiftMA(data[, Var], shiftBy = slideBy, Abs = Abs, 
-                              reminder = FALSE)
-  }
-  else if (!is.null(GroupVar)){
-    vars <- eval(parse(text = paste0("ddply(data[, c(GroupVar, Var)], GroupVar, transform, NewVarX = DataCombine:::shiftMA(", Var, 
-      ", shiftBy =", slideBy, ", Abs = ", Abs, ", reminder = FALSE))"))) 
+    data[, NewVar] <- shiftMA(data[, Var], shiftBy = slideBy, 
+                              Abs = Abs, reminder = FALSE)
+  } else if (!is.null(GroupVar)){
+    DataSub <- eval(parse(text = paste0('group_by(data[, c(GroupVar, Var)], ', 
+                                        GroupVar,')')))
+    vars <- eval(parse(text = paste0("dplyr::mutate(DataSub, NewVarX = shiftMA(", 
+                                    Var, ", shiftBy =", slideBy, ", Abs = ", 
+                                    Abs, ", reminder = FALSE))"))) 
     data[, NewVar] <- vars$NewVarX
   }
   return(data)
 }
 
 #' Internal function for slideMA
+#' @param x vector
+#' @param shiftBy numeric
+#' @param Abs numeric
+#' @param reminder logical
 #'
-#' @noRd
 #' @keywords internals
-#' @noRd
+#' @export
 
-shiftMA <- function(x, shiftBy = slideBy, Abs = Abs, reminder = reminder){
-  slideBy <- NULL
+shiftMA <- function(x, shiftBy, Abs, reminder){
   x <- shift(x, shiftBy, reminder = reminder)
   ma(x, Abs, centre = FALSE)
 }
@@ -336,7 +334,7 @@ SpreadDummy <- function(data, Var, GroupVar = NULL, NewVar = NULL,
 #' # Create fake data
 #' ID <- sort(rep(seq(1:4), 5))
 #' Time <- rep(1:5, 4)
-#' Dummy <-  sample(c(0, 1), size = 20, replace = TRUE)
+#' Dummy <-  c(1, sample(c(0, 1), size = 19, replace = TRUE))
 #' Data <- data.frame(ID, Time, Dummy)
 #' 
 #' # Find start/end of spells denoted by Dummy = 1
@@ -357,6 +355,7 @@ StartEnd <- function(data, SpellVar, GroupVar, SpellValue = NULL){
   # Find Start
   Temp <- slide(data = data, Var = SpellVar, GroupVar = GroupVar,
                 slideBy = -1, NewVar = 'TempStart')
+  Temp <- data.frame(Temp)
   Temp$Spell_Start <- 0
   Temp$Spell_Start[is.na(Temp[, SpellVar])] <- NA
   if (is.null(SpellValue)){
@@ -366,9 +365,11 @@ StartEnd <- function(data, SpellVar, GroupVar, SpellValue = NULL){
     Temp$Spell_Start[Temp[, SpellVar] == SpellValue & 
           Temp[, 'TempStart'] != SpellValue] <- 1
   }
+  
   # Find End
   Temp <- slide(data = Temp, Var = SpellVar, GroupVar = GroupVar,
                 slideBy = 1, NewVar = 'TempEnd', reminder = FALSE)
+  Temp <- data.frame(Temp)
   Temp$Spell_End <- 0
   Temp$Spell_End[is.na(Temp[, SpellVar])] <- NA
   if (is.null(SpellValue)){
