@@ -32,7 +32,7 @@
 #' @source Partially based on TszKin Julian's \code{shift} function: http://ctszkin.com/2012/03/11/generating-a-laglead-variables/
 #'
 #'
-#' @importFrom dplyr summarize mutate
+#' @importFrom dplyr group_by summarize mutate
 #' @export
 
 slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1, 
