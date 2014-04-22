@@ -1,10 +1,13 @@
 #' Drop rows from a data frame with missing values on a given variable(s).
 #'
-#' \code{DropNA} drops rows from a data frame when they have missing (NA) values on a given variable(s).
+#' \code{DropNA} drops rows from a data frame when they have missing (\code{NA}) 
+#' values on a given variable(s).
 #'
 #' @param data a data frame object.
-#' @param Var a character vector naming the variables you would like to have only non-missing (NA) values.
-#' @param message logical. Whether or not to give you a message about the number of rows that are dropped.
+#' @param Var a character vector naming the variables you would like to have 
+#' only non-missing (NA) values.
+#' @param message logical. Whether or not to give you a message about the number
+#' of rows that are dropped.
 #'
 #' @examples
 #' # Create data frame
@@ -18,7 +21,8 @@
 #' # Remove missing values in columns a and b
 #' ABSubData <- DropNA(ABData, Var = c("a", "b"))
 #' 
-#' @source Partially based on Stack Overflow answer written by donshikin: http://stackoverflow.com/questions/4862178/remove-rows-with-nas-in-data-frame
+#' @source Partially based on Stack Overflow answer written by donshikin: 
+#' \url{http://stackoverflow.com/questions/4862178/remove-rows-with-nas-in-data-frame}
 #'
 #' @export
 
@@ -52,14 +56,20 @@ DropNA <- function(data, Var, message = TRUE)
 	return(DataNoNA)
 }
 
-#' Create new variable(s) indicating if there are missing values in other variable(s)
+#' Create new variable(s) indicating if there are missing values in other 
+#' variable(s)
 #'
 #' @param data a data frame object.
-#' @param Var a character vector naming the variable(s) within which you would like to identify missing values.
-#' @param Stub a character string indicating the stub you would like to append to the new variables' name(s).
-#' @param reverse logical. If \code{reverse = FALSE} then missing values are coded as \code{1} and non-missing values are coded as \code{0}. If \code{reverse = TRUE} then missing values are coded as \code{0} and non-missing values are coded as \code{1}.
-#' @param message logical. Whether or not to give you a message about the names of the new variables that are created.
-
+#' @param Var a character vector naming the variable(s) within which you would 
+#' like to identify missing values.
+#' @param Stub a character string indicating the stub you would like to append 
+#' to the new variables' name(s).
+#' @param reverse logical. If \code{reverse = FALSE} then missing values are 
+#' coded as \code{1} and non-missing values are coded as \code{0}. If 
+#' \code{reverse = TRUE} then missing values are coded as \code{0} and 
+#' non-missing values are coded as \code{1}.
+#' @param message logical. Whether or not to give you a message about the names 
+#' of the new variables that are created.
 #' 
 #' @examples
 #' # Create data frame

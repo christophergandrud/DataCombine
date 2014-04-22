@@ -168,7 +168,6 @@ shift <- function(VarVect, shiftBy, reminder = TRUE){
 #' 
 #' @seealso \code{\link{shift}}, \code{\link{slide}}, \code{\link{dplyr}}
 #' @importFrom dplyr group_by mutate
-#' @importFrom forecast ma
 #' @export
 
 slideMA <- function(data, Var, GroupVar = NULL, periodBound = -3, offset = 1, 

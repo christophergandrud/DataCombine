@@ -1,3 +1,7 @@
+### Version 0.1.25
+
+No longer depends on the forecast package.
+
 ### Version 0.1.24
 
 `slide` and `slideMA` now rely on `dplyr` rather than `plyr` for speed improvements.
