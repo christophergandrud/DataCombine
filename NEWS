@@ -1,3 +1,8 @@
+### Verion 0.1.26
+
+`InsertRow` function allows user to insert a row into a data frame. 
+Largely implements: http://stackoverflow.com/a/11562428
+
 ### Version 0.1.25
 
 No longer depends on the forecast package.

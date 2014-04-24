@@ -3,6 +3,7 @@
 export(DropNA)
 export(FillIn)
 export(FindReplace)
+export(InsertRow)
 export(MoveFront)
 export(NaVar)
 export(PercChange)

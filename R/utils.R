@@ -202,3 +202,40 @@ dMerge <- function(data1, data2, Var, dropDups = TRUE, dupsOut = FALSE, fromLast
   return(Comb)
 }
 
+#' Inserts a new row into a data frame
+#' @param data a data frame to insert the new row into.
+#' @param NewRow a vector whose length is the same as the number of columns in 
+#' \code{data}.
+#' @param RowNum numeric indicating which row to insert the new row as. If not
+#' specified then the new row is added to the end using a vanilla 
+#' \code{\link{rbind}} call.
+#' 
+#' @examples
+#' # Create dummy data
+#' A <- B <- C <- D <- sample(1:20, size = 20, replace = TRUE)
+#' Data <- data.frame(A, B, C, D)
+#' 
+#' # Create new row
+#' New <- rep(1000, 4)
+#' 
+#' # Insert into 4th row
+#' Data <- InsertRow(Data, NewRow = New, RowNum = 4)
+#' 
+#' @source The function largely implements:
+#' \url{http://stackoverflow.com/a/11562428}
+#' @export
+
+InsertRow <- function(data, NewRow, RowNum = NULL) {
+  if (ncol(data) != length(NewRow)){
+    stop('NewRow must be the same lenght as the number of columns in data.\n',
+         call. = FALSE)
+  }
+  if (!is.null(RowNum)){
+    data[seq(RowNum + 1,nrow(data) + 1), ] <- data[seq(RowNum, nrow(data)), ]
+    data[RowNum, ] <- NewRow    
+  }
+  else if (is.null(RowNum)){
+    data <- rbind(data, NewRow)
+  }
+  return(data)
+}

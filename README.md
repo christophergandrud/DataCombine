@@ -3,7 +3,7 @@ DataCombine
 
 ### Christopher Gandrud
 
-### Version 0.1.25 [![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine)
+### Version 0.1.26 [![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine)
 
 ### Please report any bugs or suggestions at: <https://github.com/christophergandrud/DataCombine/issues>.
 
@@ -20,6 +20,8 @@ DataCombine
 - `FindReplace`: replaces multiple patterns found in a character string column of a data frame.
 
 - `grepl.sub`: subsets a data frame if a specified pattern is found in a character string.
+
+- `InsertRow`: allows user to insert a row into a data frame. Largely implements: [Ari B. Friedman's function](http://stackoverflow.com/a/11562428).
 
 - `MoveFront`: moves variables to the front of a data frame. This can be useful if you have a data frame with many variables and want to move a variable or variables to the front.
 
@@ -47,7 +49,8 @@ DataCombine
 
 ## Updates
 
-I will continue to add to the package as I build data sets and run across other pesky tasks I do repeatedly that would be simpler if they were a function.
+I will continue to add to the package as I build data sets and run across other 
+pesky tasks I do repeatedly that would be simpler if they were a function.
 
 ---
 
