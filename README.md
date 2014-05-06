@@ -1,13 +1,13 @@
 DataCombine
 ======
 
-### Christopher Gandrud
+Christopher Gandrud
 
-### Version 0.1.26 [![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine)
+Version 0.1.26 [![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine)
 
 ### Please report any bugs or suggestions at: <https://github.com/christophergandrud/DataCombine/issues>.
 
----
+## Motivation and Functions
 
 **DataCombine** is a set of miscellaneous tools intended to make combining data sets--especially time-series cross-section data--easier. The package is continually being developed as I turn lines of code that I frequently use into single functions. It currently includes the following functions:
 
@@ -45,14 +45,10 @@ DataCombine
 
 - `VarDrop`: drops one or more variables from a data frame.
 
----
-
 ## Updates
 
 I will continue to add to the package as I build data sets and run across other 
 pesky tasks I do repeatedly that would be simpler if they were a function.
-
----
 
 ## Installation
 
