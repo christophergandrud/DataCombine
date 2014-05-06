@@ -31,17 +31,16 @@
         <h1>
 <a name="datacombine" class="anchor" href="#datacombine"><span class="octicon octicon-link"></span></a>DataCombine</h1>
 
-<h3>
-<a name="christopher-gandrud" class="anchor" href="#christopher-gandrud"><span class="octicon octicon-link"></span></a>Christopher Gandrud</h3>
+<p>Christopher Gandrud</p>
 
-<h3>
-<a name="version-0123-" class="anchor" href="#version-0123-"><span class="octicon octicon-link"></span></a>Version 0.1.23 <a href="https://travis-ci.org/christophergandrud/DataCombine"><img src="https://travis-ci.org/christophergandrud/DataCombine.png" alt="Build Status"></a>
-</h3>
+<p>Version 0.1.26 <a href="https://travis-ci.org/christophergandrud/DataCombine"><img src="https://travis-ci.org/christophergandrud/DataCombine.png" alt="Build Status"></a></p>
 
-<h3>
-<a name="please-report-any-bugs-or-suggestions-at-httpsgithubcomchristophergandruddatacombineissues" class="anchor" href="#please-report-any-bugs-or-suggestions-at-httpsgithubcomchristophergandruddatacombineissues"><span class="octicon octicon-link"></span></a>Please report any bugs or suggestions at: <a href="https://github.com/christophergandrud/DataCombine/issues">https://github.com/christophergandrud/DataCombine/issues</a>.</h3>
+<p>Please report any <strong>bugs</strong> or <strong>suggestions</strong> at: <a href="https://github.com/christophergandrud/DataCombine/issues">https://github.com/christophergandrud/DataCombine/issues</a>.</p>
 
-<hr><p><strong>DataCombine</strong> is a set of miscellaneous tools intended to make combining data sets--especially time-series cross-section data--easier. The package is continually being developed as I turn lines of code that I frequently use into single functions. It currently includes the following functions:</p>
+<h2>
+<a name="motivation-and-functions" class="anchor" href="#motivation-and-functions"><span class="octicon octicon-link"></span></a>Motivation and Functions</h2>
+
+<p><strong>DataCombine</strong> is a set of miscellaneous tools intended to make combining data sets--especially time-series cross-section data--easier. The package is continually being developed as I turn lines of code that I frequently use into single functions. It currently includes the following functions:</p>
 
 <ul>
 <li><p><code>dMerge</code>: merges 2 data frames and report/drop/keeps only duplicates.</p></li>
@@ -49,6 +48,7 @@
 <li><p><code>FillIn</code>: fills in missing values of a variable from one data frame with the values from another variable.</p></li>
 <li><p><code>FindReplace</code>: replaces multiple patterns found in a character string column of a data frame.</p></li>
 <li><p><code>grepl.sub</code>: subsets a data frame if a specified pattern is found in a character string.</p></li>
+<li><p><code>InsertRow</code>: allows user to insert a row into a data frame. Largely implements: <a href="http://stackoverflow.com/a/11562428">Ari B. Friedman's function</a>.</p></li>
 <li><p><code>MoveFront</code>: moves variables to the front of a data frame. This can be useful if you have a data frame with many variables and want to move a variable or variables to the front.</p></li>
 <li><p><code>NaVar</code>: create new variable(s) indicating if there are missing values in other variable(s).</p></li>
 <li><p><code>PercChange</code>: calculates the percentage change from a specified lag, including within groups.</p></li>
@@ -60,12 +60,13 @@
 <li><p><code>rmExcept</code>: removes all objects from a workspace except those specified by the user.</p></li>
 <li><p><code>TimeFill</code>: creates a continuous <code>Unit</code>-<code>Time</code>-<code>Dummy</code> data frame from a data frame with <code>Unit</code>-<code>Start</code>-<code>End</code> times.</p></li>
 <li><p><code>VarDrop</code>: drops one or more variables from a data frame.</p></li>
-</ul><hr><h2>
+</ul><h2>
 <a name="updates" class="anchor" href="#updates"><span class="octicon octicon-link"></span></a>Updates</h2>
 
-<p>I will continue to add to the package as I build data sets and run across other pesky tasks I do repeatedly that would be simpler if they were a function.</p>
+<p>I will continue to add to the package as I build data sets and run across other 
+pesky tasks I do repeatedly that would be simpler if they were a function.</p>
 
-<hr><h2>
+<h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <p><strong>DataCombine</strong> is on <a href="http://cran.r-project.org/">CRAN</a>. </p>
