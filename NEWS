@@ -1,3 +1,13 @@
+### Version 0.2
+
+Added `CountSpell`, a function that returns a variable counting the spell number
+for an observation. Works with grouped data.
+
+Added an `OnlyStart` argument to `StartStop` to return only a new `Spell_Start`
+variable.
+
+Documentation and internal code improvements.
+
 ### Version 0.1.27
 
 `FillIn` internal code improvements.

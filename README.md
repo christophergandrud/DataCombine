@@ -3,13 +3,16 @@ DataCombine
 
 Christopher Gandrud
 
-Version 0.1.27 [![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine)
+Version 0.2 [![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine)
 
 Please report any **bugs** or **suggestions** at: <https://github.com/christophergandrud/DataCombine/issues>.
 
 ## Motivation and Functions
 
 **DataCombine** is a set of miscellaneous tools intended to make combining data sets--especially time-series cross-section data--easier. The package is continually being developed as I turn lines of code that I frequently use into single functions. It currently includes the following functions:
+
+- `CountSpell`: function that returns a variable counting the spell number
+for an observation. Works with grouped data.
 
 - `dMerge`: merges 2 data frames and report/drop/keeps only duplicates.
 
