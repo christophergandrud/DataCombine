@@ -1,3 +1,7 @@
+### Version 0.1.27
+
+`FillIn` internal code improvements.
+
 ### Verion 0.1.26
 
 !!! `grepl.sub` argument `patterns` changed to `pattern`. !!!

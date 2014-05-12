@@ -33,16 +33,16 @@ FillIn <- function(D1, D2, Var1 = NULL, Var2 = NULL, KeyVar = c("iso2c", "year")
 {
   VarGen = VarGen.1 = NULL
   
-  # Ensure that Var1 and Var2 are of the same class
-  if (class(D1[, Var1]) != class(D2[, Var2])){
-    stop(paste('Var1 and Var2 need to have the same class.'), call. = FALSE)
-  }
-
   # Give Var2 the same name as var1 if Var2 is NULL
   if (is.null(Var2)){
     Var2 <- Var1
   } else {
     Var2 <- Var2
+  }
+  
+  # Ensure that Var1 and Var2 are of the same class
+  if (class(D1[, Var1]) != class(D2[, Var2])){
+    stop(paste('Var1 and Var2 need to have the same class.'), call. = FALSE)
   }
   
   # Give var a generic name
