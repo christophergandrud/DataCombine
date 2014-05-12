@@ -554,17 +554,26 @@ CountSpellOne <- function(data, TimeVar = NULL, SpellVar = NULL,
   if (is.null(TimeVar)){
     stop('You must specify the TimeVar', call. = FALSE)
   }
+  if (is.null(SpellValue)){
+    stop('You must specify the SpellValue', call. = FALSE)
+  }
   
-  dataSpell <- StartEnd(data = data, SpellVar = SpellVar, 
+  if (!any(data[, SpellVar] == SpellValue)){
+    dataSpell <- data
+    dataSpell$Spell_Count <- 0
+  } 
+  else if (any(data[, SpellVar] != SpellValue)) {
+    dataSpell <- StartEnd(data = data, SpellVar = SpellVar, 
                         SpellValue = SpellValue, OnlyStart = TRUE)
       
-  temp <- subset(dataSpell, Spell_Start == 1)
-  temp$spell_ID <- 1:nrow(temp)
+    temp <- subset(dataSpell, Spell_Start == 1)
+    temp$spell_ID <- 1:nrow(temp)
   
-  dataSpell$Spell_Count <- 0
-  for (u in 1:max(temp$spell_ID)){
-    dataSpell$Spell_Count[dataSpell[, TimeVar] >= 
+    dataSpell$Spell_Count <- 0
+    for (u in 1:max(temp$spell_ID)){
+      dataSpell$Spell_Count[dataSpell[, TimeVar] >= 
                             temp[temp$spell_ID == u, TimeVar]] <- u
+    }
   }
   return(dataSpell$Spell_Count)
 }
