@@ -190,7 +190,7 @@ shift <- function(VarVect, shiftBy, reminder = TRUE){
 #' \code{shift} returns the slid data to a new vector rather than the original 
 #' data frame.
 #' @param periodBound numeric. The time point for the outer bound of the time 
-#' period overwhich to create the moving averages. The default is \code{-3}, 
+#' period over which to create the moving averages. The default is \code{-3}, 
 #' i.e. the period begins three time periods before a given time period. Can 
 #' also be positive for leading moving averages.
 #' @param offset numeric. How many time increments away from a given increment 
