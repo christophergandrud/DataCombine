@@ -127,26 +127,26 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
 
 #' A function for creating lag and lead variables.
 #'
-#' \code{shift} a function for creating lag and lead variables, including for 
+#' \code{shift} a function for creating lag and lead variables, including for
 #' time-series cross-sectional data.
 #'
 #' @param VarVect a vector you would like to shift (create lag or lead).
-#' @param shiftBy numeric value specifying how many rows (time units) to shift 
-#' the data by. Negative values shift the data down--lag the data. Positive 
+#' @param shiftBy numeric value specifying how many rows (time units) to shift
+#' the data by. Negative values shift the data down--lag the data. Positive
 #' values shift the data up--lead the data.
-#' @param reminder logical. Whether or not to remind you to order your data by 
+#' @param reminder logical. Whether or not to remind you to order your data by
 #' the \code{GroupVar} and time variable before running \code{shift}.
 #'
 #' @return a vector
 #'
-#' @description The function shifts a vector up or down to create lag or lead 
+#' @description The function shifts a vector up or down to create lag or lead
 #' variables.
-#' Note: your data needs to be sorted by date. The date should be ascending 
+#' Note: your data needs to be sorted by date. The date should be ascending
 #' (i.e. increasing as it moves down the rows).
 #'
 #' @seealso \code{\link{slide}}
 #'
-#' @source Largely based on TszKin Julian's \code{shift} function: 
+#' @source Largely based on TszKin Julian's \code{shift} function:
 #' \url{http://ctszkin.com/2012/03/11/generating-a-laglead-variables/}.
 #'
 #' @export
@@ -177,29 +177,37 @@ shift <- function(VarVect, shiftBy, reminder = TRUE){
   return(out)
 }
 
-#' Create a moving average for a period before or after each time point for a 
+#' Create a moving average for a period before or after each time point for a
 #' given variable
 #'
 #' @param data a data frame object.
-#' @param Var a character string naming the variable you would like to create 
+#' @param Var a character string naming the variable you would like to create
 #' the lag/lead moving averages from.
-#' @param GroupVar a character string naming the variable grouping the units 
-#' within which \code{Var} will be turned into slid moving averages. If 
-#' \code{GroupVar = NULL} then the whole variable is slid up or down and moving 
-#' averages will be created. This is similar to \code{\link{shift}}, though 
-#' \code{shift} returns the slid data to a new vector rather than the original 
+#' @param GroupVar a character string naming the variable grouping the units
+#' within which \code{Var} will be turned into slid moving averages. If
+#' \code{GroupVar = NULL} then the whole variable is slid up or down and moving
+#' averages will be created. This is similar to \code{\link{shift}}, though
+#' \code{shift} returns the slid data to a new vector rather than the original
 #' data frame.
-#' @param periodBound numeric. The time point for the outer bound of the time 
-#' period over which to create the moving averages. The default is \code{-3}, 
-#' i.e. the period begins three time periods before a given time period. Can 
-#' also be positive for leading moving averages.
-#' @param offset numeric. How many time increments away from a given increment 
-#' to begin the moving average time period. The default is \code{1}. Note: must 
-#' be positive.
-#' @param NewVar a character string specifying the name for the new variable to 
+#' @param periodBound integer. The time point for the outer bound of the time
+#' period over which to create the moving averages. The default is \code{-3},
+#' i.e. the moving average period begins three time points before a given time
+#' point. Can also be positive for leading moving averages.
+#' @param offset integer. How many time increments away from a given time point
+#' to begin the moving average time period. The default is \code{1}. Effectively
+#' controls how wide the moving average window is in the other direction of
+#' \code{periodBound}. Note: must be positive.
+#' @param NewVar a character string specifying the name for the new variable to
 #' place the slid data in.
-#' @param reminder logical. Whether or not to remind you to order your data by 
+#' @param reminder logical. Whether or not to remind you to order your data by
 #' the \code{GroupVar} and time variable before running \code{slideMA}.
+#'
+#' @details \code{slideMA} is designed to give you more control over the window
+#' for creating the moving average. Think of the \code{periodBound} and
+#' \code{offset} arguments working together. If for example,
+#' \code{periodBound = -3} and \code{offset = 1} then the variable of interest
+#' will be lagged by 2 then a moving average window of three time increments
+#' around the lagged variable is found.
 #'
 #' @return a data frame
 #'
@@ -223,51 +231,51 @@ shift <- function(VarVect, shiftBy, reminder = TRUE){
 
 slideMA <- function(data, Var, GroupVar = NULL, periodBound = -3, offset = 1,
                     NewVar = NULL, reminder = TRUE){
-  slideBy <- NULL
-  if (isTRUE(reminder)){
+    slideBy <- NULL
+    if (isTRUE(reminder)){
     if (is.null(GroupVar)){
       message(paste('\nRemember to put', deparse(substitute(data)),
                     'in time order before running slide.\n'))
     }
-    if (!is.null(GroupVar)){
-      message(paste('\nRemember to order', deparse(substitute(data)), 'by',
+        if (!is.null(GroupVar)){
+            message(paste('\nRemember to order', deparse(substitute(data)), 'by',
                     GroupVar, 'and the time variable before running slide.\n'))
+        }
     }
-  }
-  # Determine if Var exists in data
-  DataNames <- names(data)
-  TestExist <- Var %in% DataNames
-  if (!isTRUE(TestExist)){
-    stop(paste(Var, "was not found in the data frame.\n"), call. = FALSE)
-  }
+    # Determine if Var exists in data
+    DataNames <- names(data)
+    TestExist <- Var %in% DataNames
+    if (!isTRUE(TestExist)){
+        stop(paste(Var, "was not found in the data frame.\n"), call. = FALSE)
+    }
 
-  VarVect <- data[, Var]
+    VarVect <- data[, Var]
 
-  if (is.null(NewVar)){
+    if (is.null(NewVar)){
     NewVar <- paste0(Var, 'MA', periodBound, '_', offset)
-  }
+    }
 
-  Abs = abs(periodBound)
-  if (periodBound < 0){
-    slideBy = periodBound + abs(offset)
-  } else if (periodBound > 0){
-    slideBy = periodBound - abs(offset)
-  }
+    Abs = abs(periodBound)
+    if (periodBound < 0){
+        slideBy = periodBound + abs(offset)
+    } else if (periodBound > 0){
+        slideBy = periodBound - abs(offset)
+    }
 
-  # Create lags/leads moving averages
-  if (is.null(GroupVar)){
-    data[, NewVar] <- shiftMA(data[, Var], shiftBy = slideBy,
-                              Abs = Abs, reminder = FALSE)
-  } else if (!is.null(GroupVar)){
-    DataSub <- eval(parse(text = paste0('group_by(data[, c(GroupVar, Var)], ',
-                                        GroupVar,')')))
-    vars <- eval(parse(text = paste0("dplyr::mutate(DataSub, NewVarX = shiftMA(",
+    # Create lags/leads moving averages
+    if (is.null(GroupVar)){
+        data[, NewVar] <- shiftMA(data[, Var], shiftBy = slideBy,
+                                  Abs = Abs, reminder = FALSE)
+    } else if (!is.null(GroupVar)){
+        DataSub <- eval(parse(text = paste0('group_by(data[, c(GroupVar, Var)], ',
+                            GroupVar,')')))
+        vars <- eval(parse(text = paste0("dplyr::mutate(DataSub, NewVarX = shiftMA(",
                                     Var, ", shiftBy =", slideBy, ", Abs = ",
                                     Abs, ", reminder = FALSE))")))
-    data[, NewVar] <- vars$NewVarX
-    data <- data.frame(data)
-  }
-  return(data)
+        data[, NewVar] <- vars$NewVarX
+        data <- data.frame(data)
+    }
+    return(data)
 }
 
 #' Internal function for slideMA
@@ -284,23 +292,23 @@ shiftMA <- function(x, shiftBy, Abs, reminder){
   ma(x, Abs, centre = FALSE)
 }
 
-#' Spread a dummy variable (1's and 0') over a specified time period and for 
+#' Spread a dummy variable (1's and 0') over a specified time period and for
 #' specified groups
 #'
 #' @param data a data frame object.
-#' @param Var a character string naming the numeric dummy variable with values 
+#' @param Var a character string naming the numeric dummy variable with values
 #' 0 and 1 that you would like to spread. Can be either spread as a lag or lead.
-#' @param GroupVar a character string naming the variable grouping the units 
-#' within which \code{Var} will be spread If \code{GroupVar = NULL} then the 
-#' whole variable is spread up or down. This is similar to \code{\link{shift}}, 
-#' though \code{shift} slides the data and returns it to a new vector rather 
+#' @param GroupVar a character string naming the variable grouping the units
+#' within which \code{Var} will be spread If \code{GroupVar = NULL} then the
+#' whole variable is spread up or down. This is similar to \code{\link{shift}},
+#' though \code{shift} slides the data and returns it to a new vector rather
 #' than the original data frame.
-#' @param NewVar a character string specifying the name for the new variable to 
+#' @param NewVar a character string specifying the name for the new variable to
 #' place the spread dummy data in.
-#' @param spreadBy numeric value specifying how many rows (time units) to spread 
-#' the data over. Negative values spread the data down--lag the data. Positive 
+#' @param spreadBy numeric value specifying how many rows (time units) to spread
+#' the data over. Negative values spread the data down--lag the data. Positive
 #' values spread the data up--lead the data.
-#' @param reminder logical. Whether or not to remind you to order your data by 
+#' @param reminder logical. Whether or not to remind you to order your data by
 #' the \code{GroupVar} and time variable before running \code{SpreadDummy}.
 #'
 #' @examples
@@ -383,21 +391,21 @@ SpreadDummy <- function(data, Var, GroupVar = NULL, NewVar = NULL,
 
 #' Find the starting and ending time points of a spell
 #'
-#' \code{StartEnd} finds the starting and ending time points of a spell, 
-#' including for time-series cross-sectional data. Note: your data needs to be 
-#' sorted by date. The date should be ascending (i.e. increasing as it moves 
+#' \code{StartEnd} finds the starting and ending time points of a spell,
+#' including for time-series cross-sectional data. Note: your data needs to be
+#' sorted by date. The date should be ascending (i.e. increasing as it moves
 #' down the rows).
 #'
 #' @param data a data frame object.
-#' @param SpellVar a character string naming the variable with information on 
+#' @param SpellVar a character string naming the variable with information on
 #' when each spell starts.
-#' @param GroupVar a character string naming the variable grouping the units 
+#' @param GroupVar a character string naming the variable grouping the units
 #' experiencing the spells. If \code{GroupVar = NULL} then .
-#' @param SpellValue a value indicating when a unit is in a spell. If 
-#' \code{SpellValue = NULL} then any change in \code{Var}'s value will be 
+#' @param SpellValue a value indicating when a unit is in a spell. If
+#' \code{SpellValue = NULL} then any change in \code{Var}'s value will be
 #' treated as the start/end of a spell. Must specify if \code{OnlyStart = TRUE}.
-#' @param OnlyStart logical for whether or not to only add a new 
-#' \code{Spell_Start} variable. Please see the details. 
+#' @param OnlyStart logical for whether or not to only add a new
+#' \code{Spell_Start} variable. Please see the details.
 #'
 #' @examples
 #' # Create fake data
@@ -412,13 +420,13 @@ SpreadDummy <- function(data, Var, GroupVar = NULL, NewVar = NULL,
 #'
 #' head(DataSpell)
 #'
-#' @return a data frame. If \code{OnlyStart = FALSE} then two new variables are 
+#' @return a data frame. If \code{OnlyStart = FALSE} then two new variables are
 #' returned:
 #' \itemize{
 #'    \item{Spell_Start: }{The time period year of a given spell.}
 #'    \item{Spell_End: }{The end time period of a given spell.}
 #' }
-#' If \code{OnlyStart = TRUE} then only \code{Spell_Start} is added. 
+#' If \code{OnlyStart = TRUE} then only \code{Spell_Start} is added.
 #' This variable includes both \code{1}'s for the start of a new spell and for
 #' the start of a 'gap spell', i.e. a spell after \code{Spell_End}.
 #' @seealso \code{\link{slide}}
@@ -463,17 +471,17 @@ StartEnd <- function(data, SpellVar = NULL, GroupVar = NULL, SpellValue = NULL,
           Temp[, 'TempEnd'] != SpellValue] <- 1
   }
   Temp <- ungroup(Temp)
-  
+
   if (isTRUE(OnlyStart)){
     if (is.null(SpellValue)){
       stop('Must specify SpellValue if OnlyStart = TRUE.', call. = FALSE)
     }
-    Temp <- slide(data = Temp, Var = 'Spell_End', GroupVar = GroupVar, 
+    Temp <- slide(data = Temp, Var = 'Spell_End', GroupVar = GroupVar,
                   slideBy = -1, NewVar = 'TempNewStart', reminder = FALSE)
     Temp <- ungroup(Temp)
-    Temp$Spell_Start[Temp$Spell_Start != SpellValue & 
+    Temp$Spell_Start[Temp$Spell_Start != SpellValue &
                        Temp$TempNewStart == SpellValue] <- 1
-    Temp <- VarDrop(Temp, c('TempStart', 'TempEnd', 'TempNewStart', 
+    Temp <- VarDrop(Temp, c('TempStart', 'TempEnd', 'TempNewStart',
                             'Spell_End'))
   }
   else if (!isTRUE(OnlyStart)){
@@ -483,43 +491,43 @@ StartEnd <- function(data, SpellVar = NULL, GroupVar = NULL, SpellValue = NULL,
 }
 
 #' Count spells, including for grouped data
-#' 
-#' \code{CountSpell} is a function that returns a variable counting the spell 
+#'
+#' \code{CountSpell} is a function that returns a variable counting the spell
 #' number for an observation. Works with grouped data.
 #' @param data a data frame object.
 #' @param TimeVar a charachter string naming the time variable.
-#' @param SpellVar a character string naming the variable with information on 
+#' @param SpellVar a character string naming the variable with information on
 #' when each spell starts.
-#' @param GroupVar a character string naming the variable grouping the units 
+#' @param GroupVar a character string naming the variable grouping the units
 #' experiencing the spells. If \code{GroupVar = NULL} then .
 #' @param NewVar NewVar a character string naming the new variable to place the
 #' spell counts in.
-#' @param SpellValue a value indicating when a unit is in a spell. If 
-#' \code{SpellValue = NULL} then any change in \code{Var}'s value will be 
+#' @param SpellValue a value indicating when a unit is in a spell. If
+#' \code{SpellValue = NULL} then any change in \code{Var}'s value will be
 #' treated as the start/end of a spell.
-#' 
+#'
 #' @examples
 #' # Create fake data
 #' ID <- sort(rep(seq(1:4), 5))
 #' Time <- rep(1:20)
 #' Dummy <-  c(1, sample(c(0, 1), size = 19, replace = TRUE))
 #' Data <- data.frame(ID, Time, Dummy)
-#' 
+#'
 #' # Find spell for whole data frame
-#' DataSpell1 <- CountSpell(Data, TimeVar = 'Time', SpellVar = 'Dummy',  
+#' DataSpell1 <- CountSpell(Data, TimeVar = 'Time', SpellVar = 'Dummy',
 #'                          SpellValue = 1)
-#'                          
+#'
 #' head(DataSpell1)
-#' 
+#'
 #' # Find spell for each ID group
-#' DataSpell2 <- CountSpell(Data, TimeVar = 'Time', SpellVar = 'Dummy',  
+#' DataSpell2 <- CountSpell(Data, TimeVar = 'Time', SpellVar = 'Dummy',
 #'                          GroupVar = 'ID', SpellValue = 1)
-#'                          
+#'
 #' head(DataSpell2)
-#' 
+#'
 #' @export
 
-CountSpell <- function(data, TimeVar = NULL, SpellVar = NULL, GroupVar = NULL, 
+CountSpell <- function(data, TimeVar = NULL, SpellVar = NULL, GroupVar = NULL,
                        NewVar = NULL, SpellValue = NULL)
 {
   if (is.null(NewVar)){
@@ -530,24 +538,24 @@ CountSpell <- function(data, TimeVar = NULL, SpellVar = NULL, GroupVar = NULL,
   tempMain <- data.frame()
     for (i in unique(data[, GroupVar])){
       tempSub <- data[data[, GroupVar] == i, ]
-      tempSub[, NewVar] <- CountSpellOne(data = tempSub, TimeVar = TimeVar, 
+      tempSub[, NewVar] <- CountSpellOne(data = tempSub, TimeVar = TimeVar,
                                   SpellVar = SpellVar, SpellValue = SpellValue)
       tempMain <- rbind(tempMain, tempSub)
     }
   data <- tempMain
   }
   else if (is.null(GroupVar)){
-    data[, NewVar] <- CountSpellOne(data = data, TimeVar = TimeVar, 
+    data[, NewVar] <- CountSpellOne(data = data, TimeVar = TimeVar,
                                 SpellVar = SpellVar, SpellValue = SpellValue)
   }
   return(data)
 }
 
 #' Internal function for finding spells for one unit
-#' 
+#'
 #' @noRd
 
-CountSpellOne <- function(data, TimeVar = NULL, SpellVar = NULL, 
+CountSpellOne <- function(data, TimeVar = NULL, SpellVar = NULL,
                           SpellValue = NULL)
 {
   Spell_Start <- NULL
@@ -557,21 +565,21 @@ CountSpellOne <- function(data, TimeVar = NULL, SpellVar = NULL,
   if (is.null(SpellValue)){
     stop('You must specify the SpellValue', call. = FALSE)
   }
-  
+
   if (!any(data[, SpellVar] == SpellValue)){
     dataSpell <- data
     dataSpell$Spell_Count <- 0
-  } 
+  }
   else if (any(data[, SpellVar] != SpellValue)) {
-    dataSpell <- StartEnd(data = data, SpellVar = SpellVar, 
+    dataSpell <- StartEnd(data = data, SpellVar = SpellVar,
                         SpellValue = SpellValue, OnlyStart = TRUE)
-      
+
     temp <- subset(dataSpell, Spell_Start == 1)
     temp$spell_ID <- 1:nrow(temp)
-  
+
     dataSpell$Spell_Count <- 0
     for (u in 1:max(temp$spell_ID)){
-      dataSpell$Spell_Count[dataSpell[, TimeVar] >= 
+      dataSpell$Spell_Count[dataSpell[, TimeVar] >=
                             temp[temp$spell_ID == u, TimeVar]] <- u
     }
   }

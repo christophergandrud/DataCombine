@@ -3,7 +3,7 @@ DataCombine
 
 Christopher Gandrud
 
-Version 0.2 [![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine)
+Version 0.2.1 [![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine)
 
 Please report any **bugs** or **suggestions** at: <https://github.com/christophergandrud/DataCombine/issues>.
 
@@ -50,12 +50,12 @@ for an observation. Works with grouped data.
 
 ## Updates
 
-I will continue to add to the package as I build data sets and run across other 
+I will continue to add to the package as I build data sets and run across other
 pesky tasks I do repeatedly that would be simpler if they were a function.
 
 ## Installation
 
-**DataCombine** is on [CRAN](http://cran.r-project.org/). 
+**DataCombine** is on [CRAN](http://cran.r-project.org/).
 
 You can also install the most recent stable version with `install_github` from the [devtools](https://github.com/hadley/devtools):
 

@@ -1,3 +1,7 @@
+### Version 0.2.1
+
+Minor documentation improvements to `slideMA`.
+
 ### Version 0.2
 
 Added `CountSpell`, a function that returns a variable counting the spell number
@@ -29,7 +33,7 @@ No longer depends on the forecast package.
 
 ### Version 0.1.24
 
-`slide` and `slideMA` now rely on `dplyr` rather than `plyr` for speed 
+`slide` and `slideMA` now rely on `dplyr` rather than `plyr` for speed
 improvements.
 
 ### Version 0.1.23
@@ -70,7 +74,7 @@ Minor internal improvements to `rmExcept`.
 
 ### Version 0.1.17
 
-Added `TimeFill` for creating a continuous Unit-Time-Dummy data frame from a 
+Added `TimeFill` for creating a continuous Unit-Time-Dummy data frame from a
 data frame with Unit-Start-End times.
 
 ### Version 0.1.16
@@ -81,7 +85,7 @@ Added `message` option to `DropNA`. Allows the user to turn of the drop message.
 
 Added `VarDrop` for dropping one or more variables from a data frame.
 
-Added `dMerge` which merges 2 data frames and reports/drops/keeps only 
+Added `dMerge` which merges 2 data frames and reports/drops/keeps only
 duplicates.
 
 ### Version 0.1.14
@@ -100,7 +104,7 @@ Added `PercChange` for calculating the percentage change from a specified lag, i
 
 ### Version 0.1.11
 
-Added `exact` argument to `FindReplace` to only replace exact pattern matches. Also added argument `vector` to return a vector of the replacement variable 
+Added `exact` argument to `FindReplace` to only replace exact pattern matches. Also added argument `vector` to return a vector of the replacement variable
 rather than the whole data frame.
 
 Improved warnings for `FindReplace`.
@@ -115,12 +119,12 @@ Minor documentation improvements.
 
 ### Version 0.1.8
 
-Added `grepl.sub` function to subset a data frame if a specified pattern is 
+Added `grepl.sub` function to subset a data frame if a specified pattern is
 found in a character string.
 
 ### Version 0.1.7
 
-Added the utility `rmExcept` for removing all objects from a workspace except 
+Added the utility `rmExcept` for removing all objects from a workspace except
 for those specified by the user.
 
 ### Version 0.1.6
@@ -143,18 +147,18 @@ Documentation improvements.
 
 ### Version 0.1.5
 
-Added `slide` and `shift` functions for lagging and leading variables. `shift` 
-is largely based on TszKin Julian's `shift` function: 
+Added `slide` and `shift` functions for lagging and leading variables. `shift`
+is largely based on TszKin Julian's `shift` function:
 <http://ctszkin.com/2012/03/11/generating-a-laglead-variables/>.
 
 ### Version 0.1.3
 
-Added `DropNA` to drop observations in a data frame with missing values for 
+Added `DropNA` to drop observations in a data frame with missing values for
 given variables.
 
 ### Version 0.1.2
 
-Stop message for `MoveFront` when variable does not exists. Other minor 
+Stop message for `MoveFront` when variable does not exists. Other minor
 documentation changes.
 
 ### Version 0.1.1

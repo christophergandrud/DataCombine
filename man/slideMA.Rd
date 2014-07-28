@@ -20,14 +20,15 @@ averages will be created. This is similar to \code{\link{shift}}, though
 \code{shift} returns the slid data to a new vector rather than the original
 data frame.}
 
-\item{periodBound}{numeric. The time point for the outer bound of the time
-period overwhich to create the moving averages. The default is \code{-3},
-i.e. the period begins three time periods before a given time period. Can
-also be positive for leading moving averages.}
+\item{periodBound}{integer. The time point for the outer bound of the time
+period over which to create the moving averages. The default is \code{-3},
+i.e. the moving average period begins three time points before a given time
+point. Can also be positive for leading moving averages.}
 
-\item{offset}{numeric. How many time increments away from a given increment
-to begin the moving average time period. The default is \code{1}. Note: must
-be positive.}
+\item{offset}{integer. How many time increments away from a given time point
+to begin the moving average time period. The default is \code{1}. Effectively
+controls how wide the moving average window is in the other direction of
+\code{periodBound}. Note: must be positive.}
 
 \item{NewVar}{a character string specifying the name for the new variable to
 place the slid data in.}
@@ -41,6 +42,14 @@ a data frame
 \description{
 Create a moving average for a period before or after each time point for a
 given variable
+}
+\details{
+\code{slideMA} is designed to give you more control over the window
+for creating the moving average. Think of the \code{periodBound} and
+\code{offset} arguments working together. If for example,
+\code{periodBound = -3} and \code{offset = 1} then the variable of interest
+will be lagged by 2 then a moving average window of three time increments
+around the lagged variable is found.
 }
 \examples{
 # Create dummy data
