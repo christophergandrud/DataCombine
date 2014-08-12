@@ -2,6 +2,8 @@
 
 Minor documentation improvements to `slideMA`.
 
+Internal improvements to `MoveFront`.
+
 ### Version 0.2
 
 Added `CountSpell`, a function that returns a variable counting the spell number
