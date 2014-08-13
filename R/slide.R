@@ -122,6 +122,7 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
         data[, NewVar] <- vars$NewVarX
     }
     data <- ungroup(data)
+    class(data) <- 'data.frame'
     return(data)
 }
 
@@ -152,29 +153,29 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
 #' @export
 
 shift <- function(VarVect, shiftBy, reminder = TRUE){
-  if(!is.numeric(shiftBy)){
-    stop(paste(shiftBy, 'must be numeric.'), call. = FALSE)
-  }
-  if (isTRUE(reminder)){
-      message(paste('Remember to put', deparse(substitute(data)),
+    if(!is.numeric(shiftBy)){
+        stop(paste(shiftBy, 'must be numeric.'), call. = FALSE)
+    }
+    if (isTRUE(reminder)){
+        message(paste('Remember to put', deparse(substitute(data)),
                     'in time order before running shift.'))
-  }
+    }
 
 
-  if (length(shiftBy) > 1)
+    if (length(shiftBy) > 1)
     return(sapply(shiftBy, shift, Var = VarVect))
 
-  out <- NULL
-  abs_shiftBy = abs(shiftBy)
+    out <- NULL
+    abs_shiftBy = abs(shiftBy)
 
-  if (shiftBy > 0){
-    out <- c(tail(VarVect, -abs_shiftBy), rep(NA, abs_shiftBy))
-  } else if (shiftBy < 0) {
-    out <- c(rep(NA, abs_shiftBy), head(VarVect, -abs_shiftBy))
-  } else {
-    out <- VarVect
-  }
-  return(out)
+    if (shiftBy > 0){
+        out <- c(tail(VarVect, -abs_shiftBy), rep(NA, abs_shiftBy))
+    } else if (shiftBy < 0) {
+        out <- c(rep(NA, abs_shiftBy), head(VarVect, -abs_shiftBy))
+    } else {
+        out <- VarVect
+    }
+    return(out)
 }
 
 #' Create a moving average for a period before or after each time point for a

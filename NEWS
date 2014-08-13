@@ -1,3 +1,8 @@
+### Version 0.2.2
+
+Minor internal improvement where slide (and associated functions) return only
+data frame class objects
+
 ### Version 0.2.1
 
 Minor documentation improvements to `slideMA`.
@@ -18,7 +23,7 @@ Documentation and internal code improvements.
 
 `FillIn` internal code improvements.
 
-### Verion 0.1.26
+### Version 0.1.26
 
 !!! `grepl.sub` argument `patterns` changed to `pattern`. !!!
 

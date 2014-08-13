@@ -11,13 +11,21 @@ MoveFront(data, Var, exact = TRUE, ignore.case = NULL, fixed = NULL)
 \arguments{
 \item{data}{a data frame object containing the variable you want to move.}
 
-\item{Var}{a character vector naming the variables you would like to move to the front of the data frame. The order of the variables should match the order you want them to have in the data frame, i.e. the first variable in the vector will be the first variable in the data frame.}
+\item{Var}{a character vector naming the variables you would like to move to
+the front of the data frame. The order of the variables should match the
+order you want them to have in the data frame, i.e. the first variable in the
+vector will be the first variable in the data frame.}
 
-\item{exact}{logical. If \code{TRUE} (the default), only exact variable names are matched.}
+\item{exact}{logical. If \code{TRUE} (the default), only exact variable names
+are matched.}
 
-\item{ignore.case}{logical. If \code{FALSE}, the variable name matching is case sensitive and if \code{TRUE}, case is ignored during matching. Only available when \code{exact = FALSE}.}
+\item{ignore.case}{logical. If \code{FALSE}, the variable name matching is
+case sensitive and if \code{TRUE}, case is ignored during matching. Only
+available when \code{exact = FALSE}.}
 
-\item{fixed}{logical. If \code{TRUE}, pattern is a string to be matched as is. Overrides all conflicting arguments. Only available when \code{exact = FALSE}.}
+\item{fixed}{logical. If \code{TRUE}, pattern is a string to be matched as
+is. Overrides all conflicting arguments. Only available when
+\code{exact = FALSE}.}
 }
 \description{
 \code{MoveFront} moves variables to the front of a data frame.
