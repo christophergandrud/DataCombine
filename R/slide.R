@@ -17,6 +17,11 @@
 #' @param slideBy numeric value specifying how many rows (time units) to shift
 #' the data by. Negative values slide the data down--lag the data. Positive
 #' values shift the data up--lead the data.
+#' @param keepInvalid logical. Whether or not to keep observations for groups for
+#' which no valid lag/lead can be created due to an insufficient number of time
+#' period observations. If \code{TRUE} then these groups are returned to the
+#' bottom of the data frame and \code{NA} is given for their new lag/lead
+#' variable value.
 #' @param reminder logical. Whether or not to remind you to order your data by
 #' the \code{GroupVar} and time variable before running \code{slide}, plus other
 #' messages.
@@ -33,6 +38,12 @@
 #'  # Lag the variable one time unit by ID group
 #'  DataSlid2 <- slide(data = Data, Var = "B", GroupVar = "ID",
 #'                 NewVar = "BLag", slideBy = -1)
+#'
+#' # Lag the variable one time unit by ID group, with invalad lags
+#' Data <- Data[1:16, ]
+#'
+#' DataSlid3 <- slide(data = Data, Var = "B", GroupVar = "ID",
+#'                  NewVar = "BLag", slideBy = -2, keepInvalid = TRUE)
 #'
 #' @return a data frame
 #'
@@ -54,7 +65,7 @@
 #' @export
 
 slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
-                  reminder = TRUE)
+                  keepInvalid = FALSE, reminder = TRUE)
 {
     fake <- total <- NULL
 
@@ -72,6 +83,12 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
     if (is.null(NewVar)){
         NewVar <- paste0(Var, slideBy)
     }
+
+    # Logically valid argument pairs
+    if (isTRUE(keepInvalid) & is.null(GroupVar)){
+            warning('keepInvalid set to FALSE when GroupVar = NULL')
+            keepInvalid <- FALSE
+        }
 
     # Give messages
     if (isTRUE(reminder)){
@@ -99,14 +116,26 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
         Minimum <- abs(slideBy) - 1
         Summed <- dplyr::mutate(data, total = sum(fake))
         SubSummed <- subset(Summed, total <= Minimum)
+        data <- VarDrop(data, 'fake')
         if (nrow(SubSummed) > 0){
             Dropping <- unique(SubSummed[, GroupVar])
+            FullData <- data
             data <- data[!(data[, GroupVar] %in% Dropping), ]
-            message(paste0('\nWarning: the following groups have ', Minimum,
-                          ' or fewer observations.\nNo reasonable lag/lead can be created, so they are dropped:\n'))
-            message(paste(Dropping, collapse = "\n"))
+            if (!isTRUE(keepInvalid)){
+                message(paste0('\nWarning: the following groups have ', Minimum,
+                        ' or fewer observations.',
+                        '\nNo valid lag/lead can be created, so they are dropped:\n'))
+                message(paste(Dropping, collapse = "\n"))
+            }
+            else if (isTRUE(keepInvalid)){
+                message(paste0('\nWarning: the following groups have ', Minimum,
+                        ' or fewer observations.',
+                        '\nNo valid lag/lead can be created.',
+                        '\nNA will be returned for these observations in the new lag/lead variable.',
+                        '\nThey will be returned at the bottom of the data frame.\n'))
+                message(paste(Dropping, collapse = "\n"))
+            }
         }
-    data <- VarDrop(data, 'fake')
     }
 
     # Create lags/leads
@@ -121,9 +150,14 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
                                  Var, ",", slideBy, ", reminder = FALSE))")))
         data[, NewVar] <- vars$NewVarX
     }
-    data <- ungroup(data)
-    class(data) <- 'data.frame'
-    return(data)
+    if (isTRUE(keepInvalid)){
+        invalid <- FullData[(FullData[, GroupVar] %in% Dropping), ]
+        invalid[, NewVar] <- NA
+        data <- rbind(data, invalid)
+    }
+   data <- ungroup(data)
+   class(data) <- 'data.frame'
+   return(data)
 }
 
 #' A function for creating lag and lead variables.
