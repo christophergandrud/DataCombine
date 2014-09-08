@@ -67,7 +67,7 @@
 slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
                   keepInvalid = FALSE, reminder = TRUE)
 {
-    fake <- total <- NULL
+    fake <- total <- FullData <- NULL
 
     # Determine if Var exists in data
     DataNames <- names(data)
@@ -117,9 +117,9 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
         Summed <- dplyr::mutate(data, total = sum(fake))
         SubSummed <- subset(Summed, total <= Minimum)
         data <- VarDrop(data, 'fake')
+        FullData <- NULL
         if (nrow(SubSummed) > 0){
             Dropping <- unique(SubSummed[, GroupVar])
-            FullData <- data
             data <- data[!(data[, GroupVar] %in% Dropping), ]
             if (!isTRUE(keepInvalid)){
                 message(paste0('\nWarning: the following groups have ', Minimum,
@@ -150,7 +150,7 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
                                  Var, ",", slideBy, ", reminder = FALSE))")))
         data[, NewVar] <- vars$NewVarX
     }
-    if (isTRUE(keepInvalid)){
+    if (isTRUE(keepInvalid) & !is.null(FullData)){
         invalid <- FullData[(FullData[, GroupVar] %in% Dropping), ]
         invalid[, NewVar] <- NA
         data <- rbind(data, invalid)
