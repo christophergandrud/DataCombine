@@ -1,4 +1,11 @@
-### Version 0.2.2
+### Version 0.2.4
+
+- Added `FillDown` a function that fills in missing (NA) values with the previous
+on-missing value.
+
+- Internal code formating improvements.
+
+### Version 0.2.3
 
 - `keepInvalid` argument added to `slide`. This allows the user to specify
 whether or not to keep observations for groups for which no valid lag/lead can

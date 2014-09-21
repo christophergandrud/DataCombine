@@ -2,6 +2,7 @@
 
 export(CountSpell)
 export(DropNA)
+export(FillDown)
 export(FillIn)
 export(FindReplace)
 export(InsertRow)

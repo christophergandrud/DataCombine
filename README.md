@@ -3,48 +3,74 @@ DataCombine
 
 Christopher Gandrud
 
-Version 0.2.3 [![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine)
+Version 0.2.4
+[![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine)
 
-Please report any **bugs** or **suggestions** at: <https://github.com/christophergandrud/DataCombine/issues>.
+Please report any **bugs** or **suggestions** at:
+<https://github.com/christophergandrud/DataCombine/issues>.
 
 ## Motivation and Functions
 
-**DataCombine** is a set of miscellaneous tools intended to make combining data sets--especially time-series cross-section data--easier. The package is continually being developed as I turn lines of code that I frequently use into single functions. It currently includes the following functions:
+**DataCombine** is a set of miscellaneous tools intended to make combining
+data sets--especially time-series cross-section data--easier. The package is
+continually being developed as I turn lines of code that I frequently use into
+single functions. It currently includes the following functions:
 
 - `CountSpell`: function that returns a variable counting the spell number
 for an observation. Works with grouped data.
 
 - `dMerge`: merges 2 data frames and report/drop/keeps only duplicates.
 
-- `DropNA`: drops rows from a data frame when they have missing (NA) values on a given variable(s).
+- `DropNA`: drops rows from a data frame when they have missing (NA) values on a
+given variable(s).
 
-- `FillIn`: fills in missing values of a variable from one data frame with the values from another variable.
+- `FillDown`: fills in missing (`NA`) values with the previous on-missing value
 
-- `FindReplace`: replaces multiple patterns found in a character string column of a data frame.
+- `FillIn`: fills in missing values of a variable from one data frame with the
+values from another variable.
 
-- `grepl.sub`: subsets a data frame if a specified pattern is found in a character string.
+- `FindReplace`: replaces multiple patterns found in a character string column
+of a data frame.
 
-- `InsertRow`: allows user to insert a row into a data frame. Largely implements: [Ari B. Friedman's function](http://stackoverflow.com/a/11562428).
+- `grepl.sub`: subsets a data frame if a specified pattern is found in a
+character string.
 
-- `MoveFront`: moves variables to the front of a data frame. This can be useful if you have a data frame with many variables and want to move a variable or variables to the front.
+- `InsertRow`: allows user to insert a row into a data frame. Largely
+implements: [Ari B. Friedman's function](http://stackoverflow.com/a/11562428).
 
-- `NaVar`: create new variable(s) indicating if there are missing values in other variable(s).
+- `MoveFront`: moves variables to the front of a data frame. This can be useful
+if you have a data frame with many variables and want to move a variable or
+variables to the front.
 
-- `PercChange`: calculates the percentage change from a specified lag, including within groups.
+- `NaVar`: create new variable(s) indicating if there are missing values in
+other variable(s).
 
-- `shift`: creates lag and lead variables, including for time-series cross-sectional data. The shifted variable is returned to a new vector. This function is largely based on [TszKin Julian's shift function](http://ctszkin.com/2012/03/11/generating-a-laglead-variables/).
+- `PercChange`: calculates the percentage change from a specified lag, including
+within groups.
 
-- `slide`: creates lag and lead variables, including for time-series cross-sectional data. The slid variable are added to the original data frame. This expands the capabilities of `shift`.
+- `shift`: creates lag and lead variables, including for time-series
+cross-sectional data. The shifted variable is returned to a new vector. This
+function is largely based on
+[TszKin Julian's shift function](http://ctszkin.com/2012/03/11/generating-a-laglead-variables/).
 
-- `slideMA`: creates a moving average for a period before or after each time point for a given variable.
+- `slide`: creates lag and lead variables, including for time-series
+cross-sectional data. The slid variable are added to the original data frame.
+This expands the capabilities of `shift`.
 
-- `SpreadDummy`: spread a dummy variable (1's and 0') over a specified time period and for specified groups.
+- `slideMA`: creates a moving average for a period before or after each time
+point for a given variable.
 
-- `StartEnd`: finds the starting and ending time points of a spell, including for time-series cross-sectional data.
+- `SpreadDummy`: spread a dummy variable (1's and 0') over a specified time
+period and for specified groups.
 
-- `rmExcept`: removes all objects from a workspace except those specified by the user.
+- `StartEnd`: finds the starting and ending time points of a spell, including
+for time-series cross-sectional data.
 
-- `TimeFill`: creates a continuous `Unit`-`Time`-`Dummy` data frame from a data frame with `Unit`-`Start`-`End` times.
+- `rmExcept`: removes all objects from a workspace except those specified by the
+user.
+
+- `TimeFill`: creates a continuous `Unit`-`Time`-`Dummy` data frame from a data
+frame with `Unit`-`Start`-`End` times.
 
 - `VarDrop`: drops one or more variables from a data frame.
 
@@ -57,7 +83,8 @@ pesky tasks I do repeatedly that would be simpler if they were a function.
 
 **DataCombine** is on [CRAN](http://cran.r-project.org/).
 
-You can also install the most recent stable version with `install_github` from the [devtools](https://github.com/hadley/devtools):
+You can also install the most recent stable version with `install_github` from
+the [devtools](https://github.com/hadley/devtools):
 
 ```{S}
 devtools::install_github('christophergandrud/DataCombine')

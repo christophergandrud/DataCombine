@@ -101,3 +101,34 @@ FillIn <- function(D1, D2, Var1 = NULL, Var2 = NULL,
     }
     OutDF
 }
+
+#' Fills in missing (NA) values with the previous non-missing value
+#'
+#' @param data a data frame.
+#' @param Var the variable in \code{data} you would like to fill down missing
+#' (\code{NA}) values.
+#'
+#' @return data frame
+#'
+#' @examples
+#' # Create fake data
+#' id <- c('Algeria', NA, NA, NA, 'Mexico', NA, NA)
+#' score <- rnorm(7)
+#' Data <- data.frame(id, score)
+#'
+#' # FillDown id
+#' DataOut <- FillDown(Data, 'id')
+#'
+#' @export
+
+FillDown <- function(data, Var) {
+    for (i in 1:nrow(data)) {
+        if (!is.na(data[i, Var])) {
+            fill <- data[i, Var]
+        }
+        else if (is.na(data[i, Var])) {
+            data[i, Var] <- fill
+        }
+    }
+    return(data)
+}
