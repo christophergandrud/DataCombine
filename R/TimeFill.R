@@ -28,7 +28,9 @@
 #' 
 #' @export
 
-TimeFill <- function(data, GroupVar, StartVar, EndVar, NewVar = 'TimeFilled', NewTimeVar = 'Time', KeepStartStop = FALSE){
+TimeFill <- function(data, GroupVar, StartVar, EndVar, NewVar = 'TimeFilled', 
+                     NewTimeVar = 'Time', KeepStartStop = FALSE)
+{
   # Warnings
   if (class(data[, StartVar]) != 'numeric'){
     message(paste0('Converting ', deparse(substitute(StartVar)), ' to numeric. Things might get wacky. Please check.'))
