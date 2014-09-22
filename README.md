@@ -21,7 +21,7 @@ for an observation. Works with grouped data.
 
 - `dMerge`: merges 2 data frames and report/drop/keeps only duplicates.
 
-- `DropNA`: drops rows from a data frame when they have missing (NA) values on a
+- `DropNA`: drops rows from a data frame when they have missing (`NA`) values on a
 given variable(s).
 
 - `FillDown`: fills in missing (`NA`) values with the previous on-missing value
