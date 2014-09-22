@@ -33,45 +33,73 @@
 
 <p>Christopher Gandrud</p>
 
-<p>Version 0.1.26 <a href="https://travis-ci.org/christophergandrud/DataCombine"><img src="https://travis-ci.org/christophergandrud/DataCombine.png" alt="Build Status"></a></p>
+<p>Version 0.2.4
+<a href="https://travis-ci.org/christophergandrud/DataCombine"><img src="https://travis-ci.org/christophergandrud/DataCombine.png" alt="Build Status"></a></p>
 
-<p>Please report any <strong>bugs</strong> or <strong>suggestions</strong> at: <a href="https://github.com/christophergandrud/DataCombine/issues">https://github.com/christophergandrud/DataCombine/issues</a>.</p>
+<p>Please report any <strong>bugs</strong> or <strong>suggestions</strong> at:
+<a href="https://github.com/christophergandrud/DataCombine/issues">https://github.com/christophergandrud/DataCombine/issues</a>.</p>
 
 <h2>
 <a name="motivation-and-functions" class="anchor" href="#motivation-and-functions"><span class="octicon octicon-link"></span></a>Motivation and Functions</h2>
 
-<p><strong>DataCombine</strong> is a set of miscellaneous tools intended to make combining data sets--especially time-series cross-section data--easier. The package is continually being developed as I turn lines of code that I frequently use into single functions. It currently includes the following functions:</p>
+<p><strong>DataCombine</strong> is a set of miscellaneous tools intended to make combining
+data sets--especially time-series cross-section data--easier. The package is
+continually being developed as I turn lines of code that I frequently use into
+single functions. It currently includes the following functions:</p>
 
 <ul>
+<li><p><code>CountSpell</code>: function that returns a variable counting the spell number
+for an observation. Works with grouped data.</p></li>
 <li><p><code>dMerge</code>: merges 2 data frames and report/drop/keeps only duplicates.</p></li>
-<li><p><code>DropNA</code>: drops rows from a data frame when they have missing (NA) values on a given variable(s).</p></li>
-<li><p><code>FillIn</code>: fills in missing values of a variable from one data frame with the values from another variable.</p></li>
-<li><p><code>FindReplace</code>: replaces multiple patterns found in a character string column of a data frame.</p></li>
-<li><p><code>grepl.sub</code>: subsets a data frame if a specified pattern is found in a character string.</p></li>
-<li><p><code>InsertRow</code>: allows user to insert a row into a data frame. Largely implements: <a href="http://stackoverflow.com/a/11562428">Ari B. Friedman's function</a>.</p></li>
-<li><p><code>MoveFront</code>: moves variables to the front of a data frame. This can be useful if you have a data frame with many variables and want to move a variable or variables to the front.</p></li>
-<li><p><code>NaVar</code>: create new variable(s) indicating if there are missing values in other variable(s).</p></li>
-<li><p><code>PercChange</code>: calculates the percentage change from a specified lag, including within groups.</p></li>
-<li><p><code>shift</code>: creates lag and lead variables, including for time-series cross-sectional data. The shifted variable is returned to a new vector. This function is largely based on <a href="http://ctszkin.com/2012/03/11/generating-a-laglead-variables/">TszKin Julian's shift function</a>.</p></li>
-<li><p><code>slide</code>: creates lag and lead variables, including for time-series cross-sectional data. The slid variable are added to the original data frame. This expands the capabilities of <code>shift</code>.</p></li>
-<li><p><code>slideMA</code>: creates a moving average for a period before or after each time point for a given variable.</p></li>
-<li><p><code>SpreadDummy</code>: spread a dummy variable (1's and 0') over a specified time period and for specified groups.</p></li>
-<li><p><code>StartEnd</code>: finds the starting and ending time points of a spell, including for time-series cross-sectional data.</p></li>
-<li><p><code>rmExcept</code>: removes all objects from a workspace except those specified by the user.</p></li>
-<li><p><code>TimeFill</code>: creates a continuous <code>Unit</code>-<code>Time</code>-<code>Dummy</code> data frame from a data frame with <code>Unit</code>-<code>Start</code>-<code>End</code> times.</p></li>
+<li><p><code>DropNA</code>: drops rows from a data frame when they have missing (<code>NA</code>) values on a
+given variable(s).</p></li>
+<li><p><code>FillDown</code>: fills in missing (<code>NA</code>) values with the previous on-missing value</p></li>
+<li><p><code>FillIn</code>: fills in missing values of a variable from one data frame with the
+values from another variable.</p></li>
+<li><p><code>FindReplace</code>: replaces multiple patterns found in a character string column
+of a data frame.</p></li>
+<li><p><code>grepl.sub</code>: subsets a data frame if a specified pattern is found in a
+character string.</p></li>
+<li><p><code>InsertRow</code>: allows user to insert a row into a data frame. Largely
+implements: <a href="http://stackoverflow.com/a/11562428">Ari B. Friedman's function</a>.</p></li>
+<li><p><code>MoveFront</code>: moves variables to the front of a data frame. This can be useful
+if you have a data frame with many variables and want to move a variable or
+variables to the front.</p></li>
+<li><p><code>NaVar</code>: create new variable(s) indicating if there are missing values in
+other variable(s).</p></li>
+<li><p><code>PercChange</code>: calculates the percentage change from a specified lag, including
+within groups.</p></li>
+<li><p><code>shift</code>: creates lag and lead variables, including for time-series
+cross-sectional data. The shifted variable is returned to a new vector. This
+function is largely based on
+<a href="http://ctszkin.com/2012/03/11/generating-a-laglead-variables/">TszKin Julian's shift function</a>.</p></li>
+<li><p><code>slide</code>: creates lag and lead variables, including for time-series
+cross-sectional data. The slid variable are added to the original data frame.
+This expands the capabilities of <code>shift</code>.</p></li>
+<li><p><code>slideMA</code>: creates a moving average for a period before or after each time
+point for a given variable.</p></li>
+<li><p><code>SpreadDummy</code>: spread a dummy variable (1's and 0') over a specified time
+period and for specified groups.</p></li>
+<li><p><code>StartEnd</code>: finds the starting and ending time points of a spell, including
+for time-series cross-sectional data.</p></li>
+<li><p><code>rmExcept</code>: removes all objects from a workspace except those specified by the
+user.</p></li>
+<li><p><code>TimeFill</code>: creates a continuous <code>Unit</code>-<code>Time</code>-<code>Dummy</code> data frame from a data
+frame with <code>Unit</code>-<code>Start</code>-<code>End</code> times.</p></li>
 <li><p><code>VarDrop</code>: drops one or more variables from a data frame.</p></li>
 </ul><h2>
 <a name="updates" class="anchor" href="#updates"><span class="octicon octicon-link"></span></a>Updates</h2>
 
-<p>I will continue to add to the package as I build data sets and run across other 
+<p>I will continue to add to the package as I build data sets and run across other
 pesky tasks I do repeatedly that would be simpler if they were a function.</p>
 
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<p><strong>DataCombine</strong> is on <a href="http://cran.r-project.org/">CRAN</a>. </p>
+<p><strong>DataCombine</strong> is on <a href="http://cran.r-project.org/">CRAN</a>.</p>
 
-<p>You can also install the most recent stable version with <code>install_github</code> from the <a href="https://github.com/hadley/devtools">devtools</a>:</p>
+<p>You can also install the most recent stable version with <code>install_github</code> from
+the <a href="https://github.com/hadley/devtools">devtools</a>:</p>
 
 <div class="highlight highlight-S"><pre>devtools<span class="o">::</span>install_github<span class="p">(</span><span class="s">'christophergandrud/DataCombine'</span><span class="p">)</span>
 </pre></div>
