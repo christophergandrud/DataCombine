@@ -1,3 +1,7 @@
+### Version 0.2.5
+
+- Minor error handling improvements to `grepl.sub`.
+
 ### Version 0.2.4
 
 - Added `FillDown` a function that fills in missing (NA) values with the previous

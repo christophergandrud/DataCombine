@@ -59,12 +59,14 @@ rmExcept <- function(keepers, envir = globalenv(), message = TRUE){
 #' @export
 
 grepl.sub <- function(data, pattern, Var, keep.found = TRUE, useBytes = TRUE){
-  y <- NULL
-  data$y <- grepl(pattern = paste0(pattern, collapse="|"), x = data[, Var],
+    y <- NULL
+    if (missing(Var)) stop('Var must be specified', call. = FALSE)
+
+    data$y <- grepl(pattern = paste0(pattern, collapse="|"), x = data[, Var],
                   useBytes = useBytes)
-  subdata <- subset(data, y == keep.found)
-  subdata$y <- NULL
-  subdata
+    subdata <- subset(data, y == keep.found)
+    subdata$y <- NULL
+    subdata
 }
 
 #' Replace multiple patterns found in a character string column of a data frame
@@ -143,11 +145,11 @@ FindReplace <- function(data, Var, replaceData, from = 'from', to = 'to', exact 
 #' @export
 
 VarDrop <- function(data, Var){
-  if (!all(Var %in% names(data))){
+    if (!all(Var %in% names(data))){
     message('At least one of the specified variables to drop is not found.')
-  }
-  data <- data[, !(names(data) %in% Var)]
-  return(data)
+    }
+    data <- data[, !(names(data) %in% Var)]
+    return(data)
 }
 
 #' Merges 2 data frames and report/drop/keeps only duplicates.
@@ -172,44 +174,45 @@ VarDrop <- function(data, Var){
 #'
 #' @export
 
-dMerge <- function(data1, data2, Var, dropDups = TRUE, dupsOut = FALSE, fromLast = FALSE, all = FALSE, all.x = all, all.y = all,
-      sort = TRUE, suffixes = c(".x",".y"),
-      incomparables = NULL){
-  if (isTRUE(dropDups) & isTRUE(dupsOut)){
-    message("dropDups ignored")
-    dropDups = FALSE
-  }
-
-  # Perform basic merge
-  Comb <- merge(data1, data2, by = Var, all = all, all.x = all.x, all.y = all.y,
-      sort = TRUE, suffixes = c(".x",".y"),
-      incomparables = incomparables)
-
-  # Find duplicated
-  DupDF <- Comb[duplicated(Comb[, Var]), ]
-
-  # Inform user of duplicates and drop if requested
-  if (is.null(DupDF)){
-    message('There are no duplicated rows.')
-    if (isTRUE(dupsOut)){
-      message('Full data set returned.')
+dMerge <- function(data1, data2, Var, dropDups = TRUE, dupsOut = FALSE,
+    fromLast = FALSE, all = FALSE, all.x = all, all.y = all,
+    sort = TRUE, suffixes = c(".x",".y"),
+    incomparables = NULL){
+    if (isTRUE(dropDups) & isTRUE(dupsOut)){
+        message("dropDups ignored")
+        dropDups = FALSE
     }
-  }
-  else if (!is.null(DupDF)){
-    Count <- nrow(DupDF)
-    if (!isTRUE(dropDups) & !isTRUE(dupsOut)){
-      message(paste('There are', Count, 'duplicated rows.'))
+
+    # Perform basic merge
+    Comb <- merge(data1, data2, by = Var, all = all, all.x = all.x, all.y = all.y,
+        sort = TRUE, suffixes = c(".x",".y"),
+        incomparables = incomparables)
+
+    # Find duplicated
+    DupDF <- Comb[duplicated(Comb[, Var]), ]
+
+    # Inform user of duplicates and drop if requested
+    if (is.null(DupDF)){
+        message('There are no duplicated rows.')
+        if (isTRUE(dupsOut)){
+            message('Full data set returned.')
+        }
     }
-    else if (isTRUE(dropDups) & !isTRUE(dupsOut)){
-      Comb <- Comb[!duplicated(Comb[, Var], fromLast = fromLast), ]
-      message(paste(Count, 'duplicated rows were dropped.'))
-    }
+    else if (!is.null(DupDF)){
+        Count <- nrow(DupDF)
+        if (!isTRUE(dropDups) & !isTRUE(dupsOut)){
+            message(paste('There are', Count, 'duplicated rows.'))
+        }
+        else if (isTRUE(dropDups) & !isTRUE(dupsOut)){
+            Comb <- Comb[!duplicated(Comb[, Var], fromLast = fromLast), ]
+            message(paste(Count, 'duplicated rows were dropped.'))
+        }
     else if (!isTRUE(dropDups) & isTRUE(dupsOut)){
-      message(paste('There are', Count, 'duplicated rows.'))
-      Comb <- DupDF
+        message(paste('There are', Count, 'duplicated rows.'))
+        Comb <- DupDF
+        }
     }
-  }
-  return(Comb)
+    return(Comb)
 }
 
 #' Inserts a new row into a data frame
