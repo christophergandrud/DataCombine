@@ -9,7 +9,7 @@ CountSpell(data, TimeVar = NULL, SpellVar = NULL, GroupVar = NULL,
 \arguments{
 \item{data}{a data frame object.}
 
-\item{TimeVar}{a charachter string naming the time variable.}
+\item{TimeVar}{a character string naming the time variable.}
 
 \item{SpellVar}{a character string naming the variable with information on
 when each spell starts.}

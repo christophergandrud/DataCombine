@@ -530,7 +530,7 @@ StartEnd <- function(data, SpellVar = NULL, GroupVar = NULL, SpellValue = NULL,
 #' \code{CountSpell} is a function that returns a variable counting the spell
 #' number for an observation. Works with grouped data.
 #' @param data a data frame object.
-#' @param TimeVar a charachter string naming the time variable.
+#' @param TimeVar a character string naming the time variable.
 #' @param SpellVar a character string naming the variable with information on
 #' when each spell starts.
 #' @param GroupVar a character string naming the variable grouping the units
