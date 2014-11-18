@@ -111,7 +111,7 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
 
     # Drop if there are not enough observations per group to slide
     if (!is.null(GroupVar)){
-        data <- eval(parse(text = paste0('group_by(data, ', GroupVar, ')')))
+        data <- group_by_(data, .dots = GroupVar) 
         data$fake <- 1
         Minimum <- abs(slideBy) - 1
         Summed <- dplyr::mutate(data, total = sum(fake))
@@ -120,7 +120,13 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
         FullData <- NULL
         if (nrow(SubSummed) > 0){
             Dropping <- unique(SubSummed[, GroupVar])
+            
+            ## Hack
+            class(data) <- 'data.frame'
             data <- data[!(data[, GroupVar] %in% Dropping), ]
+            data <- group_by_(data, .dots = GroupVar)
+            ## End Hack
+            
             if (!isTRUE(keepInvalid)){
                 message(paste0('\nWarning: the following groups have ', Minimum,
                         ' or fewer observations.',
@@ -130,9 +136,9 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
             else if (isTRUE(keepInvalid)){
                 message(paste0('\nWarning: the following groups have ', Minimum,
                         ' or fewer observations.',
-                        '\nNo valid lag/lead can be created.',
-                        '\nNA will be returned for these observations in the new lag/lead variable.',
-                        '\nThey will be returned at the bottom of the data frame.\n'))
+                        '\n  No valid lag/lead can be created.',
+                        '\n  NA will be returned for these observations in the new lag/lead variable.',
+                        '\n  They will be returned at the bottom of the data frame.\n'))
                 message(paste(Dropping, collapse = "\n"))
             }
         }

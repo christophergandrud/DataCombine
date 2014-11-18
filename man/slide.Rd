@@ -58,18 +58,18 @@ time-series cross-sectional data.
 }
 \examples{
 # Create dummy data
- A <- B <- C <- sample(1:20, size = 20, replace = TRUE)
- ID <- sort(rep(seq(1:4), 5))
- Data <- data.frame(ID, A, B, C)
+A <- B <- C <- sample(1:20, size = 20, replace = TRUE)
+ID <- sort(rep(seq(1:4), 5))
+Data <- data.frame(ID, A, B, C)
 
- # Lead the variable by two time units
- DataSlid1 <- slide(Data, Var = "A", NewVar = "ALead", slideBy = 2)
+# Lead the variable by two time units
+DataSlid1 <- slide(Data, Var = "A", NewVar = "ALead", slideBy = 2)
 
- # Lag the variable one time unit by ID group
- DataSlid2 <- slide(data = Data, Var = "B", GroupVar = "ID",
+# Lag the variable one time unit by ID group
+DataSlid2 <- slide(data = Data, Var = "B", GroupVar = "ID",
                 NewVar = "BLag", slideBy = -1)
 
-# Lag the variable one time unit by ID group, with invalad lags
+# Lag the variable one time unit by ID group, with invalid lags
 Data <- Data[1:16, ]
 
 DataSlid3 <- slide(data = Data, Var = "B", GroupVar = "ID",
