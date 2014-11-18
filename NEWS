@@ -1,3 +1,7 @@
+## Version 0.2.7
+
+Fixed a bug in `slide` when there are invalid sliding values.
+
 ### Version 0.2.6
 
 - Fixed a misspelling in the `CountSpell` documentation. Thanks to

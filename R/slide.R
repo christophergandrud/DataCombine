@@ -61,7 +61,7 @@
 #' \url{http://ctszkin.com/2012/03/11/generating-a-laglead-variables/}
 #'
 #'
-#' @importFrom dplyr group_by summarize mutate ungroup
+#' @importFrom dplyr group_by group_by_ summarize mutate ungroup
 #' @export
 
 slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
@@ -111,22 +111,29 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
 
     # Drop if there are not enough observations per group to slide
     if (!is.null(GroupVar)){
-        data <- group_by_(data, .dots = GroupVar) 
+        data <- group_by_(data, .dots = GroupVar)
         data$fake <- 1
         Minimum <- abs(slideBy) - 1
         Summed <- dplyr::mutate(data, total = sum(fake))
         SubSummed <- subset(Summed, total <= Minimum)
         data <- VarDrop(data, 'fake')
-        FullData <- NULL
-        if (nrow(SubSummed) > 0){
+        if (nrow(SubSummed) == 0) {
+            FullData <- NULL
+        }
+        else if (nrow(SubSummed) > 0){
+            ## Hack
+            FullData <- data
+            class(FullData) <- 'data.frame'
+            ## End Hack
+
             Dropping <- unique(SubSummed[, GroupVar])
-            
+
             ## Hack
             class(data) <- 'data.frame'
             data <- data[!(data[, GroupVar] %in% Dropping), ]
             data <- group_by_(data, .dots = GroupVar)
             ## End Hack
-            
+
             if (!isTRUE(keepInvalid)){
                 message(paste0('\nWarning: the following groups have ', Minimum,
                         ' or fewer observations.',
