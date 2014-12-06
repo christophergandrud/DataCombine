@@ -1,3 +1,7 @@
+## Version 0.2.7.1
+
+Added dplyr version depedency >= 0.3.
+
 ## Version 0.2.7
 
 Fixed a bug in `slide` when there are invalid sliding values.
