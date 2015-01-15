@@ -68,7 +68,10 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
                   keepInvalid = FALSE, reminder = TRUE)
 {
     fake <- total <- FullData <- NULL
-
+    if (!is.null(GroupVar) & 'data.table' %in% class(data)) stop(paste(
+        'slide does not support data.tables with with Grouped variables.\n',
+        'Convert to data.frame and try again.'), call. = F)
+    
     # Determine if Var exists in data
     DataNames <- names(data)
     TestExist <- Var %in% DataNames

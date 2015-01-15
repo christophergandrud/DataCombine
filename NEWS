@@ -1,6 +1,12 @@
+## Version 0.2.7.2
+
+- Error message added to `slide` when using grouped data.
+
 ## Version 0.2.7.1
 
 Added dplyr version depedency >= 0.3.
+
+Minor `FillIn` change checking for `missing` rather than `NULL` for `Var2`.
 
 ## Version 0.2.7
 

@@ -40,14 +40,14 @@
 #' @import data.table
 #' @export
 
-FillIn <- function(D1, D2, Var1 = NULL, Var2 = NULL,
+FillIn <- function(D1, D2, Var1, Var2,
                     KeyVar = c("iso2c", "year"), allow.cartesian = FALSE,
                     KeepD2Vars = FALSE)
 {
     VarGen = VarGen.1 = NULL
 
     # Give Var2 the same name as var1 if Var2 is NULL
-    if (is.null(Var2)){
+    if (missing(Var2)){
         Var2 <- Var1
     } else {
         Var2 <- Var2
