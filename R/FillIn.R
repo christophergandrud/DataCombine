@@ -132,3 +132,46 @@ FillDown <- function(data, Var) {
     }
     return(data)
 }
+
+#' Expands a data set so that it includes an observation for each time point in
+#' a sequence. Works with grouped data.
+#'
+#' @param data a data frame.
+#' @param GroupVar the variable in \code{data} that signifies the group
+#' variable.
+#' @param TimeVar the variable in \code{data} that signifies the time variable.
+#' The sequence will be expanded between its minimum and maximum value.
+#' @param by numeric or character string specifying the steps in the
+#' \code{TimeVar} sequence.
+#'
+#'
+#'
+#' @importFrom dplyr %>% inner_join left_join
+#' @export
+
+TimeExpand <- function(data, GroupVar, TimeVar, by = 1) {
+    if (class(data) != 'data.frame') stop('data must be a data frame',
+                                            call. = F)
+    if (!(TimeVar %in% names(data))) stop(paste0(TimeVar, 'not found in',
+                                            deparse(substitute(data)), '.'),
+                                            call. = F)
+
+    # Create sequence of times
+    times <- seq(min(data[, TimeVar]), max(data[, TimeVar]), by = by)
+    times_df <- data.frame(fake = 1, temp = times)
+    names(times_df) <- c('fake', TimeVar)
+    
+    if (!missing(GroupVar)) {
+        group <- unique(data[, GroupVar])
+        groups_df <- data.frame(fake = 1, temp = group)
+        names(groups_df) <- c('fake', GroupVar)
+        
+        times_df <- suppressMessages(inner_join(times_df, groups_df)) %>%
+                        arrange(country, date)
+    }
+    times_df <- select(times_df, -fake)
+
+    data <- suppressWarnings(suppressMessages(left_join(times_df, data)))
+    class(data) <- 'data.frame'
+    return(data)
+}
