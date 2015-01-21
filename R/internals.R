@@ -1,11 +1,11 @@
 #' Moving average function
 #'
 #'
-#' @source Directly from the \code{forecast} package. 
+#' @source Directly from the \code{forecast} package.
 #' @keywords internals
 #' @noRd
 
-ma <- function(x,order,centre=TRUE)
+ma <- function(x, order, centre = TRUE)
 {
     tt <- 1:length(x)
     if(order%%2) #odd
