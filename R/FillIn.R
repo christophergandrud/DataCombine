@@ -142,14 +142,20 @@ FillDown <- function(data, Var) {
 #' @param TimeVar the variable in \code{data} that signifies the time variable.
 #' The sequence will be expanded between its minimum and maximum value.
 #' @param by numeric or character string specifying the steps in the
-#' \code{TimeVar} sequence.
+#' \code{TimeVar} sequence. Can use \code{"month"}, \code{"year"} etc for 
+#' POSIXt data.
 #'
+#' @examples 
+#' Data <- data.frame(country = c("Cambodia", "Camnodia", "Japan", "Japan"),
+#'                    year = c(1990, 2001, 1994, 2012))
+#' 
+#' ExpandedData <- TimeExpand(Data, GroupVar = 'country', TimeVar = 'year')
 #'
-#'
-#' @importFrom dplyr %>% inner_join left_join
+#' @importFrom dplyr select inner_join left_join
 #' @export
 
 TimeExpand <- function(data, GroupVar, TimeVar, by = 1) {
+    fake <- NULL
     if (class(data) != 'data.frame') stop('data must be a data frame',
                                             call. = F)
     if (!(TimeVar %in% names(data))) stop(paste0(TimeVar, 'not found in',
@@ -166,8 +172,8 @@ TimeExpand <- function(data, GroupVar, TimeVar, by = 1) {
         groups_df <- data.frame(fake = 1, temp = group)
         names(groups_df) <- c('fake', GroupVar)
         
-        times_df <- suppressMessages(inner_join(times_df, groups_df)) %>%
-                        arrange(country, date)
+        times_df <- suppressMessages(inner_join(times_df, groups_df))
+        times_df <- times_df[order(times_df[, GroupVar], times_df[, TimeVar]), ]
     }
     times_df <- select(times_df, -fake)
 

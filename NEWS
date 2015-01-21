@@ -1,6 +1,6 @@
 ## Version 0.2.8
 
-Added function `TimeFill`. This expands a data set so that it includes an 
+Added function `TimeExpand`. This expands a data set so that it includes an 
 observation for each time point in a sequence. Works with grouped data.
 
 ## Version 0.2.7.2

@@ -17,10 +17,17 @@ variable.}
 The sequence will be expanded between its minimum and maximum value.}
 
 \item{by}{numeric or character string specifying the steps in the
-\code{TimeVar} sequence.}
+\code{TimeVar} sequence. Can use \code{"month"}, \code{"year"} etc for
+POSIXt data.}
 }
 \description{
 Expands a data set so that it includes an observation for each time point in
 a sequence. Works with grouped data.
+}
+\examples{
+Data <- data.frame(country = c("Cambodia", "Camnodia", "Japan", "Japan"),
+                   year = c(1990, 2001, 1994, 2012))
+
+ExpandedData <- TimeExpand(Data, GroupVar = 'country', TimeVar = 'year')
 }
 
