@@ -24,7 +24,7 @@ for an observation. Works with grouped data.
 - `DropNA`: drops rows from a data frame when they have missing (`NA`) values on a
 given variable(s).
 
-- `FillDown`: fills in missing (`NA`) values with the previous on-missing value
+- `FillDown`: fills in missing (`NA`) values with the previous non-missing value
 
 - `FillIn`: fills in missing values of a variable from one data frame with the
 values from another variable.
