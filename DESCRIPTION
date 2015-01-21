@@ -4,7 +4,7 @@ Description: R tools for combining and cleaning data sets, including filling in
     missing observations with data from another data frame and creating
     lag/lead variables.
 Version: 0.2.7.2
-Date: 2015-01-15
+Date: 2015-01-21
 Author: Christopher Gandrud
 Maintainer: Christopher Gandrud <christopher.gandrud@gmail.com>
 License: GPL (>= 3)
@@ -16,4 +16,5 @@ Imports:
     data.table,
     dplyr (>= 0.3)
 Suggests:
-    devtools
+    devtools,
+    testthat
