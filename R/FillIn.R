@@ -122,6 +122,7 @@ FillIn <- function(D1, D2, Var1, Var2,
 #' @export
 
 FillDown <- function(data, Var) {
+    if (is.na(data[1, Var])) fill <- NA 
     for (i in 1:nrow(data)) {
         if (!is.na(data[i, Var])) {
             fill <- data[i, Var]
