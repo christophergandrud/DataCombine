@@ -122,7 +122,7 @@ FillIn <- function(D1, D2, Var1, Var2,
 #' @export
 
 FillDown <- function(data, Var) {
-    if (is.na(data[1, Var])) fill <- NA 
+    if (is.na(data[1, Var])) fill <- NA
     for (i in 1:nrow(data)) {
         if (!is.na(data[i, Var])) {
             fill <- data[i, Var]
@@ -143,13 +143,13 @@ FillDown <- function(data, Var) {
 #' @param TimeVar the variable in \code{data} that signifies the time variable.
 #' The sequence will be expanded between its minimum and maximum value.
 #' @param by numeric or character string specifying the steps in the
-#' \code{TimeVar} sequence. Can use \code{"month"}, \code{"year"} etc for 
+#' \code{TimeVar} sequence. Can use \code{"month"}, \code{"year"} etc for
 #' POSIXt data.
 #'
-#' @examples 
+#' @examples
 #' Data <- data.frame(country = c("Cambodia", "Camnodia", "Japan", "Japan"),
 #'                    year = c(1990, 2001, 1994, 2012))
-#' 
+#'
 #' ExpandedData <- TimeExpand(Data, GroupVar = 'country', TimeVar = 'year')
 #'
 #' @importFrom dplyr select inner_join left_join
@@ -162,18 +162,19 @@ TimeExpand <- function(data, GroupVar, TimeVar, by = 1) {
     if (!(TimeVar %in% names(data))) stop(paste0(TimeVar, 'not found in',
                                             deparse(substitute(data)), '.'),
                                             call. = F)
-    if (class(TimeVar) == 'character') stop('TimeVar must be numeric or POSIXt.',
+    if ('character' %in% class(data[, TimeVar])) stop('
+                                            TimeVar must be numeric or POSIXt.',
                                             call. = F)
     # Create sequence of times
     times <- seq(min(data[, TimeVar]), max(data[, TimeVar]), by = by)
     times_df <- data.frame(fake = 1, temp = times)
     names(times_df) <- c('fake', TimeVar)
-    
+
     if (!missing(GroupVar)) {
         group <- unique(data[, GroupVar])
         groups_df <- data.frame(fake = 1, temp = group)
         names(groups_df) <- c('fake', GroupVar)
-        
+
         times_df <- suppressMessages(inner_join(times_df, groups_df))
         times_df <- times_df[order(times_df[, GroupVar], times_df[, TimeVar]), ]
     }
