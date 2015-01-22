@@ -9,7 +9,7 @@ Partially based on TszKin Julian's \code{shift} function:
 \url{http://ctszkin.com/2012/03/11/generating-a-laglead-variables/}
 }
 \usage{
-slide(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
+slide(data, Var, TimeVar, GroupVar, NewVar, slideBy = -1,
   keepInvalid = FALSE, reminder = TRUE)
 }
 \arguments{
@@ -18,8 +18,11 @@ slide(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
 \item{Var}{a character string naming the variable you would like to slide
 (create lag or lead).}
 
+\item{TimeVar}{optional character string naming the time variable. If
+specified then the data is ordered by Var-TimeVar before sliding.}
+
 \item{GroupVar}{a character string naming the variable grouping the units
-within which \code{Var} will be slid. If \code{GroupVar = NULL} then the
+within which \code{Var} will be slid. If \code{GroupVar} is missing then the
 whole variable is slid up or down. This is similar to \code{\link{shift}},
 though \code{shift} returns the slid data to a new vector rather than the
 original data frame.}

@@ -7,8 +7,10 @@
 #' @param data a data frame object.
 #' @param Var a character string naming the variable you would like to slide
 #' (create lag or lead).
+#' @param TimeVar optional character string naming the time variable. If
+#' specified then the data is ordered by Var-TimeVar before sliding.
 #' @param GroupVar a character string naming the variable grouping the units
-#' within which \code{Var} will be slid. If \code{GroupVar = NULL} then the
+#' within which \code{Var} will be slid. If \code{GroupVar} is missing then the
 #' whole variable is slid up or down. This is similar to \code{\link{shift}},
 #' though \code{shift} returns the slid data to a new vector rather than the
 #' original data frame.
@@ -64,14 +66,14 @@
 #' @importFrom dplyr group_by group_by_ summarize mutate ungroup
 #' @export
 
-slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
-                  keepInvalid = FALSE, reminder = TRUE)
+slide <- function(data, Var, TimeVar, GroupVar, NewVar,
+                    slideBy = -1, keepInvalid = FALSE, reminder = TRUE)
 {
     fake <- total <- FullData <- NULL
-    if (!is.null(GroupVar) & 'data.table' %in% class(data)) stop(paste(
+    if (!missing(GroupVar) & 'data.table' %in% class(data)) stop(paste(
         'slide does not support data.tables with with Grouped variables.\n',
         'Convert to data.frame and try again.'), call. = F)
-    
+
     # Determine if Var exists in data
     DataNames <- names(data)
     TestExist <- Var %in% DataNames
@@ -80,40 +82,44 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
         stop(paste(Var, "was not found in the data frame."), call. = FALSE)
     }
 
+    if (!missing(TimeVar)) data[order(data[, Var], data[, TimeVar]), ]
+
     VarVect <- data[, Var]
 
     # Variable Name
-    if (is.null(NewVar)){
+    if (missing(NewVar)){
         NewVar <- paste0(Var, slideBy)
     }
 
     # Logically valid argument pairs
-    if (isTRUE(keepInvalid) & is.null(GroupVar)){
-            warning('keepInvalid set to FALSE when GroupVar = NULL')
+    if (isTRUE(keepInvalid) & missing(GroupVar)){
+            warning('keepInvalid set to FALSE when GroupVar is missing.')
             keepInvalid <- FALSE
         }
 
     # Give messages
     if (isTRUE(reminder)){
-        if (is.null(GroupVar)){
-          message(paste('\nRemember to put', deparse(substitute(data)),
-                        'in time order before running.\n'))
-        }
-        if (!is.null(GroupVar)){
-          message(paste('\nRemember to order', deparse(substitute(data)),
-                        'by', GroupVar,
-                        'and the time variable before running.\n'))
+        if (missing(TimeVar)){
+            if (missing(GroupVar)){
+                message(paste('\nRemember to put', deparse(substitute(data)),
+                'in time order before running.'))
+            }
+            if (!missing(GroupVar)){
+                message(paste('\nRemember to order', deparse(substitute(data)),
+                'by', GroupVar,
+                'and the time variable before running.'))
+            }
         }
         if (slideBy < 0) {
-            message(paste('Lagging', Var, 'by', abs(slideBy), 'time units.\n'))
+            message(paste('\nLagging', Var, 'by', abs(slideBy), 'time units.\n'))
         }
         else if (slideBy > 0) {
-            message(paste('Leading', Var, 'by', abs(slideBy), 'time units.\n'))
+            message(paste('\nLeading', Var, 'by', abs(slideBy), 'time units.\n'))
         }
     }
 
     # Drop if there are not enough observations per group to slide
-    if (!is.null(GroupVar)){
+    if (!missing(GroupVar)){
         data <- group_by_(data, .dots = GroupVar)
         data$fake <- 1
         Minimum <- abs(slideBy) - 1
@@ -155,11 +161,11 @@ slide <- function(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
     }
 
     # Create lags/leads
-    if (is.null(GroupVar)){
+    if (missing(GroupVar)){
         data[, NewVar] <- shift(VarVect = VarVect, shiftBy = slideBy,
                                 reminder = FALSE)
     }
-    else if (!is.null(GroupVar)){
+    else if (!missing(GroupVar)){
         DataSub <- eval(parse(text = paste0('group_by(data[, c(GroupVar, Var)], ',
                                             GroupVar,')')))
         vars <- eval(parse(text = paste0("dplyr::mutate(DataSub, NewVarX = shift(",
@@ -236,7 +242,7 @@ shift <- function(VarVect, shiftBy, reminder = TRUE){
 #' the lag/lead moving averages from.
 #' @param GroupVar a character string naming the variable grouping the units
 #' within which \code{Var} will be turned into slid moving averages. If
-#' \code{GroupVar = NULL} then the whole variable is slid up or down and moving
+#' \code{GroupVar} is missing then the whole variable is slid up or down and moving
 #' averages will be created. This is similar to \code{\link{shift}}, though
 #' \code{shift} returns the slid data to a new vector rather than the original
 #' data frame.
@@ -280,15 +286,15 @@ shift <- function(VarVect, shiftBy, reminder = TRUE){
 #' @importFrom dplyr group_by mutate
 #' @export
 
-slideMA <- function(data, Var, GroupVar = NULL, periodBound = -3, offset = 1,
-                    NewVar = NULL, reminder = TRUE){
+slideMA <- function(data, Var, GroupVar, periodBound = -3, offset = 1,
+                    NewVar, reminder = TRUE){
     slideBy <- NULL
     if (isTRUE(reminder)){
-    if (is.null(GroupVar)){
+    if (missing(GroupVar)){
       message(paste('\nRemember to put', deparse(substitute(data)),
                     'in time order before running slide.\n'))
     }
-        if (!is.null(GroupVar)){
+        if (!missing(GroupVar)){
             message(paste('\nRemember to order', deparse(substitute(data)), 'by',
                     GroupVar, 'and the time variable before running slide.\n'))
         }
@@ -302,7 +308,7 @@ slideMA <- function(data, Var, GroupVar = NULL, periodBound = -3, offset = 1,
 
     VarVect <- data[, Var]
 
-    if (is.null(NewVar)){
+    if (missing(NewVar)){
     NewVar <- paste0(Var, 'MA', periodBound, '_', offset)
     }
 
@@ -314,10 +320,10 @@ slideMA <- function(data, Var, GroupVar = NULL, periodBound = -3, offset = 1,
     }
 
     # Create lags/leads moving averages
-    if (is.null(GroupVar)){
+    if (missing(GroupVar)){
         data[, NewVar] <- shiftMA(data[, Var], shiftBy = slideBy,
                                   Abs = Abs, reminder = FALSE)
-    } else if (!is.null(GroupVar)){
+    } else if (!missing(GroupVar)){
         DataSub <- eval(parse(text = paste0('group_by(data[, c(GroupVar, Var)], ',
                             GroupVar,')')))
         vars <- eval(parse(text = paste0("dplyr::mutate(DataSub, NewVarX = shiftMA(",
@@ -350,7 +356,7 @@ shiftMA <- function(x, shiftBy, Abs, reminder){
 #' @param Var a character string naming the numeric dummy variable with values
 #' 0 and 1 that you would like to spread. Can be either spread as a lag or lead.
 #' @param GroupVar a character string naming the variable grouping the units
-#' within which \code{Var} will be spread If \code{GroupVar = NULL} then the
+#' within which \code{Var} will be spread If \code{GroupVar} is missing then the
 #' whole variable is spread up or down. This is similar to \code{\link{shift}},
 #' though \code{shift} slides the data and returns it to a new vector rather
 #' than the original data frame.
@@ -379,14 +385,14 @@ shiftMA <- function(x, shiftBy, Abs, reminder){
 #' @seealso \code{\link{slide}}
 #' @export
 
-SpreadDummy <- function(data, Var, GroupVar = NULL, NewVar = NULL,
+SpreadDummy <- function(data, Var, GroupVar, NewVar,
                         spreadBy = -2, reminder = TRUE){
     # Check if variable is numeric dummy
     if (class(data[, Var]) != 'numeric'){
         stop(paste(Var, 'must be a numeric dummy variable.'), call. = FALSE)
     }
 
-    if (is.null(NewVar)){
+    if (missing(NewVar)){
         NewVar <- paste0(Var, 'Spread', spreadBy)
     }
 
@@ -399,20 +405,20 @@ SpreadDummy <- function(data, Var, GroupVar = NULL, NewVar = NULL,
     for (i in start:spreadBy){
         NewTemp <- paste0(NewVar, i)
         if (isTRUE(reminder) & abs(i) == 1){
-          if (!is.null(GroupVar)){
+          if (!missing(GroupVar)){
             temp <- slide(data, Var = Var, GroupVar = GroupVar,
                           NewVar = NewTemp, slideBy = i)
           }
-          else if (is.null(GroupVar)){
+          else if (missing(GroupVar)){
             temp <- slide(data, Var = Var, NewVar = NewTemp,
                           slideBy = i)
           }
         }
-        else if (!is.null(GroupVar)){
+        else if (!missing(GroupVar)){
         temp <- slide(data, Var = Var, GroupVar = GroupVar,
             NewVar = NewTemp, slideBy = i, reminder = FALSE)
         }
-        else if (is.null(GroupVar)){
+        else if (missing(GroupVar)){
         temp <- slide(data, Var = Var, NewVar = NewTemp,
             slideBy = i, reminder = FALSE)
         }
@@ -451,9 +457,9 @@ SpreadDummy <- function(data, Var, GroupVar = NULL, NewVar = NULL,
 #' @param SpellVar a character string naming the variable with information on
 #' when each spell starts.
 #' @param GroupVar a character string naming the variable grouping the units
-#' experiencing the spells. If \code{GroupVar = NULL} then .
+#' experiencing the spells. If \code{GroupVar} is missing then .
 #' @param SpellValue a value indicating when a unit is in a spell. If
-#' \code{SpellValue = NULL} then any change in \code{Var}'s value will be
+#' \code{SpellValue} is missing then any change in \code{Var}'s value will be
 #' treated as the start/end of a spell. Must specify if \code{OnlyStart = TRUE}.
 #' @param OnlyStart logical for whether or not to only add a new
 #' \code{Spell_Start} variable. Please see the details.
@@ -484,13 +490,13 @@ SpreadDummy <- function(data, Var, GroupVar = NULL, NewVar = NULL,
 #' @importFrom dplyr ungroup
 #' @export
 
-StartEnd <- function(data, SpellVar = NULL, GroupVar = NULL, SpellValue = NULL,
+StartEnd <- function(data, SpellVar, GroupVar, SpellValue,
                      OnlyStart = FALSE)
 {
-  if (is.null(SpellVar)){
+  if (missing(SpellVar)){
     stop('You must specify the SpellVar', call. = FALSE)
   }
-  if (!is.null(GroupVar)){
+  if (!missing(GroupVar)){
     message(paste('\nRemember to order', deparse(substitute(data)), 'by',
                   GroupVar, 'and the time variable before running slide.\n'))
   }
@@ -500,10 +506,10 @@ StartEnd <- function(data, SpellVar = NULL, GroupVar = NULL, SpellValue = NULL,
   Temp <- data.frame(Temp)
   Temp$Spell_Start <- 0
   Temp$Spell_Start[is.na(Temp[, SpellVar])] <- NA
-  if (is.null(SpellValue)){
+  if (missing(SpellValue)){
     Temp$Spell_Start[Temp[, SpellVar] != Temp[, 'TempStart']] <- 1
   }
-  else if (!is.null(SpellValue)){
+  else if (!missing(SpellValue)){
     Temp$Spell_Start[Temp[, SpellVar] == SpellValue &
           Temp[, 'TempStart'] != SpellValue] <- 1
   }
@@ -514,17 +520,17 @@ StartEnd <- function(data, SpellVar = NULL, GroupVar = NULL, SpellValue = NULL,
   Temp <- data.frame(Temp)
   Temp$Spell_End <- 0
   Temp$Spell_End[is.na(Temp[, SpellVar])] <- NA
-  if (is.null(SpellValue)){
+  if (missing(SpellValue)){
     Temp$Spell_End[Temp[, SpellVar] != Temp[, 'TempEnd']] <- 1
   }
-  else if (!is.null(SpellValue)){
+  else if (!missing(SpellValue)){
     Temp$Spell_End[Temp[, SpellVar] == SpellValue &
           Temp[, 'TempEnd'] != SpellValue] <- 1
   }
   Temp <- ungroup(Temp)
 
   if (isTRUE(OnlyStart)){
-    if (is.null(SpellValue)){
+    if (missing(SpellValue)){
       stop('Must specify SpellValue if OnlyStart = TRUE.', call. = FALSE)
     }
     Temp <- slide(data = Temp, Var = 'Spell_End', GroupVar = GroupVar,
@@ -550,11 +556,11 @@ StartEnd <- function(data, SpellVar = NULL, GroupVar = NULL, SpellValue = NULL,
 #' @param SpellVar a character string naming the variable with information on
 #' when each spell starts.
 #' @param GroupVar a character string naming the variable grouping the units
-#' experiencing the spells. If \code{GroupVar = NULL} then .
+#' experiencing the spells.
 #' @param NewVar NewVar a character string naming the new variable to place the
 #' spell counts in.
 #' @param SpellValue a value indicating when a unit is in a spell. If
-#' \code{SpellValue = NULL} then any change in \code{Var}'s value will be
+#' \code{SpellValue} is missing then any change in \code{Var}'s value will be
 #' treated as the start/end of a spell.
 #'
 #' @examples
@@ -578,14 +584,14 @@ StartEnd <- function(data, SpellVar = NULL, GroupVar = NULL, SpellValue = NULL,
 #'
 #' @export
 
-CountSpell <- function(data, TimeVar = NULL, SpellVar = NULL, GroupVar = NULL,
-                       NewVar = NULL, SpellValue = NULL)
+CountSpell <- function(data, TimeVar, SpellVar, GroupVar,
+                       NewVar, SpellValue)
 {
-  if (is.null(NewVar)){
+  if (missing(NewVar)){
     NewVar <- paste0(SpellVar, '_', 'SpellCount')
     message(paste0('\nSpell count placed in new variable: ', NewVar, '.\n'))
   }
-  if (!is.null(GroupVar)){
+  if (!missing(GroupVar)){
   tempMain <- data.frame()
     for (i in unique(data[, GroupVar])){
       tempSub <- data[data[, GroupVar] == i, ]
@@ -595,7 +601,7 @@ CountSpell <- function(data, TimeVar = NULL, SpellVar = NULL, GroupVar = NULL,
     }
   data <- tempMain
   }
-  else if (is.null(GroupVar)){
+  else if (missing(GroupVar)){
     data[, NewVar] <- CountSpellOne(data = data, TimeVar = TimeVar,
                                 SpellVar = SpellVar, SpellValue = SpellValue)
   }
@@ -606,14 +612,14 @@ CountSpell <- function(data, TimeVar = NULL, SpellVar = NULL, GroupVar = NULL,
 #'
 #' @noRd
 
-CountSpellOne <- function(data, TimeVar = NULL, SpellVar = NULL,
-                          SpellValue = NULL)
+CountSpellOne <- function(data, TimeVar, SpellVar,
+                          SpellValue)
 {
   Spell_Start <- NULL
-  if (is.null(TimeVar)){
+  if (missing(TimeVar)){
     stop('You must specify the TimeVar', call. = FALSE)
   }
-  if (is.null(SpellValue)){
+  if (missing(SpellValue)){
     stop('You must specify the SpellValue', call. = FALSE)
   }
 

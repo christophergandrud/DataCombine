@@ -4,8 +4,7 @@
 \alias{CountSpell}
 \title{Count spells, including for grouped data}
 \usage{
-CountSpell(data, TimeVar = NULL, SpellVar = NULL, GroupVar = NULL,
-  NewVar = NULL, SpellValue = NULL)
+CountSpell(data, TimeVar, SpellVar, GroupVar, NewVar, SpellValue)
 }
 \arguments{
 \item{data}{a data frame object.}
@@ -16,13 +15,13 @@ CountSpell(data, TimeVar = NULL, SpellVar = NULL, GroupVar = NULL,
 when each spell starts.}
 
 \item{GroupVar}{a character string naming the variable grouping the units
-experiencing the spells. If \code{GroupVar = NULL} then .}
+experiencing the spells.}
 
 \item{NewVar}{NewVar a character string naming the new variable to place the
 spell counts in.}
 
 \item{SpellValue}{a value indicating when a unit is in a spell. If
-\code{SpellValue = NULL} then any change in \code{Var}'s value will be
+\code{SpellValue} is missing then any change in \code{Var}'s value will be
 treated as the start/end of a spell.}
 }
 \description{

@@ -4,8 +4,7 @@
 \alias{StartEnd}
 \title{Find the starting and ending time points of a spell}
 \usage{
-StartEnd(data, SpellVar = NULL, GroupVar = NULL, SpellValue = NULL,
-  OnlyStart = FALSE)
+StartEnd(data, SpellVar, GroupVar, SpellValue, OnlyStart = FALSE)
 }
 \arguments{
 \item{data}{a data frame object.}
@@ -14,10 +13,10 @@ StartEnd(data, SpellVar = NULL, GroupVar = NULL, SpellValue = NULL,
 when each spell starts.}
 
 \item{GroupVar}{a character string naming the variable grouping the units
-experiencing the spells. If \code{GroupVar = NULL} then .}
+experiencing the spells. If \code{GroupVar} is missing then .}
 
 \item{SpellValue}{a value indicating when a unit is in a spell. If
-\code{SpellValue = NULL} then any change in \code{Var}'s value will be
+\code{SpellValue} is missing then any change in \code{Var}'s value will be
 treated as the start/end of a spell. Must specify if \code{OnlyStart = TRUE}.}
 
 \item{OnlyStart}{logical for whether or not to only add a new

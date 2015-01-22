@@ -5,8 +5,8 @@
 \title{Create a moving average for a period before or after each time point for a
 given variable}
 \usage{
-slideMA(data, Var, GroupVar = NULL, periodBound = -3, offset = 1,
-  NewVar = NULL, reminder = TRUE)
+slideMA(data, Var, GroupVar, periodBound = -3, offset = 1, NewVar,
+  reminder = TRUE)
 }
 \arguments{
 \item{data}{a data frame object.}
@@ -16,7 +16,7 @@ the lag/lead moving averages from.}
 
 \item{GroupVar}{a character string naming the variable grouping the units
 within which \code{Var} will be turned into slid moving averages. If
-\code{GroupVar = NULL} then the whole variable is slid up or down and moving
+\code{GroupVar} is missing then the whole variable is slid up or down and moving
 averages will be created. This is similar to \code{\link{shift}}, though
 \code{shift} returns the slid data to a new vector rather than the original
 data frame.}

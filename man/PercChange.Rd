@@ -4,21 +4,28 @@
 \alias{PercChange}
 \title{Calculate the percentage change from a specified lag, including withing group}
 \usage{
-PercChange(data, Var, GroupVar = NULL, NewVar = NULL, slideBy = -1,
-  type = "percent")
+PercChange(data, Var, GroupVar, NewVar, slideBy = -1, type = "percent")
 }
 \arguments{
 \item{data}{a data frame object.}
 
-\item{Var}{a character string naming the variable you would like to find the percentage change for.}
+\item{Var}{a character string naming the variable you would like to find the
+percentage change for.}
 
-\item{GroupVar}{a character string naming the variable grouping the units within which the percentage change will be found for (i.e. countries in a time series). If \code{GroupVar = NULL} then the entire data frame is treated as one unit.}
+\item{GroupVar}{a character string naming the variable grouping the units
+within which the percentage change will be found for (i.e. countries in a
+time series). If \code{GroupVar} is missing then the entire data frame is
+treated as one unit.}
 
-\item{NewVar}{a character string specifying the name for the new variable to place the percentage change in.}
+\item{NewVar}{a character string specifying the name for the new variable to
+place the percentage change in.}
 
-\item{slideBy}{numeric value specifying how many rows (time units) to make the percentage change comparison for. Positive values shift the data up--lead the data.}
+\item{slideBy}{numeric value specifying how many rows (time units) to make
+the percentage change comparison for. Positive values shift the data up--lead
+the data.}
 
-\item{type}{character string set at either \code{percent} for percentages or \code{proportion} to find proportions.}
+\item{type}{character string set at either \code{percent} for percentages or
+\code{proportion} to find proportions.}
 }
 \value{
 a data frame
@@ -27,7 +34,9 @@ a data frame
 Calculate the percentage change from a specified lag, including withing group
 }
 \details{
-Finds the percentage or proportion change for over a given time period either within groups of data or the whole data frame. Important: the data must be in time order and, if groups are used, group-time order.
+Finds the percentage or proportion change for over a given time
+period either within groups of data or the whole data frame. Important: the
+data must be in time order and, if groups are used, group-time order.
 }
 \examples{
 # Create fake data frame
@@ -36,8 +45,10 @@ B <- c(1:10)
 Data <- data.frame(A, B)
 
 # Find percentage change from two periods before
-Out <- PercChange(Data, Var = 'B', GroupVar = NULL,
-         type = 'proportion', NewVar = 'PercentChange', slideBy = -2)
+Out <- PercChange(Data, Var = 'B',
+         type = 'proportion',
+         NewVar = 'PercentChange',
+         slideBy = -2)
 
 Out
 }

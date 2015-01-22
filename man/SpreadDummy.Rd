@@ -5,8 +5,7 @@
 \title{Spread a dummy variable (1's and 0') over a specified time period and for
 specified groups}
 \usage{
-SpreadDummy(data, Var, GroupVar = NULL, NewVar = NULL, spreadBy = -2,
-  reminder = TRUE)
+SpreadDummy(data, Var, GroupVar, NewVar, spreadBy = -2, reminder = TRUE)
 }
 \arguments{
 \item{data}{a data frame object.}
@@ -15,7 +14,7 @@ SpreadDummy(data, Var, GroupVar = NULL, NewVar = NULL, spreadBy = -2,
 0 and 1 that you would like to spread. Can be either spread as a lag or lead.}
 
 \item{GroupVar}{a character string naming the variable grouping the units
-within which \code{Var} will be spread If \code{GroupVar = NULL} then the
+within which \code{Var} will be spread If \code{GroupVar} is missing then the
 whole variable is spread up or down. This is similar to \code{\link{shift}},
 though \code{shift} slides the data and returns it to a new vector rather
 than the original data frame.}

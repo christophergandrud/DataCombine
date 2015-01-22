@@ -3,10 +3,11 @@ Title: Tools for Easily Combining and Clean Data Sets
 Description: R tools for combining and cleaning data sets, including filling in
     missing observations with data from another data frame and creating
     lag/lead variables.
-Version: 0.2.3
-Date: 2015-01-21
-Author: Christopher Gandrud
-Maintainer: Christopher Gandrud <christopher.gandrud@gmail.com>
+Version: 0.2.8.1
+Date: 2015-01-22
+Authors@R: as.person(c(
+    "Christopher Gandrud <christopher.gandrud@gmail.com> [aut, cre, cph]"
+    ))
 License: GPL (>= 3)
 URL: http://christophergandrud.github.io/DataCombine/
 BugReports: https://github.com/christophergandrud/DataCombine/issues
