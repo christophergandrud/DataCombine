@@ -162,7 +162,8 @@ TimeExpand <- function(data, GroupVar, TimeVar, by = 1) {
     if (!(TimeVar %in% names(data))) stop(paste0(TimeVar, 'not found in',
                                             deparse(substitute(data)), '.'),
                                             call. = F)
-
+    if (class(TimeVar) == 'character') stop('TimeVar must be numeric or POSIXt.',
+                                            call. = F)
     # Create sequence of times
     times <- seq(min(data[, TimeVar]), max(data[, TimeVar]), by = by)
     times_df <- data.frame(fake = 1, temp = times)
