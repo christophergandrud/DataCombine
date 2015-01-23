@@ -141,7 +141,12 @@ FillDown <- function(data, Var) {
 #' @param GroupVar the variable in \code{data} that signifies the group
 #' variable.
 #' @param TimeVar the variable in \code{data} that signifies the time variable.
-#' The sequence will be expanded between its minimum and maximum value.
+#' The sequence will be expanded between its minimum and maximum value if 
+#' \code{begin} and \code{end} are not specified.
+#' @param begin numeric of length 1. Specifies beginning time point. 
+#' Only relevant if \code{end} is specified.
+#' @param end numeric of length 1. Specifies ending time point. 
+#' Only relevant if \code{begin} is specified.
 #' @param by numeric or character string specifying the steps in the
 #' \code{TimeVar} sequence. Can use \code{"month"}, \code{"year"} etc for
 #' POSIXt data.
@@ -155,18 +160,27 @@ FillDown <- function(data, Var) {
 #' @importFrom dplyr select inner_join left_join
 #' @export
 
-TimeExpand <- function(data, GroupVar, TimeVar, by = 1) {
+TimeExpand <- function(data, GroupVar, TimeVar, begin, end, by = 1) {
     fake <- NULL
-    if (class(data) != 'data.frame') stop('data must be a data frame',
+    if (!is.data.frame(data)) stop('data must be a data frame',
                                             call. = F)
-    if (!(TimeVar %in% names(data))) stop(paste0(TimeVar, 'not found in',
-                                            deparse(substitute(data)), '.'),
-                                            call. = F)
-    if ('character' %in% class(data[, TimeVar])) stop('
-                                            TimeVar must be numeric or POSIXt.',
-                                            call. = F)
+    if (!missing(TimeVar)){
+        if (!(TimeVar %in% names(data))) stop(paste0(
+            TimeVar, 'not found in',
+            deparse(substitute(data)), '.'),
+            call. = F)
+    }
+    if (!missing(begin) & !missing(end)) {
+        minimum <- begin
+        maximum <- end
+    }
+    else if (missing(begin) & missing(end)){
+        minimum <- min(data[, TimeVar])
+        maximum <- max(data[, TimeVar])
+    }
+    
     # Create sequence of times
-    times <- seq(min(data[, TimeVar]), max(data[, TimeVar]), by = by)
+    times <- seq(minimum, maximum, by = by)
     times_df <- data.frame(fake = 1, temp = times)
     names(times_df) <- c('fake', TimeVar)
 

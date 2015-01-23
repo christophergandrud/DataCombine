@@ -5,7 +5,7 @@
 \title{Expands a data set so that it includes an observation for each time point in
 a sequence. Works with grouped data.}
 \usage{
-TimeExpand(data, GroupVar, TimeVar, by = 1)
+TimeExpand(data, GroupVar, TimeVar, begin, end, by = 1)
 }
 \arguments{
 \item{data}{a data frame.}
@@ -14,7 +14,14 @@ TimeExpand(data, GroupVar, TimeVar, by = 1)
 variable.}
 
 \item{TimeVar}{the variable in \code{data} that signifies the time variable.
-The sequence will be expanded between its minimum and maximum value.}
+The sequence will be expanded between its minimum and maximum value if
+\code{begin} and \code{end} are not specified.}
+
+\item{begin}{numeric of length 1. Specifies beginning time point.
+Only relevant if \code{end} is specified.}
+
+\item{end}{numeric of length 1. Specifies ending time point.
+Only relevant if \code{begin} is specified.}
 
 \item{by}{numeric or character string specifying the steps in the
 \code{TimeVar} sequence. Can use \code{"month"}, \code{"year"} etc for
