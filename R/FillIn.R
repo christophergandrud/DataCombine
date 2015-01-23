@@ -104,9 +104,10 @@ FillIn <- function(D1, D2, Var1, Var2,
 
 #' Fills in missing (NA) values with the previous non-missing value
 #'
-#' @param data a data frame.
-#' @param Var the variable in \code{data} you would like to fill down missing
-#' (\code{NA}) values.
+#' @param data a data frame. Optional as you can simply specify a vector with
+#' \code{Var},
+#' @param Var the variable in \code{data} or a vector you would like to fill 
+#' down missing (\code{NA}) values.
 #'
 #' @return data frame
 #'
@@ -122,16 +123,30 @@ FillIn <- function(D1, D2, Var1, Var2,
 #' @export
 
 FillDown <- function(data, Var) {
-    if (is.na(data[1, Var])) fill <- NA
-    for (i in 1:nrow(data)) {
-        if (!is.na(data[i, Var])) {
-            fill <- data[i, Var]
+    if (!missing(data)){
+        if (is.na(data[1, Var])) fill <- NA
+        for (i in 1:nrow(data)) {
+            if (!is.na(data[i, Var])) {
+                fill <- data[i, Var]
+            }
+            else if (is.na(data[i, Var])) {
+                data[i, Var] <- fill
+            }
         }
-        else if (is.na(data[i, Var])) {
-            data[i, Var] <- fill
-        }
+        return(data)
     }
-    return(data)
+    else if (missing(data)) {
+        if (is.na(Var[[1]])) fill <- NA
+            for (i in 1:length(Var)) {
+                if (!is.na(Var[[i]])) {
+                    fill <- Var[[i]]
+                }
+                else if (is.na(Var[[i]])) {
+                    Var[[i]] <- fill
+                }
+            }
+        return(Var)
+    }
 }
 
 #' Expands a data set so that it includes an observation for each time point in

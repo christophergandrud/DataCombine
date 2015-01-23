@@ -7,10 +7,11 @@
 FillDown(data, Var)
 }
 \arguments{
-\item{data}{a data frame.}
+\item{data}{a data frame. Optional as you can simply specify a vector with
+\code{Var},}
 
-\item{Var}{the variable in \code{data} you would like to fill down missing
-(\code{NA}) values.}
+\item{Var}{the variable in \code{data} or a vector you would like to fill
+down missing (\code{NA}) values.}
 }
 \value{
 data frame

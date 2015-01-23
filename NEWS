@@ -1,3 +1,8 @@
+## Version 0.2.8.2
+
+`FillDown` down accepts just vectors. This is useful when used with dplyr's
+`group_by` and `mutate`/`summarize` functions.
+
 ## Version 0.2.8.1
 
 Added `TimeVar` argument to `slide`. The argument is optional. When the
