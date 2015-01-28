@@ -14,6 +14,7 @@
 #' the data.
 #' @param type character string set at either \code{percent} for percentages or
 #' \code{proportion} to find proportions.
+#' @param ... arguments passed to \code{\link{slide}}.
 #'
 #' @return a data frame
 #' @details Finds the percentage or proportion change for over a given time
@@ -28,15 +29,15 @@
 #'
 #' # Find percentage change from two periods before
 #' Out <- PercChange(Data, Var = 'B',
-#'          type = 'proportion', 
-#'          NewVar = 'PercentChange', 
+#'          type = 'proportion',
+#'          NewVar = 'PercentChange',
 #'          slideBy = -2)
 #'
 #' Out
 #' @export
 
 PercChange <- function(data, Var, GroupVar, NewVar, slideBy = -1,
-                       type = "percent"){
+                       type = "percent", ...){
   if (!(type %in% c('proportion', 'percent'))){
     stop("type must be either 'proportion' or 'percent'." )
   }
@@ -44,7 +45,7 @@ PercChange <- function(data, Var, GroupVar, NewVar, slideBy = -1,
     NewVar = paste0(Var, '_PChangeFrom', slideBy)
   }
   Temp <- slide(data = data, Var = Var, GroupVar = GroupVar, NewVar = NewVar,
-                slideBy = slideBy)
+                slideBy = slideBy, ...)
   Temp[, NewVar] <- (Temp[, Var]- Temp[, NewVar])/Temp[, NewVar]
 
   if (type == 'percent'){

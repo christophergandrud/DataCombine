@@ -4,7 +4,7 @@
 \alias{PercChange}
 \title{Calculate the percentage change from a specified lag, including withing group}
 \usage{
-PercChange(data, Var, GroupVar, NewVar, slideBy = -1, type = "percent")
+PercChange(data, Var, GroupVar, NewVar, slideBy = -1, type = "percent", ...)
 }
 \arguments{
 \item{data}{a data frame object.}
@@ -26,6 +26,8 @@ the data.}
 
 \item{type}{character string set at either \code{percent} for percentages or
 \code{proportion} to find proportions.}
+
+\item{...}{arguments passed to \code{\link{slide}}.}
 }
 \value{
 a data frame
