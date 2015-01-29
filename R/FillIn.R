@@ -119,7 +119,12 @@ FillIn <- function(D1, D2, Var1, Var2,
 #'
 #' # FillDown id
 #' DataOut <- FillDown(Data, 'id')
-#'
+#' 
+#' \dontrun{
+#' # Use group_by and mutate from dplyr to FillDown grouped data, e.g.:
+#' Example <- Example %>% group_by(grouping) %>% 
+#'              mutate(NewFilled = FillDown(Var = VarToFill))
+#' }
 #' @export
 
 FillDown <- function(data, Var) {

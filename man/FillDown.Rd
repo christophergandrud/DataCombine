@@ -27,5 +27,11 @@ Data <- data.frame(id, score)
 
 # FillDown id
 DataOut <- FillDown(Data, 'id')
+
+\dontrun{
+# Use group_by and mutate from dplyr to FillDown grouped data, e.g.:
+Example <- Example \%>\% group_by(grouping) \%>\%
+             mutate(NewFilled = FillDown(Var = VarToFill))
+}
 }
 
