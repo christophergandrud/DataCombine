@@ -240,7 +240,7 @@ dMerge <- function(data1, data2, Var, dropDups = TRUE, dupsOut = FALSE,
 
 InsertRow <- function(data, NewRow, RowNum = NULL) {
   if (ncol(data) != length(NewRow)){
-    stop('NewRow must be the same lenght as the number of columns in data.\n',
+    stop('NewRow must be the same length as the number of columns in the data.\n',
          call. = FALSE)
   }
   if (!is.null(RowNum)){
