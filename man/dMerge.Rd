@@ -13,23 +13,35 @@ dMerge(data1, data2, Var, dropDups = TRUE, dupsOut = FALSE,
 
 \item{data2}{a data frame. The second data frame to merge.}
 
-\item{Var}{character vector containing the names of the variables merge by. See \code{\link{merge}}.}
+\item{Var}{character vector containing the names of the variables merge by.
+See \code{\link{merge}}.}
 
-\item{dropDups}{logical. Whether or not to drop duplicated rows based on \code{Var}. If \code{dropDups = FALSE} then it gives a count of the duplicated rows.}
+\item{dropDups}{logical. Whether or not to drop duplicated rows based on
+\code{Var}. If \code{dropDups = FALSE} then it gives a count of the
+duplicated rows.}
 
-\item{dupsOut}{logical. If \code{TRUE} then a data frame only containing duplicated values is returned and \code{dropDups} is ignored.}
+\item{dupsOut}{logical. If \code{TRUE} then a data frame only containing
+duplicated values is returned and \code{dropDups} is ignored.}
 
-\item{fromLast}{logical indicating if duplication should be considered from the reverse side. Only relevant if \code{dropDups = TRUE}.}
+\item{fromLast}{logical indicating if duplication should be considered from
+the reverse side. Only relevant if \code{dropDups = TRUE}.}
 
-\item{all}{logical; all = L is shorthand for all.x = L and all.y = L, where L is either TRUE or FALSE.}
+\item{all}{logical; all = L is shorthand for \code{all.x = L} and
+\code{all.y = L}, where \code{L} is either \code{TRUE} or \code{FALSE}.}
 
-\item{all.x}{logical; if TRUE, then extra rows will be added to the output, one for each row in x that has no matching row in y. These rows will have NAs in those columns that are usually filled with values from y. The default is FALSE, so that only rows with data from both x and y are included in the output.}
+\item{all.x}{logical; if TRUE, then extra rows will be added to the output,
+one for each row in x that has no matching row in y. These rows will have
+\code{NA}s in those columns that are usually filled with values from y. The
+default is #' \code{FALSE}, so that only rows with data from both x and y are
+included in the output.}
 
-\item{all.y}{logical; analogous to all.x.}
+\item{all.y}{logical; analogous to \code{all.x}.}
 
 \item{sort}{logical. Should the result be sorted on the by columns?}
 
-\item{suffixes}{a character vector of length 2 specifying the suffixes to be used for making unique the names of columns in the result which not used for merging (appearing in by etc).}
+\item{suffixes}{a character vector of length 2 specifying the suffixes to be
+used for making unique the names of columns in the result which not used for
+merging (appearing in by etc).}
 
 \item{incomparables}{values which cannot be matched. See \code{\link{match}}.}
 }

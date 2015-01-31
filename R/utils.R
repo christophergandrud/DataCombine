@@ -71,19 +71,30 @@ grepl.sub <- function(data, pattern, Var, keep.found = TRUE, useBytes = TRUE){
 
 #' Replace multiple patterns found in a character string column of a data frame
 #'
-#' \code{FindReplace} allows you to find and replace multiple character string patterns in a data frame's column.
+#' \code{FindReplace} allows you to find and replace multiple character string
+#' patterns in a data frame's column.
 #'
-#' @param data data frame with the column you would like to replace string patterns.
-#' @param Var character string naming the column you would like to replace string patterns. The column must be of class \code{character} or \code{factor}.
-#' @param replaceData a data frame with at least two columns. One contains the patterns to replace and the other contains their replacement. Note: the pattern and its replacement must be in the same row.
-#' @param from character string naming the column with the patterns you would like to replace.
-#' @param to character string naming the column with the the pattern replacements.
-#' @param exact logical. Indicates whether to only replace exact pattern matches (\code{TRUE}) or not (\code{FALSE}).
-#' @param vector logical. If \code{TRUE} then the replacement is returned as a single vector. If \code{FALSE} then the whole data frame is returned.
+#' @param data data frame with the column you would like to replace string
+#' patterns.
+#' @param Var character string naming the column you would like to replace
+#' string patterns. The column must be of class \code{character} or
+#' \code{factor}.
+#' @param replaceData a data frame with at least two columns. One contains the
+#' patterns to replace and the other contains their replacement. Note: the
+#' pattern and its replacement must be in the same row.
+#' @param from character string naming the column with the patterns you would
+#' like to replace.
+#' @param to character string naming the column with the the pattern
+#' replacements.
+#' @param exact logical. Indicates whether to only replace exact pattern matches
+#' (\code{TRUE}) or not (\code{FALSE}).
+#' @param vector logical. If \code{TRUE} then the replacement is returned as a
+#' single vector. If \code{FALSE} then the whole data frame is returned.
 #'
 #' @examples
 #' # Create original data
-#' ABData <- data.frame(a = c("London, UK", "Oxford, UK", "Berlin, DE", "Hamburg, DE", "Oslo, NO"),
+#' ABData <- data.frame(a = c("London, UK", "Oxford, UK", "Berlin, DE",
+#'                      "Hamburg, DE", "Oslo, NO"),
 #'                      b = c(8, 0.1, 3, 2, 1))
 #'
 #' # Create replacements data frame
@@ -99,7 +110,8 @@ grepl.sub <- function(data, pattern, Var, keep.found = TRUE, useBytes = TRUE){
 #'
 #' @export
 
-FindReplace <- function(data, Var, replaceData, from = 'from', to = 'to', exact = TRUE, vector = FALSE){
+FindReplace <- function(data, Var, replaceData, from = 'from', to = 'to',
+                        exact = TRUE, vector = FALSE){
   if(!(class(data[, Var]) %in% c('character', 'factor'))){
     stop(paste(Var, 'is not a character string or factor. Please convert to a character string or factor and then rerun.'),
          call. = FALSE)
@@ -112,10 +124,12 @@ FindReplace <- function(data, Var, replaceData, from = 'from', to = 'to', exact 
 
   for (i in 1:ReplaceNRows){
     if(isTRUE(exact)){
-      data[, Var] <- gsub(pattern = paste0("^", replaceData[i, from], "$"), replacement = replaceData[i, to], data[, Var])
+      data[, Var] <- gsub(pattern = paste0("^", replaceData[i, from], "$"),
+                        replacement = replaceData[i, to], data[, Var])
     }
     if(!isTRUE(exact)){
-      data[, Var] <- gsub(pattern = replaceData[i, from], replacement = replaceData[i, to], data[, Var])
+      data[, Var] <- gsub(pattern = replaceData[i, from],
+                        replacement = replaceData[i, to], data[, Var])
     }
   }
   if(isTRUE(vector)){
@@ -158,15 +172,27 @@ VarDrop <- function(data, Var){
 #'
 #' @param data1 a data frame. The first data frame to merge.
 #' @param data2 a data frame. The second data frame to merge.
-#' @param Var character vector containing the names of the variables merge by. See \code{\link{merge}}.
-#' @param dropDups logical. Whether or not to drop duplicated rows based on \code{Var}. If \code{dropDups = FALSE} then it gives a count of the duplicated rows.
-#' @param dupsOut logical. If \code{TRUE} then a data frame only containing duplicated values is returned and \code{dropDups} is ignored.
-#' @param fromLast logical indicating if duplication should be considered from the reverse side. Only relevant if \code{dropDups = TRUE}.
-#' @param all logical; all = L is shorthand for all.x = L and all.y = L, where L is either TRUE or FALSE.
-#' @param all.x logical; if TRUE, then extra rows will be added to the output, one for each row in x that has no matching row in y. These rows will have NAs in those columns that are usually filled with values from y. The default is FALSE, so that only rows with data from both x and y are included in the output.
-#' @param all.y logical; analogous to all.x.
+#' @param Var character vector containing the names of the variables merge by.
+#' See \code{\link{merge}}.
+#' @param dropDups logical. Whether or not to drop duplicated rows based on
+#' \code{Var}. If \code{dropDups = FALSE} then it gives a count of the
+#' duplicated rows.
+#' @param dupsOut logical. If \code{TRUE} then a data frame only containing
+#' duplicated values is returned and \code{dropDups} is ignored.
+#' @param fromLast logical indicating if duplication should be considered from
+#' the reverse side. Only relevant if \code{dropDups = TRUE}.
+#' @param all logical; all = L is shorthand for \code{all.x = L} and
+#' \code{all.y = L}, where \code{L} is either \code{TRUE} or \code{FALSE}.
+#' @param all.x logical; if TRUE, then extra rows will be added to the output,
+#' one for each row in x that has no matching row in y. These rows will have
+#' \code{NA}s in those columns that are usually filled with values from y. The
+#' default is #' \code{FALSE}, so that only rows with data from both x and y are
+#' included in the output.
+#' @param all.y logical; analogous to \code{all.x}.
 #' @param sort logical. Should the result be sorted on the by columns?
-#' @param suffixes	a character vector of length 2 specifying the suffixes to be used for making unique the names of columns in the result which not used for merging (appearing in by etc).
+#' @param suffixes	a character vector of length 2 specifying the suffixes to be
+#' used for making unique the names of columns in the result which not used for
+#' merging (appearing in by etc).
 #' @param incomparables	values which cannot be matched. See \code{\link{match}}.
 #'
 #'
@@ -180,11 +206,12 @@ dMerge <- function(data1, data2, Var, dropDups = TRUE, dupsOut = FALSE,
     incomparables = NULL){
     if (isTRUE(dropDups) & isTRUE(dupsOut)){
         message("dropDups ignored")
-        dropDups = FALSE
+        dropDups <- FALSE
     }
 
     # Perform basic merge
-    Comb <- merge(data1, data2, by = Var, all = all, all.x = all.x, all.y = all.y,
+    Comb <- merge(data1, data2, by = Var, all = all, all.x = all.x,
+        all.y = all.y,
         sort = TRUE, suffixes = c(".x",".y"),
         incomparables = incomparables)
 

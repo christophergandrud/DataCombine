@@ -8,26 +8,37 @@ FindReplace(data, Var, replaceData, from = "from", to = "to",
   exact = TRUE, vector = FALSE)
 }
 \arguments{
-\item{data}{data frame with the column you would like to replace string patterns.}
+\item{data}{data frame with the column you would like to replace string
+patterns.}
 
-\item{Var}{character string naming the column you would like to replace string patterns. The column must be of class \code{character} or \code{factor}.}
+\item{Var}{character string naming the column you would like to replace
+string patterns. The column must be of class \code{character} or
+\code{factor}.}
 
-\item{replaceData}{a data frame with at least two columns. One contains the patterns to replace and the other contains their replacement. Note: the pattern and its replacement must be in the same row.}
+\item{replaceData}{a data frame with at least two columns. One contains the
+patterns to replace and the other contains their replacement. Note: the
+pattern and its replacement must be in the same row.}
 
-\item{from}{character string naming the column with the patterns you would like to replace.}
+\item{from}{character string naming the column with the patterns you would
+like to replace.}
 
-\item{to}{character string naming the column with the the pattern replacements.}
+\item{to}{character string naming the column with the the pattern
+replacements.}
 
-\item{exact}{logical. Indicates whether to only replace exact pattern matches (\code{TRUE}) or not (\code{FALSE}).}
+\item{exact}{logical. Indicates whether to only replace exact pattern matches
+(\code{TRUE}) or not (\code{FALSE}).}
 
-\item{vector}{logical. If \code{TRUE} then the replacement is returned as a single vector. If \code{FALSE} then the whole data frame is returned.}
+\item{vector}{logical. If \code{TRUE} then the replacement is returned as a
+single vector. If \code{FALSE} then the whole data frame is returned.}
 }
 \description{
-\code{FindReplace} allows you to find and replace multiple character string patterns in a data frame's column.
+\code{FindReplace} allows you to find and replace multiple character string
+patterns in a data frame's column.
 }
 \examples{
 # Create original data
-ABData <- data.frame(a = c("London, UK", "Oxford, UK", "Berlin, DE", "Hamburg, DE", "Oslo, NO"),
+ABData <- data.frame(a = c("London, UK", "Oxford, UK", "Berlin, DE",
+                     "Hamburg, DE", "Oslo, NO"),
                      b = c(8, 0.1, 3, 2, 1))
 
 # Create replacements data frame

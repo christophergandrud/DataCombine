@@ -2,6 +2,8 @@
 
 Minor change to `PercChange` allowing arguments to be passed to `slide`.
 
+Minor internal code improvements.
+
 ## Version 0.2.8.2
 
 `FillDown` down accepts just vectors. This is useful when used with dplyr's
