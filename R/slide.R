@@ -140,6 +140,14 @@ slide <- function(data, Var, TimeVar, GroupVar, NewVar,
             ## Hack
             class(data) <- 'data.frame'
             data <- data[!(data[, GroupVar] %in% Dropping), ]
+
+            if (is.factor(data[, GroupVar])){
+                message(paste0('Converting ', GroupVar,
+                                ' to a character vector. ',
+                               'Necessary when invalid lag/leads are created.'))
+                data[, GroupVar] <- as.character(data[, GroupVar])
+                message(summary(data[, GroupVar]))
+            }
             data <- group_by_(data, .dots = GroupVar)
             ## End Hack
 
@@ -166,10 +174,12 @@ slide <- function(data, Var, TimeVar, GroupVar, NewVar,
                                 reminder = FALSE)
     }
     else if (!missing(GroupVar)){
-        DataSub <- eval(parse(text = paste0('group_by(data[, c(GroupVar, Var)], ',
-                                            GroupVar,')')))
-        vars <- eval(parse(text = paste0("dplyr::mutate(DataSub, NewVarX = shift(",
-                                 Var, ",", slideBy, ", reminder = FALSE))")))
+        DataSub <- eval(parse(text = paste0(
+                                        'group_by(data[, c(GroupVar, Var)], ',
+                                        GroupVar,')')))
+        vars <- eval(parse(text = paste0(
+                                    'dplyr::mutate(DataSub, NewVarX = shift(',
+                                    Var, ',', slideBy, ', reminder = FALSE))')))
         data[, NewVar] <- vars$NewVarX
     }
     if (isTRUE(keepInvalid) & !is.null(FullData)){
