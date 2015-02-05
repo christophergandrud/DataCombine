@@ -1,3 +1,7 @@
+## Version 0.2.9
+
+Fixed a bug in `slide` when using factor `GroupVar`s. 
+
 ## Version 0.2.8.3
 
 Minor change to `PercChange` allowing arguments to be passed to `slide`.

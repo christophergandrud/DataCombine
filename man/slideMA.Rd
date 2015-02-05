@@ -16,10 +16,10 @@ the lag/lead moving averages from.}
 
 \item{GroupVar}{a character string naming the variable grouping the units
 within which \code{Var} will be turned into slid moving averages. If
-\code{GroupVar} is missing then the whole variable is slid up or down and moving
-averages will be created. This is similar to \code{\link{shift}}, though
-\code{shift} returns the slid data to a new vector rather than the original
-data frame.}
+\code{GroupVar} is missing then the whole variable is slid up or down and
+moving averages will be created. This is similar to \code{\link{shift}},
+though \code{shift} returns the slid data to a new vector rather than the
+original data frame.}
 
 \item{periodBound}{integer. The time point for the outer bound of the time
 period over which to create the moving averages. The default is \code{-3},
