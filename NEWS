@@ -1,3 +1,7 @@
+## Version 0.2.10
+
+`slide` convert with tbl_df.
+
 ## Version 0.2.9
 
 Fixed a bug in `slide` when using factor class variables as `GroupVar`. 

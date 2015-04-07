@@ -73,12 +73,17 @@ slide <- function(data, Var, TimeVar, GroupVar, NewVar,
     if (!missing(GroupVar) & 'data.table' %in% class(data)) stop(paste(
         'slide does not support data.tables with with Grouped variables.\n',
         'Convert to data.frame and try again.'), call. = F)
+    
+    if (!missing(GroupVar) & 'tbl_df' %in% class(data)) {
+        message('Converting to plain data frame from tbl_df.')
+        data <- as.data.frame(data)
+    }
 
     # Determine if Var exists in data
     DataNames <- names(data)
     TestExist <- Var %in% DataNames
 
-    if (!isTRUE(TestExist)){
+    if (!isTRUE(TestExist)) {
         stop(paste(Var, "was not found in the data frame."), call. = FALSE)
     }
 
