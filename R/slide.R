@@ -73,7 +73,7 @@ slide <- function(data, Var, TimeVar, GroupVar, NewVar,
     if (!missing(GroupVar) & 'data.table' %in% class(data)) stop(paste(
         'slide does not support data.tables with with Grouped variables.\n',
         'Convert to data.frame and try again.'), call. = F)
-    
+
     if (!missing(GroupVar) & 'tbl_df' %in% class(data)) {
         message('Converting to plain data frame from tbl_df.')
         data <- as.data.frame(data)
@@ -473,6 +473,7 @@ SpreadDummy <- function(data, Var, GroupVar, NewVar,
 #' treated as the start/end of a spell. Must specify if \code{OnlyStart = TRUE}.
 #' @param OnlyStart logical for whether or not to only add a new
 #' \code{Spell_Start} variable. Please see the details.
+#' @param ... Aguments to pass to \code{\link{slide}}.
 #'
 #' @examples
 #' # Create fake data
@@ -483,7 +484,7 @@ SpreadDummy <- function(data, Var, GroupVar, NewVar,
 #'
 #' # Find start/end of spells denoted by Dummy = 1
 #' DataSpell <- StartEnd(Data, SpellVar = 'Dummy', GroupVar = 'ID',
-#'                      SpellValue = 1)
+#'                      TimeVar = 'Time', SpellValue = 1)
 #'
 #' head(DataSpell)
 #'
@@ -500,61 +501,65 @@ SpreadDummy <- function(data, Var, GroupVar, NewVar,
 #' @importFrom dplyr ungroup
 #' @export
 
-StartEnd <- function(data, SpellVar, GroupVar, SpellValue,
-                     OnlyStart = FALSE)
+StartEnd <- function(data,
+                    SpellVar,
+                    GroupVar,
+                    SpellValue,
+                    OnlyStart = FALSE, ...)
 {
-  if (missing(SpellVar)){
-    stop('You must specify the SpellVar', call. = FALSE)
-  }
-  if (!missing(GroupVar)){
-    message(paste('\nRemember to order', deparse(substitute(data)), 'by',
-                  GroupVar, 'and the time variable before running slide.\n'))
-  }
-  # Find Start
-  Temp <- slide(data = data, Var = SpellVar, GroupVar = GroupVar,
-                slideBy = -1, NewVar = 'TempStart', reminder = FALSE)
-  Temp <- data.frame(Temp)
-  Temp$Spell_Start <- 0
-  Temp$Spell_Start[is.na(Temp[, SpellVar])] <- NA
-  if (missing(SpellValue)){
-    Temp$Spell_Start[Temp[, SpellVar] != Temp[, 'TempStart']] <- 1
-  }
-  else if (!missing(SpellValue)){
-    Temp$Spell_Start[Temp[, SpellVar] == SpellValue &
-          Temp[, 'TempStart'] != SpellValue] <- 1
-  }
-
-  # Find End
-  Temp <- slide(data = Temp, Var = SpellVar, GroupVar = GroupVar,
-                slideBy = 1, NewVar = 'TempEnd', reminder = FALSE)
-  Temp <- data.frame(Temp)
-  Temp$Spell_End <- 0
-  Temp$Spell_End[is.na(Temp[, SpellVar])] <- NA
-  if (missing(SpellValue)){
-    Temp$Spell_End[Temp[, SpellVar] != Temp[, 'TempEnd']] <- 1
-  }
-  else if (!missing(SpellValue)){
-    Temp$Spell_End[Temp[, SpellVar] == SpellValue &
-          Temp[, 'TempEnd'] != SpellValue] <- 1
-  }
-  Temp <- ungroup(Temp)
-
-  if (isTRUE(OnlyStart)){
-    if (missing(SpellValue)){
-      stop('Must specify SpellValue if OnlyStart = TRUE.', call. = FALSE)
+    if (missing(SpellVar)){
+        stop('You must specify the SpellVar', call. = FALSE)
     }
-    Temp <- slide(data = Temp, Var = 'Spell_End', GroupVar = GroupVar,
-                  slideBy = -1, NewVar = 'TempNewStart', reminder = FALSE)
+    if (!missing(GroupVar)){
+        message(paste('\nRemember to order', deparse(substitute(data)), 'by',
+        GroupVar, 'and the time variable before running slide.\n'))
+    }
+    # Find Start
+    Temp <- slide(data = data, Var = SpellVar, GroupVar = GroupVar,
+                slideBy = -1, NewVar = 'TempStart', reminder = FALSE, ...)
+    Temp <- data.frame(Temp)
+    Temp$Spell_Start <- 0
+    Temp$Spell_Start[is.na(Temp[, SpellVar])] <- NA
+    if (missing(SpellValue)){
+        Temp$Spell_Start[Temp[, SpellVar] != Temp[, 'TempStart']] <- 1
+    }
+    else if (!missing(SpellValue)){
+        Temp$Spell_Start[Temp[, SpellVar] == SpellValue &
+        Temp[, 'TempStart'] != SpellValue] <- 1
+    }
+
+    # Find End
+    Temp <- slide(data = Temp, Var = SpellVar, GroupVar = GroupVar, slideBy = 1,
+                NewVar = 'TempEnd', reminder = FALSE, ...)
+    Temp <- data.frame(Temp)
+    Temp$Spell_End <- 0
+    Temp$Spell_End[is.na(Temp[, SpellVar])] <- NA
+    if (missing(SpellValue)){
+        Temp$Spell_End[Temp[, SpellVar] != Temp[, 'TempEnd']] <- 1
+    }
+    else if (!missing(SpellValue)){
+        Temp$Spell_End[Temp[, SpellVar] == SpellValue &
+        Temp[, 'TempEnd'] != SpellValue] <- 1
+    }
     Temp <- ungroup(Temp)
-    Temp$Spell_Start[Temp$Spell_Start != SpellValue &
-                       Temp$TempNewStart == SpellValue] <- 1
-    Temp <- VarDrop(Temp, c('TempStart', 'TempEnd', 'TempNewStart',
-                            'Spell_End'))
-  }
-  else if (!isTRUE(OnlyStart)){
-    Temp <- VarDrop(Temp, c('TempStart', 'TempEnd'))
-  }
-  return(Temp)
+
+    if (isTRUE(OnlyStart)){
+        if (missing(SpellValue)){
+            stop('Must specify SpellValue if OnlyStart = TRUE.', call. = FALSE)
+        }
+        Temp <- slide(data = Temp, Var = 'Spell_End', GroupVar = GroupVar,
+                    slideBy = -1, NewVar = 'TempNewStart', reminder = FALSE,
+                    ...)
+        Temp <- ungroup(Temp)
+        Temp$Spell_Start[Temp$Spell_Start != SpellValue &
+        Temp$TempNewStart == SpellValue] <- 1
+        Temp <- VarDrop(Temp, c('TempStart', 'TempEnd', 'TempNewStart',
+                        'Spell_End'))
+    }
+    else if (!isTRUE(OnlyStart)){
+        Temp <- VarDrop(Temp, c('TempStart', 'TempEnd'))
+    }
+    return(Temp)
 }
 
 #' Count spells, including for grouped data
