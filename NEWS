@@ -1,3 +1,7 @@
+## Version 0.2.12
+
+Improved error handling in `FillDown` for missing variables.
+
 ## Version 0.2.11
 
 Allow arguments for `slide` to be passed throught `StartEnd`.

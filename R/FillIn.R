@@ -128,7 +128,13 @@ FillIn <- function(D1, D2, Var1, Var2,
 #' @export
 
 FillDown <- function(data, Var) {
-    if (!missing(data)){
+    if (!missing(data)) {
+        # Determine if Var exists in data
+        TestExist <- Var %in% names(data)
+        
+        if (!isTRUE(TestExist)) {
+            stop(paste(Var, "was not found in the data frame."), call. = FALSE)
+        }
         if (is.na(data[1, Var])) fill <- NA
         for (i in 1:nrow(data)) {
             if (!is.na(data[i, Var])) {
