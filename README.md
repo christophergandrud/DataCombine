@@ -3,7 +3,7 @@ DataCombine
 
 Christopher Gandrud
 
-Version 0.2.10
+Version 0.2.11
 [![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine)
 
 Please report any **bugs** or **suggestions** at:
