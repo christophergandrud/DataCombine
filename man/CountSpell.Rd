@@ -20,9 +20,7 @@ experiencing the spells.}
 \item{NewVar}{NewVar a character string naming the new variable to place the
 spell counts in.}
 
-\item{SpellValue}{a value indicating when a unit is in a spell. If
-\code{SpellValue} is missing then any change in \code{Var}'s value will be
-treated as the start/end of a spell.}
+\item{SpellValue}{a value indicating when a unit is in a spell.}
 }
 \description{
 \code{CountSpell} is a function that returns a variable counting the spell
