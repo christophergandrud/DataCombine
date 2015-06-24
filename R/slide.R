@@ -574,9 +574,7 @@ StartEnd <- function(data,
 #' experiencing the spells.
 #' @param NewVar NewVar a character string naming the new variable to place the
 #' spell counts in.
-#' @param SpellValue a value indicating when a unit is in a spell. If
-#' \code{SpellValue} is missing then any change in \code{Var}'s value will be
-#' treated as the start/end of a spell.
+#' @param SpellValue a value indicating when a unit is in a spell. 
 #'
 #' @examples
 #' # Create fake data
@@ -602,13 +600,13 @@ StartEnd <- function(data,
 CountSpell <- function(data, TimeVar, SpellVar, GroupVar,
                        NewVar, SpellValue)
 {
-  if (missing(NewVar)){
+  if (missing(NewVar)) {
     NewVar <- paste0(SpellVar, '_', 'SpellCount')
     message(paste0('\nSpell count placed in new variable: ', NewVar, '.\n'))
   }
-  if (!missing(GroupVar)){
+  if (!missing(GroupVar)) { 
   tempMain <- data.frame()
-    for (i in unique(data[, GroupVar])){
+    for (i in unique(data[, GroupVar])) {
       tempSub <- data[data[, GroupVar] == i, ]
       tempSub[, NewVar] <- CountSpellOne(data = tempSub, TimeVar = TimeVar,
                                   SpellVar = SpellVar, SpellValue = SpellValue)
@@ -616,7 +614,7 @@ CountSpell <- function(data, TimeVar, SpellVar, GroupVar,
     }
   data <- tempMain
   }
-  else if (missing(GroupVar)){
+  else if (missing(GroupVar)) {
     data[, NewVar] <- CountSpellOne(data = data, TimeVar = TimeVar,
                                 SpellVar = SpellVar, SpellValue = SpellValue)
   }
@@ -631,14 +629,14 @@ CountSpellOne <- function(data, TimeVar, SpellVar,
                           SpellValue)
 {
   Spell_Start <- NULL
-  if (missing(TimeVar)){
+  if (missing(TimeVar)) {
     stop('You must specify the TimeVar', call. = FALSE)
   }
-  if (missing(SpellValue)){
+  if (missing(SpellValue)) {
     stop('You must specify the SpellValue', call. = FALSE)
   }
 
-  if (!any(data[, SpellVar] == SpellValue)){
+  if (!any(data[, SpellVar] == SpellValue)) {
     dataSpell <- data
     dataSpell$Spell_Count <- 0
   }
@@ -650,7 +648,7 @@ CountSpellOne <- function(data, TimeVar, SpellVar,
     temp$spell_ID <- 1:nrow(temp)
 
     dataSpell$Spell_Count <- 0
-    for (u in 1:max(temp$spell_ID)){
+    for (u in 1:max(temp$spell_ID)) {
       dataSpell$Spell_Count[dataSpell[, TimeVar] >=
                             temp[temp$spell_ID == u, TimeVar]] <- u
     }
