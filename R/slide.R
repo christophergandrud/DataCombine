@@ -574,7 +574,8 @@ StartEnd <- function(data,
 #' experiencing the spells.
 #' @param NewVar NewVar a character string naming the new variable to place the
 #' spell counts in.
-#' @param SpellValue a value indicating when a unit is in a spell. 
+#' @param SpellValue a value indicating when a unit is in a spell. Must match
+#' the class of the \code{SpellVar}.
 #'
 #' @examples
 #' # Create fake data
@@ -629,12 +630,13 @@ CountSpellOne <- function(data, TimeVar, SpellVar,
                           SpellValue)
 {
   Spell_Start <- NULL
-  if (missing(TimeVar)) {
-    stop('You must specify the TimeVar', call. = FALSE)
-  }
-  if (missing(SpellValue)) {
-    stop('You must specify the SpellValue', call. = FALSE)
-  }
+  if (missing(TimeVar)) stop('You must specify the TimeVar', call. = FALSE)
+
+  if (missing(SpellValue)) stop('You must specify the SpellValue', 
+                                call. = FALSE)
+
+  if (class(SpellValue) != class(data[, SpellVar])) 
+      stop('SpellValue must be the same class as SpellVar', call. = FALSE)
 
   if (!any(data[, SpellVar] == SpellValue)) {
     dataSpell <- data

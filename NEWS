@@ -1,3 +1,7 @@
+## Version 0.2.13
+
+- Improved error handling and documentation in `CountSpell`.
+
 ## Version 0.2.12
 
 Improved error handling in `FillDown` for missing variables.
