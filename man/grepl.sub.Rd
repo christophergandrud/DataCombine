@@ -4,7 +4,7 @@
 \alias{grepl.sub}
 \title{Subset a data frame if a specified pattern is found in a character string}
 \usage{
-grepl.sub(data, pattern, Var, keep.found = TRUE, useBytes = TRUE)
+grepl.sub(data, pattern, Var, keep.found = TRUE, ...)
 }
 \arguments{
 \item{data}{data frame.}
@@ -18,8 +18,7 @@ found in.}
 \item{keep.found}{logical. whether or not to keep observations where the
 pattern is found (\code{TRUE}) or not found (\code{FALSE}).}
 
-\item{useBytes}{logical. If TRUE the matching is done byte-by-byte rather
-than character-by-character. See \code{\link{grep}}.}
+\item{...}{arguments to pass to \code{\link{grepl}}.}
 }
 \description{
 Subset a data frame if a specified pattern is found in a character string

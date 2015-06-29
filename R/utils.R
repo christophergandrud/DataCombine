@@ -44,8 +44,7 @@ rmExcept <- function(keepers, envir = globalenv(), message = TRUE){
 #' found in.
 #' @param keep.found logical. whether or not to keep observations where the
 #' pattern is found (\code{TRUE}) or not found (\code{FALSE}).
-#' @param useBytes logical. If TRUE the matching is done byte-by-byte rather
-#' than character-by-character. See \code{\link{grep}}.
+#' @param ... arguments to pass to \code{\link{grepl}}.
 #'
 #' @examples
 #' # Create data frame
@@ -58,12 +57,12 @@ rmExcept <- function(keepers, envir = globalenv(), message = TRUE){
 #'
 #' @export
 
-grepl.sub <- function(data, pattern, Var, keep.found = TRUE, useBytes = TRUE){
+grepl.sub <- function(data, pattern, Var, keep.found = TRUE, ...){
     y <- NULL
     if (missing(Var)) stop('Var must be specified', call. = FALSE)
 
-    data$y <- grepl(pattern = paste0(pattern, collapse="|"), x = data[, Var],
-                  useBytes = useBytes)
+    data$y <- grepl(pattern = paste0(pattern, collapse =  "|"), x = data[, Var],
+                    ...)
     subdata <- subset(data, y == keep.found)
     subdata$y <- NULL
     subdata
