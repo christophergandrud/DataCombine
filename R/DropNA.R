@@ -1,10 +1,10 @@
 #' Drop rows from a data frame with missing values on a given variable(s).
 #'
-#' \code{DropNA} drops rows from a data frame when they have missing (\code{NA}) 
+#' \code{DropNA} drops rows from a data frame when they have missing (\code{NA})
 #' values on a given variable(s).
 #'
 #' @param data a data frame object.
-#' @param Var a character vector naming the variables you would like to have 
+#' @param Var a character vector naming the variables you would like to have
 #' only non-missing (NA) values.
 #' @param message logical. Whether or not to give you a message about the number
 #' of rows that are dropped.
@@ -12,74 +12,74 @@
 #' @examples
 #' # Create data frame
 #' a <- c(1, 2, 3, 4, NA)
-#' b <- c( 1, NA, 3, 4, 5) 
+#' b <- c( 1, NA, 3, 4, 5)
 #' ABData <- data.frame(a, b)
-#' 
+#'
 #' # Remove missing values from column a
 #' ASubData <- DropNA(ABData, Var = "a", message = FALSE)
-#' 
+#'
 #' # Remove missing values in columns a and b
 #' ABSubData <- DropNA(ABData, Var = c("a", "b"))
-#' 
-#' @source Partially based on Stack Overflow answer written by donshikin: 
+#'
+#' @source Partially based on Stack Overflow answer written by donshikin:
 #' \url{http://stackoverflow.com/questions/4862178/remove-rows-with-nas-in-data-frame}
 #'
 #' @export
 
 DropNA <- function(data, Var, message = TRUE)
 {
-	# Find term number
-	DataNames <- names(data)
-	TestExist <- Var %in% DataNames
-	if (!all(TestExist)){
-		stop("Variable(s) not found in the data frame.", call. = FALSE)
-	}
+    # Find term number
+    DataNames <- names(data)
+    TestExist <- Var %in% DataNames
+    if (!all(TestExist)){
+        stop("Variable(s) not found in the data frame.", call. = FALSE)
+    }
 
-	# Drop if NA
-	if (length(Var) == 1){
-		DataNoNA <- data[!is.na(data[, Var]), ]
+    # Drop if NA
+    if (length(Var) == 1){
+        DataNoNA <- data[!is.na(data[, Var]), ]
 
-		DataVar <- data[, Var]
-		DataNA <- DataVar[is.na(DataVar)]
-		TotalDropped <- length(DataNA)
-	}
-	else{
-		RowNA <- apply(data[, Var], 1, function(x){any(is.na(x))})
-		DataNoNA <- data[!RowNA, ]
+        DataVar <- data[, Var]
+        DataNA <- DataVar[is.na(DataVar)]
+        TotalDropped <- length(DataNA)
+    }
+    else{
+        RowNA <- apply(data[, Var], 1, function(x){any(is.na(x))})
+        DataNoNA <- data[!RowNA, ]
 
-		TotalDropped <- sum(RowNA)
-	}	
+        TotalDropped <- sum(RowNA)
+    }
 
   if (isTRUE(message)){
-	  message(paste(TotalDropped, "rows dropped from the data frame because of missing values." ))
+      message(paste(TotalDropped, "rows dropped from the data frame because of missing values." ))
   }
-	return(DataNoNA)
+    return(DataNoNA)
 }
 
-#' Create new variable(s) indicating if there are missing values in other 
+#' Create new variable(s) indicating if there are missing values in other
 #' variable(s)
 #'
 #' @param data a data frame object.
-#' @param Var a character vector naming the variable(s) within which you would 
+#' @param Var a character vector naming the variable(s) within which you would
 #' like to identify missing values.
-#' @param Stub a character string indicating the stub you would like to append 
+#' @param Stub a character string indicating the stub you would like to append
 #' to the new variables' name(s).
-#' @param reverse logical. If \code{reverse = FALSE} then missing values are 
-#' coded as \code{1} and non-missing values are coded as \code{0}. If 
-#' \code{reverse = TRUE} then missing values are coded as \code{0} and 
+#' @param reverse logical. If \code{reverse = FALSE} then missing values are
+#' coded as \code{1} and non-missing values are coded as \code{0}. If
+#' \code{reverse = TRUE} then missing values are coded as \code{0} and
 #' non-missing values are coded as \code{1}.
-#' @param message logical. Whether or not to give you a message about the names 
+#' @param message logical. Whether or not to give you a message about the names
 #' of the new variables that are created.
-#' 
+#'
 #' @examples
 #' # Create data frame
 #' a <- c(1, 2, 3, 4, NA)
-#' b <- c( 1, NA, 3, 4, 5) 
+#' b <- c( 1, NA, 3, 4, 5)
 #' ABData <- data.frame(a, b)
-#' 
+#'
 #' # Create varibles indicating missing values in columns a and b
 #' ABData1 <- NaVar(ABData, Var = c('a', 'b'))
-#' 
+#'
 #' # Create varible indicating missing values in columns a with reversed dummy
 #' ABData2 <- NaVar(ABData, Var = 'a', reverse = TRUE, message = FALSE)
 #'

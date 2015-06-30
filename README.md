@@ -4,7 +4,8 @@ DataCombine
 Christopher Gandrud
 
 Version 0.2.15
-[![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine)
+[![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine)![CRAN Downloads](http://cranlogs.r-pkg.org/badges/last-month/DataCombine)
+
 
 Please report any **bugs** or **suggestions** at:
 <https://github.com/christophergandrud/DataCombine/issues>.
@@ -29,7 +30,7 @@ given variable(s).
 - `FillIn`: fills in missing values of a variable from one data frame with the
 values from another variable.
 
-- `FindDups`: find duplicated values in a data frame and subsetting it to either 
+- `FindDups`: find duplicated values in a data frame and subsetting it to either
 include or not include them.
 
 - `FindReplace`: replaces multiple patterns found in a character string column
