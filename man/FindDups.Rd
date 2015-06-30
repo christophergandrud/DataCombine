@@ -5,7 +5,7 @@
 \title{Find duplicated values in a data frame and subsetting it to either include or
 not include them.}
 \usage{
-FindDups(data, Vars, NotDups = FALSE)
+FindDups(data, Vars, NotDups = FALSE, test = FALSE)
 }
 \arguments{
 \item{data}{a data frame to select the duplicated values from.}
@@ -15,9 +15,12 @@ values on.}
 
 \item{NotDups}{logical. If \code{TRUE} then a data frame without duplicated
 values is returned.}
+
+\item{test}{logical. If \code{TRUE} then the function will return an error
+if there are duplicated values.}
 }
 \value{
-a data frame
+a data frame, unless \code{test = TRUE} and there are duplicates.
 }
 \description{
 Find duplicated values in a data frame and subsetting it to either include or

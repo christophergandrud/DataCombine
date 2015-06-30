@@ -287,17 +287,22 @@ InsertRow <- function(data, NewRow, RowNum = NULL) {
 #' values on.
 #' @param NotDups logical. If \code{TRUE} then a data frame without duplicated
 #' values is returned.
+#' @param test logical. If \code{TRUE} then the function will return an error
+#' if there are duplicated values.
 #' 
-#' @return a data frame
+#' @return a data frame, unless \code{test = TRUE} and there are duplicates.
 #' 
 #' @export
 
-FindDups <- function(data, Vars, NotDups = FALSE) {
+FindDups <- function(data, Vars, NotDups = FALSE, test = FALSE) {
     dups <- data[duplicated(data[, Vars]), ]
-    message(sprintf('%s duplicates in the data frame.', nrow(dups)))
+    numb_dups <- nrow(dups)
+    message(sprintf('%s duplicates in the data frame.', numb_dups))
+    
+    if (isTRUE(test) & numb_dups != 0) stop('Find your duplicates!', .call = F)
     
     if (!isTRUE(NotDups)) out <- dups
     if (isTRUE(NotDups)) out <- data[!duplicated(data[, Vars]), ]
     
-    return(out)
+    if (!isTRUE(test)) return(out)
 }
