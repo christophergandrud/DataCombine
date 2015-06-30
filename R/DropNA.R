@@ -51,7 +51,7 @@ DropNA <- function(data, Var, message = TRUE)
 	}	
 
   if (isTRUE(message)){
-	  message(paste(TotalDropped, "rows dropped from the data frame." ))
+	  message(paste(TotalDropped, "rows dropped from the data frame because of missing values." ))
   }
 	return(DataNoNA)
 }

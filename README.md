@@ -3,7 +3,7 @@ DataCombine
 
 Christopher Gandrud
 
-Version 0.2.14
+Version 0.2.15
 [![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine)
 
 Please report any **bugs** or **suggestions** at:
@@ -28,6 +28,9 @@ given variable(s).
 
 - `FillIn`: fills in missing values of a variable from one data frame with the
 values from another variable.
+
+- `FindDups`: find duplicated values in a data frame and subsetting it to either 
+include or not include them.
 
 - `FindReplace`: replaces multiple patterns found in a character string column
 of a data frame.

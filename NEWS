@@ -1,3 +1,8 @@
+## Version 0.2.15
+
+- `FindDups` for finding duplicated values in a data frame and subsetting it 
+to either include or not include them.
+
 ## Version 0.2.14
 
 - `grepl.sub` now uses dot notation to pass arguments to `grepl`.
