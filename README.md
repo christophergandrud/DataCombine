@@ -30,7 +30,7 @@ given variable(s).
 - `FillIn`: fills in missing values of a variable from one data frame with the
 values from another variable.
 
-- `FindDups`: find duplicated values in a data frame and subsetting it to either
+- `FindDups`: find duplicated values in a data frame and subset it to either
 include or not include them.
 
 - `FindReplace`: replaces multiple patterns found in a character string column
