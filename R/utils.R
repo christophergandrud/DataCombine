@@ -299,7 +299,7 @@ FindDups <- function(data, Vars, NotDups = FALSE, test = FALSE) {
     numb_dups <- nrow(dups)
     message(sprintf('%s duplicates in the data frame.', numb_dups))
     
-    if (isTRUE(test) & numb_dups != 0) stop('Find your duplicates!', .call = F)
+    if (isTRUE(test) & numb_dups != 0) stop('Find your duplicates!', call. = F)
     
     if (!isTRUE(NotDups)) out <- dups
     if (isTRUE(NotDups)) out <- data[!duplicated(data[, Vars]), ]
