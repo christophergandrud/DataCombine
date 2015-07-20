@@ -279,7 +279,7 @@ InsertRow <- function(data, NewRow, RowNum = NULL) {
     return(data)
 }
 
-#' Find duplicated values in a data frame and subsetting it to either include or 
+#' Find duplicated values in a data frame and subset it to either include or 
 #' not include them.
 #' 
 #' @param data a data frame to select the duplicated values from.
