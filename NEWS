@@ -1,6 +1,10 @@
+## Version 0.2.16
+
+- `FindDups` documentation improvements.
+
 ## Version 0.2.15
 
-- `FindDups` for finding duplicated values in a data frame and subsetting it 
+- `FindDups` for finding duplicated values in a data frame and subsetting it
 to either include or not include them.
 
 ## Version 0.2.14
@@ -25,7 +29,7 @@ Allow arguments for `slide` to be passed throught `StartEnd`.
 
 ## Version 0.2.9
 
-Fixed a bug in `slide` when using factor class variables as `GroupVar`. 
+Fixed a bug in `slide` when using factor class variables as `GroupVar`.
 
 ## Version 0.2.8.3
 

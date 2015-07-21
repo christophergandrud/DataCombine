@@ -2,10 +2,10 @@
 % Please edit documentation in R/utils.R
 \name{FindDups}
 \alias{FindDups}
-\title{Find duplicated values in a data frame and subsetting it to either include or
+\title{Find duplicated values in a data frame and subset it to either include or
 not include them.}
 \usage{
-FindDups(data, Vars, NotDups = FALSE, test = FALSE)
+FindDups(data, Vars, NotDups = FALSE, test = FALSE, ...)
 }
 \arguments{
 \item{data}{a data frame to select the duplicated values from.}
@@ -18,12 +18,19 @@ values is returned.}
 
 \item{test}{logical. If \code{TRUE} then the function will return an error
 if there are duplicated values.}
+
+\item{...}{arguments to pass to \code{\link{duplicated}}.}
 }
 \value{
 a data frame, unless \code{test = TRUE} and there are duplicates.
 }
 \description{
-Find duplicated values in a data frame and subsetting it to either include or
+Find duplicated values in a data frame and subset it to either include or
 not include them.
+}
+\examples{
+Data <- data.frame(ID = c(1, 1, 2, 2), Value = c(1, 2, 3, 4))
+
+FindDups(Data, Vars = 'ID')
 }
 

@@ -279,9 +279,9 @@ InsertRow <- function(data, NewRow, RowNum = NULL) {
     return(data)
 }
 
-#' Find duplicated values in a data frame and subset it to either include or 
+#' Find duplicated values in a data frame and subset it to either include or
 #' not include them.
-#' 
+#'
 #' @param data a data frame to select the duplicated values from.
 #' @param Vars character vector of variables in \code{data} to find duplicated
 #' values on.
@@ -289,20 +289,26 @@ InsertRow <- function(data, NewRow, RowNum = NULL) {
 #' values is returned.
 #' @param test logical. If \code{TRUE} then the function will return an error
 #' if there are duplicated values.
+#' @param ... arguments to pass to \code{\link{duplicated}}.
+#'
+#' @examples
+#' Data <- data.frame(ID = c(1, 1, 2, 2), Value = c(1, 2, 3, 4))
 #' 
+#' FindDups(Data, Vars = 'ID')
+#'
 #' @return a data frame, unless \code{test = TRUE} and there are duplicates.
-#' 
+#'
 #' @export
 
-FindDups <- function(data, Vars, NotDups = FALSE, test = FALSE) {
-    dups <- data[duplicated(data[, Vars]), ]
+FindDups <- function(data, Vars, NotDups = FALSE, test = FALSE, ...) {
+    dups <- data[duplicated(data[, Vars], ...), ]
     numb_dups <- nrow(dups)
     message(sprintf('%s duplicates in the data frame.', numb_dups))
-    
+
     if (isTRUE(test) & numb_dups != 0) stop('Find your duplicates!', call. = F)
-    
+
     if (!isTRUE(NotDups)) out <- dups
-    if (isTRUE(NotDups)) out <- data[!duplicated(data[, Vars]), ]
-    
+    if (isTRUE(NotDups)) out <- data[!duplicated(data[, Vars], ...), ]
+
     if (!isTRUE(test)) return(out)
 }
