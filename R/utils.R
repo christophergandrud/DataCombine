@@ -307,8 +307,12 @@ FindDups <- function(data, Vars, NotDups = FALSE, test = FALSE, ...) {
 
     if (isTRUE(test) & numb_dups != 0) stop('Find your duplicates!', call. = F)
 
-    if (!isTRUE(NotDups)) out <- dups
+    if (!isTRUE(NotDups)) {
+        if (numb_dups > 0) {
+            out <- dups[, Vars]
+        }
+    } 
     if (isTRUE(NotDups)) out <- data[!duplicated(data[, Vars], ...), ]
 
-    if (!isTRUE(test)) return(out)
+    if (!isTRUE(test) & numb_dups > 0) return(out)
 }
