@@ -3,7 +3,7 @@ DataCombine
 
 Christopher Gandrud
 
-Version 0.2.16
+Version 0.2.17
 [![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine)![CRAN Downloads](http://cranlogs.r-pkg.org/badges/last-month/DataCombine)
 
 
@@ -16,6 +16,9 @@ Please report any **bugs** or **suggestions** at:
 data sets--especially time-series cross-section data--easier. The package is
 continually being developed as I turn lines of code that I frequently use into
 single functions. It currently includes the following functions:
+
+- `change`: calculates the absolute, percentage, and proportion change from 
+a specified lag, including within groups.
 
 - `CountSpell`: function that returns a variable counting the spell number
 for an observation. Works with grouped data.
@@ -48,9 +51,6 @@ variables to the front.
 
 - `NaVar`: create new variable(s) indicating if there are missing values in
 other variable(s).
-
-- `change`: calculates the absolut, percentage, and proportion change from 
-a specified lag, including within groups.
 
 - `shift`: creates lag and lead variables, including for time-series
 cross-sectional data. The shifted variable is returned to a new vector. This
