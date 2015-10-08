@@ -49,8 +49,8 @@ variables to the front.
 - `NaVar`: create new variable(s) indicating if there are missing values in
 other variable(s).
 
-- `PercChange`: calculates the percentage change from a specified lag, including
-within groups.
+- `change`: calculates the absolut, percentage, and proportion change from 
+a specified lag, including within groups.
 
 - `shift`: creates lag and lead variables, including for time-series
 cross-sectional data. The shifted variable is returned to a new vector. This

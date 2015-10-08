@@ -1,3 +1,9 @@
+## Version 0.2.7
+
+- `change` calculate the changes (absolute, percent, and proportion) changes 
+from a specified lag, including within groups. Replaced `PercChange` which 
+has the same syntax, but did not find absolute changes.
+
 ## Version 0.2.16
 
 - `FindDups` code and documentation improvements.
