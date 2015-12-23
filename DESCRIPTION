@@ -2,8 +2,8 @@ Package: DataCombine
 Title: Tools for Easily Combining and Cleaning Data Sets
 Description: Tools for combining and cleaning data sets, particularly
     with grouped and time series data.
-Version: 0.2.17
-Date: 2015-10-08
+Version: 0.2.18
+Date: 2015-12-23
 Authors@R: c(
     person("Christopher", "Gandrud", email = "christopher.gandrud@gmail.com",
     role = c("aut", "cre"))
@@ -19,3 +19,4 @@ Imports:
 Suggests:
     devtools,
     testthat
+RoxygenNote: 5.0.1

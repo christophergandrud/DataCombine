@@ -1,4 +1,9 @@
-## Version 0.2.7
+## Version 0.2.18
+
+- `SpreadDummy` now starts by coercing the `data` to a data frame, so that it
+works more smoothly with dplyr data tables.
+
+## Version 0.2.17
 
 - `change` calculate the changes (absolute, percent, and proportion) changes 
 from a specified lag, including within groups. Replaced `PercChange` which 
