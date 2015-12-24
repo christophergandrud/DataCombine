@@ -1,31 +1,50 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!doctype html>
+<html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>DataCombine by christophergandrud</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
   <body>
-    <section class="page-header">
-      <h1 class="project-name">DataCombine</h1>
-      <h2 class="project-tagline">R tools for combining and cleaning data sets. </h2>
-      <a href="https://github.com/christophergandrud/DataCombine" class="btn">View on GitHub</a>
-      <a href="https://github.com/christophergandrud/DataCombine/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/christophergandrud/DataCombine/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/christophergandrud/DataCombine">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/christophergandrud/DataCombine/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/christophergandrud/DataCombine/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
-    <section class="main-content">
-      <h1>
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>DataCombine</h1>
+          <p>R tools for combining and cleaning data sets. </p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/christophergandrud">christophergandrud</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
 <a id="datacombine" class="anchor" href="#datacombine" aria-hidden="true"><span class="octicon octicon-link"></span></a>DataCombine</h1>
 
 <p>Christopher Gandrud</p>
 
-<p>Version 0.2.15
-<a href="https://travis-ci.org/christophergandrud/DataCombine"><img src="https://travis-ci.org/christophergandrud/DataCombine.png" alt="Build Status"></a><img src="http://cranlogs.r-pkg.org/badges/last-month/DataCombine" alt="CRAN Downloads"></p>
+<p>Version 0.2.18
+<a href="https://travis-ci.org/christophergandrud/DataCombine"><img src="https://travis-ci.org/christophergandrud/DataCombine.png" alt="Build Status"></a><a href="http://cran.r-project.org/package=DataCombine"><img src="http://www.r-pkg.org/badges/version/DataCombine" alt="CRAN Version"></a><img src="http://cranlogs.r-pkg.org/badges/last-month/DataCombine" alt="CRAN Downloads"></p>
 
 <p>Please report any <strong>bugs</strong> or <strong>suggestions</strong> at:
 <a href="https://github.com/christophergandrud/DataCombine/issues">https://github.com/christophergandrud/DataCombine/issues</a>.</p>
@@ -39,6 +58,8 @@ continually being developed as I turn lines of code that I frequently use into
 single functions. It currently includes the following functions:</p>
 
 <ul>
+<li><p><code>change</code>: calculates the absolute, percentage, and proportion change from 
+a specified lag, including within groups.</p></li>
 <li><p><code>CountSpell</code>: function that returns a variable counting the spell number
 for an observation. Works with grouped data.</p></li>
 <li><p><code>dMerge</code>: merges 2 data frames and report/drop/keeps only duplicates.</p></li>
@@ -47,7 +68,7 @@ given variable(s).</p></li>
 <li><p><code>FillDown</code>: fills in missing (<code>NA</code>) values with the previous non-missing value</p></li>
 <li><p><code>FillIn</code>: fills in missing values of a variable from one data frame with the
 values from another variable.</p></li>
-<li><p><code>FindDups</code>: find duplicated values in a data frame and subsetting it to either
+<li><p><code>FindDups</code>: find duplicated values in a data frame and subset it to either
 include or not include them.</p></li>
 <li><p><code>FindReplace</code>: replaces multiple patterns found in a character string column
 of a data frame.</p></li>
@@ -60,8 +81,6 @@ if you have a data frame with many variables and want to move a variable or
 variables to the front.</p></li>
 <li><p><code>NaVar</code>: create new variable(s) indicating if there are missing values in
 other variable(s).</p></li>
-<li><p><code>PercChange</code>: calculates the percentage change from a specified lag, including
-within groups.</p></li>
 <li><p><code>shift</code>: creates lag and lead variables, including for time-series
 cross-sectional data. The shifted variable is returned to a new vector. This
 function is largely based on
@@ -98,17 +117,11 @@ pesky tasks I do repeatedly that would be simpler if they were a function.</p>
 <p>You can also install the most recent stable version with <code>install_github</code> from
 the <a href="https://github.com/hadley/devtools">devtools</a>:</p>
 
-<div class="highlight highlight-S"><pre>devtools::install_github(<span class="pl-s"><span class="pl-pds">'</span>christophergandrud/DataCombine<span class="pl-pds">'</span></span>)</pre></div>
+<div class="highlight highlight-source-asm-x86"><pre>devtools::install_github(<span class="pl-s"><span class="pl-pds">'</span>christophergandrud/DataCombine<span class="pl-pds">'</span></span>)</pre></div>
+      </section>
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/christophergandrud/DataCombine">DataCombine</a> is maintained by <a href="https://github.com/christophergandrud">christophergandrud</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
-    </section>
-
-  
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
   </body>
 </html>
-
