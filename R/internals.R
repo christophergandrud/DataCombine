@@ -3,6 +3,7 @@
 #'
 #' @source Directly from the \code{forecast} package.
 #' @keywords internals
+#' @importFrom stats cor ts ksmooth tsp tsp<-
 #' @noRd
 
 ma <- function(x, order, centre = TRUE)
