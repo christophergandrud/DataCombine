@@ -211,7 +211,7 @@ dMerge <- function(data1, data2, Var, dropDups = TRUE, dupsOut = FALSE,
     # Perform basic merge
     Comb <- merge(data1, data2, by = Var, all = all, all.x = all.x,
         all.y = all.y,
-        sort = TRUE, suffixes = c(".x",".y"),
+        sort = TRUE, suffixes = suffixes,
         incomparables = incomparables)
 
     # Find duplicated
