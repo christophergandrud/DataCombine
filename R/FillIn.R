@@ -52,6 +52,12 @@ FillIn <- function(D1, D2, Var1, Var2,
     } else {
         Var2 <- Var2
     }
+    
+    # Ensure that Var1 and Var2 exist in D1 and D2
+    if (!(Var1 %in% names(D1))) stop('Var1 must be a variable in D1.', 
+                                     call. = FALSE)
+    if (!(Var2 %in% names(D2))) stop('Var2 must be a variable in D2.', 
+                                     call. = FALSE)
 
     # Ensure that Var1 and Var2 are of the same class
     if (class(D1[, Var1]) != class(D2[, Var2])){

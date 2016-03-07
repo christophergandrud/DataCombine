@@ -1,7 +1,15 @@
+## Version 0.2.20
+
+- `Var` in `dMerge` is deprecated. Use `by` instead to match `merge` syntax 
+more closely.
+
 ## Version 0.2.19
 
-Fixed a bug in `dMerge` that overwrote users `suffixes` specification. 
+- Fixed a bug in `dMerge` that overwrote users `suffixes` specification. 
 Thanks to @hplieninger for spotting this.
+
+- `FillIn` intelligently fails if `Var1` and `Var2` do not exist in their 
+respective data.frames.
 
 ## Version 0.2.18
 

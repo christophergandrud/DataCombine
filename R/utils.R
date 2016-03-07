@@ -171,8 +171,8 @@ VarDrop <- function(data, Var) {
 #'
 #' @param data1 a data frame. The first data frame to merge.
 #' @param data2 a data frame. The second data frame to merge.
-#' @param Var character vector containing the names of the variables merge by.
-#' See \code{\link{merge}}.
+#' @param by specifications of the columns used for merging. 
+#' @param Var depricated.
 #' @param dropDups logical. Whether or not to drop duplicated rows based on
 #' \code{Var}. If \code{dropDups = FALSE} then it gives a count of the
 #' duplicated rows.
@@ -199,7 +199,7 @@ VarDrop <- function(data, Var) {
 #'
 #' @export
 
-dMerge <- function(data1, data2, Var, dropDups = TRUE, dupsOut = FALSE,
+dMerge <- function(data1, data2, by, Var, dropDups = TRUE, dupsOut = FALSE,
     fromLast = FALSE, all = FALSE, all.x = all, all.y = all,
     sort = TRUE, suffixes = c(".x",".y"),
     incomparables = NULL){
@@ -207,15 +207,20 @@ dMerge <- function(data1, data2, Var, dropDups = TRUE, dupsOut = FALSE,
         message("dropDups ignored")
         dropDups <- FALSE
     }
+    if (!missing(Var)) {
+        warning('Var is depricated. Transfering value to "by" argument.', 
+                call. = FALSE)
+        by <- Var
+    }
 
     # Perform basic merge
-    Comb <- merge(data1, data2, by = Var, all = all, all.x = all.x,
+    Comb <- merge(data1, data2, by = by, all = all, all.x = all.x,
         all.y = all.y,
         sort = TRUE, suffixes = suffixes,
         incomparables = incomparables)
 
     # Find duplicated
-    DupDF <- Comb[duplicated(Comb[, Var]), ]
+    DupDF <- Comb[duplicated(Comb[, by]), ]
 
     # Inform user of duplicates and drop if requested
     if (is.null(DupDF)) {

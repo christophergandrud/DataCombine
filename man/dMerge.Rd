@@ -4,7 +4,7 @@
 \alias{dMerge}
 \title{Merges 2 data frames and report/drop/keeps only duplicates.}
 \usage{
-dMerge(data1, data2, Var, dropDups = TRUE, dupsOut = FALSE,
+dMerge(data1, data2, by, Var, dropDups = TRUE, dupsOut = FALSE,
   fromLast = FALSE, all = FALSE, all.x = all, all.y = all,
   sort = TRUE, suffixes = c(".x", ".y"), incomparables = NULL)
 }
@@ -13,8 +13,9 @@ dMerge(data1, data2, Var, dropDups = TRUE, dupsOut = FALSE,
 
 \item{data2}{a data frame. The second data frame to merge.}
 
-\item{Var}{character vector containing the names of the variables merge by.
-See \code{\link{merge}}.}
+\item{by}{specifications of the columns used for merging.}
+
+\item{Var}{depricated.}
 
 \item{dropDups}{logical. Whether or not to drop duplicated rows based on
 \code{Var}. If \code{dropDups = FALSE} then it gives a count of the
