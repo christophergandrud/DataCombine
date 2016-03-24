@@ -5,7 +5,8 @@
 #'
 #' @param data a data frame object.
 #' @param Var a character vector naming the variables you would like to have
-#' only non-missing (NA) values.
+#' only non-missing (NA) values. If missing, then all NAs will be dropped
+#' from the data frame.
 #' @param message logical. Whether or not to give you a message about the number
 #' of rows that are dropped.
 #'
@@ -20,6 +21,9 @@
 #'
 #' # Remove missing values in columns a and b
 #' ABSubData <- DropNA(ABData, Var = c("a", "b"))
+#' 
+#' # Remove missing values in all columns of ABDatat
+#' AllSubData <- DropNA(ABData)
 #'
 #' @source Partially based on Stack Overflow answer written by donshikin:
 #' \url{http://stackoverflow.com/questions/4862178/remove-rows-with-nas-in-data-frame}
@@ -30,6 +34,10 @@ DropNA <- function(data, Var, message = TRUE)
 {
     # Find term number
     DataNames <- names(data)
+    if (missing(Var)) {
+        message('No Var specified. Dropping all NAs from the data frame.\n')
+        Var <- names(data)
+    }
     TestExist <- Var %in% DataNames
     if (!all(TestExist)){
         stop("Variable(s) not found in the data frame.", call. = FALSE)

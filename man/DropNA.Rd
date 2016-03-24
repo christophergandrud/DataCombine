@@ -14,7 +14,8 @@ DropNA(data, Var, message = TRUE)
 \item{data}{a data frame object.}
 
 \item{Var}{a character vector naming the variables you would like to have
-only non-missing (NA) values.}
+only non-missing (NA) values. If missing, then all NAs will be dropped
+from the data frame.}
 
 \item{message}{logical. Whether or not to give you a message about the number
 of rows that are dropped.}
@@ -34,6 +35,9 @@ ASubData <- DropNA(ABData, Var = "a", message = FALSE)
 
 # Remove missing values in columns a and b
 ABSubData <- DropNA(ABData, Var = c("a", "b"))
+
+# Remove missing values in all columns of ABDatat
+AllSubData <- DropNA(ABData)
 
 }
 
