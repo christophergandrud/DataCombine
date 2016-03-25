@@ -3,7 +3,7 @@ Title: Tools for Easily Combining and Cleaning Data Sets
 Description: Tools for combining and cleaning data sets, particularly
     with grouped and time series data.
 Version: 0.2.20
-Date: 2016-03-24
+Date: 2016-03-25
 Authors@R: c(
     person("Christopher", "Gandrud", email = "christopher.gandrud@gmail.com",
     role = c("aut", "cre"))
@@ -15,7 +15,7 @@ Depends:
     R (>= 3.0.2)
 Imports:
     data.table,
-    dplyr (>= 0.3)
+    dplyr (>= 0.4)
 Suggests:
     devtools,
     testthat

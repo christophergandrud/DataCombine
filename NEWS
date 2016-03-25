@@ -1,5 +1,7 @@
 ## Version 0.2.20
 
+- Internal changes to enable compatability with dplyr version 0.4.3.
+
 - The `Var` argument in `dMerge` is deprecated. Use `by` instead to match 
 `merge` syntax more closely.
 

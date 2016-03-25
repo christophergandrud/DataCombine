@@ -63,7 +63,7 @@
 #' \url{http://ctszkin.com/2012/03/11/generating-a-laglead-variables/}
 #'
 #'
-#' @importFrom dplyr group_by group_by_ summarize mutate ungroup %>%
+#' @importFrom dplyr group_by group_by_ summarize mutate ungroup %>% bind_rows
 #' @export
 
 slide <- function(data, Var, TimeVar, GroupVar, NewVar, slideBy = -1,
@@ -177,10 +177,9 @@ slide <- function(data, Var, TimeVar, GroupVar, NewVar, slideBy = -1,
         data[, NewVar] <- vars$NewVarX
     }
     if (isTRUE(keepInvalid) & !is.null(FullData)) {
-        invalid <- FullData[(FullData[, GroupVar] %in% Dropping),
-            ]
+        invalid <- FullData[(FullData[, GroupVar] %in% Dropping), ]
         invalid[, NewVar] <- NA
-        data <- rbind(data, invalid)
+        data <- bind_rows(data, invalid)
     }
     data <- ungroup(data)
     class(data) <- "data.frame"
