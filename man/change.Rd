@@ -2,10 +2,11 @@
 % Please edit documentation in R/PercChange.R
 \name{change}
 \alias{change}
-\title{Calculate the changes (absolute, percent, and proportion) changes from a 
+\title{Calculate the changes (absolute, percent, and proportion) changes from a
 specified lag, including within groups}
 \usage{
-change(data, Var, GroupVar, NewVar, slideBy = -1, type = "percent", ...)
+change(data, Var, GroupVar, TimeVar, NewVar, slideBy = -1, type = "percent",
+  ...)
 }
 \arguments{
 \item{data}{a data frame object.}
@@ -18,6 +19,9 @@ within which the percentage change will be found for (i.e. countries in a
 time series). If \code{GroupVar} is missing then the entire data frame is
 treated as one unit.}
 
+\item{TimeVar}{optional character string naming the time variable. If
+specified then the data is ordered by Var-TimeVar before finding the change.}
+
 \item{NewVar}{a character string specifying the name for the new variable to
 place the percentage change in.}
 
@@ -25,7 +29,7 @@ place the percentage change in.}
 the percentage change comparison for. Positive values shift the data up--lead
 the data.}
 
-\item{type}{character string set at \code{absolute}, \code{percent} for 
+\item{type}{character string set at \code{absolute}, \code{percent} for
 percentages, or \code{proportion} to find proportions.}
 
 \item{...}{arguments passed to \code{\link{slide}}.}
@@ -34,13 +38,13 @@ percentages, or \code{proportion} to find proportions.}
 a data frame
 }
 \description{
-Calculate the changes (absolute, percent, and proportion) changes from a 
+Calculate the changes (absolute, percent, and proportion) changes from a
 specified lag, including within groups
 }
 \details{
-Finds the absolute, percentage, or proportion change for over a 
-given time period either within groups of data or the whole data frame. 
-Important: the data must be in time order and, if groups are used, 
+Finds the absolute, percentage, or proportion change for over a
+given time period either within groups of data or the whole data frame.
+Important: the data must be in time order and, if groups are used,
 group-time order.
 }
 \examples{

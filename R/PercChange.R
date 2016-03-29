@@ -56,7 +56,7 @@ PercChange <- function(data, Var, GroupVar, NewVar, slideBy = -1,
 }
 
 
-#' Calculate the changes (absolute, percent, and proportion) changes from a 
+#' Calculate the changes (absolute, percent, and proportion) changes from a
 #' specified lag, including within groups
 #'
 #' @param data a data frame object.
@@ -66,19 +66,21 @@ PercChange <- function(data, Var, GroupVar, NewVar, slideBy = -1,
 #' within which the percentage change will be found for (i.e. countries in a
 #' time series). If \code{GroupVar} is missing then the entire data frame is
 #' treated as one unit.
+#' @param TimeVar optional character string naming the time variable. If
+#' specified then the data is ordered by Var-TimeVar before finding the change.
 #' @param NewVar a character string specifying the name for the new variable to
 #' place the percentage change in.
 #' @param slideBy numeric value specifying how many rows (time units) to make
 #' the percentage change comparison for. Positive values shift the data up--lead
 #' the data.
-#' @param type character string set at \code{absolute}, \code{percent} for 
+#' @param type character string set at \code{absolute}, \code{percent} for
 #' percentages, or \code{proportion} to find proportions.
 #' @param ... arguments passed to \code{\link{slide}}.
 #'
 #' @return a data frame
-#' @details Finds the absolute, percentage, or proportion change for over a 
-#' given time period either within groups of data or the whole data frame. 
-#' Important: the data must be in time order and, if groups are used, 
+#' @details Finds the absolute, percentage, or proportion change for over a
+#' given time period either within groups of data or the whole data frame.
+#' Important: the data must be in time order and, if groups are used,
 #' group-time order.
 #'
 #' @examples
@@ -96,7 +98,7 @@ PercChange <- function(data, Var, GroupVar, NewVar, slideBy = -1,
 #' Out
 #' @export
 
-change <- function(data, Var, GroupVar, NewVar, slideBy = -1,
+change <- function(data, Var, GroupVar, TimeVar, NewVar, slideBy = -1,
                        type = "percent", ...){
     if (!(type %in% c('absolute', 'proportion', 'percent'))){
         stop("type must be 'absolute', 'proportion', or 'percent'." )
@@ -106,19 +108,18 @@ change <- function(data, Var, GroupVar, NewVar, slideBy = -1,
     }
     Temp <- slide(data = data, Var = Var, GroupVar = GroupVar, NewVar = NewVar,
                   slideBy = slideBy, ...)
-    
+
     if (type == 'absolute') {
         Temp[, NewVar] <- Temp[, Var] - Temp[, NewVar]
     }
-    
+
     if (type == 'proportion') {
         Temp[, NewVar] <- (Temp[, Var] - Temp[, NewVar])/Temp[, NewVar]
     }
-    
+
     if (type == 'percent'){
         Temp[, NewVar] <- (Temp[, Var] - Temp[, NewVar])/Temp[, NewVar]
         Temp[, NewVar] <- Temp[, NewVar]*100
     }
     Temp
 }
-

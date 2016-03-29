@@ -1,18 +1,22 @@
+## Version 0.2.21
+
+Improved documentation.
+
 ## Version 0.2.20
 
 - Internal changes to enable compatability with dplyr version 0.4.4.
 
-- The `Var` argument in `dMerge` is deprecated. Use `by` instead to match 
+- The `Var` argument in `dMerge` is deprecated. Use `by` instead to match
 `merge` syntax more closely.
 
-- `DropNA` drops all NAs from the supplied data frame if `Var` is missing. 
+- `DropNA` drops all NAs from the supplied data frame if `Var` is missing.
 
 ## Version 0.2.19
 
-- Fixed a bug in `dMerge` that overwrote users `suffixes` specification. 
+- Fixed a bug in `dMerge` that overwrote users `suffixes` specification.
 Thanks to @hplieninger for spotting this.
 
-- `FillIn` intelligently fails if `Var1` and `Var2` do not exist in their 
+- `FillIn` intelligently fails if `Var1` and `Var2` do not exist in their
 respective data.frames.
 
 ## Version 0.2.18
@@ -22,8 +26,8 @@ works more smoothly with dplyr data tables.
 
 ## Version 0.2.17
 
-- `change` calculate the changes (absolute, percent, and proportion) changes 
-from a specified lag, including within groups. Replaced `PercChange` which 
+- `change` calculate the changes (absolute, percent, and proportion) changes
+from a specified lag, including within groups. Replaced `PercChange` which
 has the same syntax, but did not find absolute changes.
 
 ## Version 0.2.16
@@ -97,23 +101,23 @@ Minor `FillIn` change checking for `missing` rather than `NULL` for `Var2`.
 
 Fixed a bug in `slide` when there are invalid sliding values.
 
-### Version 0.2.6
+## Version 0.2.6
 
 - Fixed a misspelling in the `CountSpell` documentation. Thanks to
 Sascha Schuster.
 
-### Version 0.2.5
+## Version 0.2.5
 
 - Minor error handling improvements to `grepl.sub`.
 
-### Version 0.2.4
+## Version 0.2.4
 
 - Added `FillDown` a function that fills in missing (NA) values with the
 previous non-missing value.
 
 - Internal code formating improvements.
 
-### Version 0.2.3
+## Version 0.2.3
 
 - `keepInvalid` argument added to `slide`. This allows the user to specify
 whether or not to keep observations for groups for which no valid lag/lead can
@@ -121,18 +125,18 @@ be created due to an insufficient number of time points. If TRUE then these
 groups are returned to the bottom of the data frame and NA is given for their
 new lag/lead variable value.
 
-### Version 0.2.2
+## Version 0.2.2
 
 Minor internal improvement where slide (and associated functions) return only
 data frame class objects
 
-### Version 0.2.1
+## Version 0.2.1
 
 Minor documentation improvements to `slideMA`.
 
 Internal improvements to `MoveFront`.
 
-### Version 0.2
+## Version 0.2
 
 Added `CountSpell`, a function that returns a variable counting the spell number
 for an observation. Works with grouped data.
@@ -142,11 +146,11 @@ variable.
 
 Documentation and internal code improvements.
 
-### Version 0.1.27
+## Version 0.1.27
 
 `FillIn` internal code improvements.
 
-### Version 0.1.26
+## Version 0.1.26
 
 !!! `grepl.sub` argument `patterns` changed to `pattern`. !!!
 
@@ -157,32 +161,32 @@ Minor documentation improvements.
 
 Minor internal code cleaning.
 
-### Version 0.1.25
+## Version 0.1.25
 
 No longer depends on the forecast package.
 
-### Version 0.1.24
+## Version 0.1.24
 
 `slide` and `slideMA` now rely on `dplyr` rather than `plyr` for speed
 improvements.
 
-### Version 0.1.23
+## Version 0.1.23
 
 Minor `StartEnd` bug fix.
 
-### Version 0.1.22
+## Version 0.1.22
 
 `StartEnd` function added. Finds the starting and ending time points of a spell.
 
 Small improvement to `slide` to drop temporary 'fake' variable' before returning the data frame.
 
-### Version 0.1.21
+## Version 0.1.21
 
 Small improvement to `FillIn` so that it doesn't attempt to find correlations if Var2 is not numeric.
 
 Error message improvements.
 
-### Version 0.1.20
+## Version 0.1.20
 
 Added `SpreadDummy` to spread a dummy variable (1's and 0') over a specified time period and for specified groups.
 
@@ -190,82 +194,82 @@ Improved error handling in `slide` for when the number of rows in a group is sma
 
 Minor argument default changes in `FindReplace`.
 
-### Version 0.1.19
+## Version 0.1.19
 
 Added `slideMA` for creating a moving average for a period before or after each time point for a given variable.
 
 Message improvements to `shift`
 
-### Version 0.1.18
+## Version 0.1.18
 
 Added `NaVar` for creating new variable(s) indicating if there are missing values in other variable(s).
 
 Minor internal improvements to `rmExcept`.
 
-### Version 0.1.17
+## Version 0.1.17
 
 Added `TimeFill` for creating a continuous Unit-Time-Dummy data frame from a
 data frame with Unit-Start-End times.
 
-### Version 0.1.16
+## Version 0.1.16
 
 Added `message` option to `DropNA`. Allows the user to turn of the drop message.
 
-### Version 0.1.15
+## Version 0.1.15
 
 Added `VarDrop` for dropping one or more variables from a data frame.
 
 Added `dMerge` which merges 2 data frames and reports/drops/keeps only
 duplicates.
 
-### Version 0.1.14
+## Version 0.1.14
 
 Improve messages for `slide`.
 
-### Version 0.1.13
+## Version 0.1.13
 
 Added `exact`, `ignore.case`, and `fixed` arguments to `MoveFront` for more flexible variable name matching. Thanks to Felix Haas for the suggestion.
 
 Minor documentation improvements.
 
-### Version 0.1.12
+## Version 0.1.12
 
 Added `PercChange` for calculating the percentage change from a specified lag, including within groups.
 
-### Version 0.1.11
+## Version 0.1.11
 
 Added `exact` argument to `FindReplace` to only replace exact pattern matches. Also added argument `vector` to return a vector of the replacement variable
 rather than the whole data frame.
 
 Improved warnings for `FindReplace`.
 
-### Version 0.1.10
+## Version 0.1.10
 
 Added `FindReplace` function to replace multiple patterns found in a character string column of a data frame
 
-### Version 0.1.9
+## Version 0.1.9
 
 Minor documentation improvements.
 
-### Version 0.1.8
+## Version 0.1.8
 
 Added `grepl.sub` function to subset a data frame if a specified pattern is
 found in a character string.
 
-### Version 0.1.7
+## Version 0.1.7
 
 Added the utility `rmExcept` for removing all objects from a workspace except
 for those specified by the user.
 
-### Version 0.1.6
+## Version 0.1.6
 
 Speed improvements made to `slide`. Thanks to briatte.
 
-### Version 0.1.5.2
+## Version 0.1.5.2
 
 `FillIn` now allows you to drop variables from `D2` in the resulting data set.
 
-### Version 0.1.5.1
+## Version 0.1.5.1
 
 `MoveFront` can now move more than one variable to the front of a data frame.
 
@@ -275,26 +279,26 @@ Bug fix for `slide` argument `NewVar`.
 
 Documentation improvements.
 
-### Version 0.1.5
+## Version 0.1.5
 
 Added `slide` and `shift` functions for lagging and leading variables. `shift`
 is largely based on TszKin Julian's `shift` function:
 <http://ctszkin.com/2012/03/11/generating-a-laglead-variables/>.
 
-### Version 0.1.3
+## Version 0.1.3
 
 Added `DropNA` to drop observations in a data frame with missing values for
 given variables.
 
-### Version 0.1.2
+## Version 0.1.2
 
 Stop message for `MoveFront` when variable does not exists. Other minor
 documentation changes.
 
-### Version 0.1.1
+## Version 0.1.1
 
 Minor update to `FillIn` for data.frame 1.8.8.
 
-### Version 0.1
+## Version 0.1
 
 First version including the `FillIn` and `MoveFront` commands.

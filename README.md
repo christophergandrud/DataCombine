@@ -3,7 +3,7 @@ DataCombine
 
 Christopher Gandrud
 
-Version 0.2.20
+Version 0.2.21
 [![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine) [![CRAN Version](http://www.r-pkg.org/badges/version/DataCombine)](http://cran.r-project.org/package=DataCombine) ![CRAN Downloads](http://cranlogs.r-pkg.org/badges/last-month/DataCombine) ![CRAN Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/DataCombine)
 
 
