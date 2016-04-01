@@ -1,6 +1,9 @@
 ## Version 0.2.21
 
-Improved documentation.
+- `CasesTable` function added to report cases after listwise deletion of 
+missing values for time-series cross-sectional data.
+
+- Improved documentation.
 
 ## Version 0.2.20
 

@@ -7,6 +7,18 @@ time-series cross-sectional data.}
 \usage{
 CasesTable(data, GroupVar, TimeVar, Vars)
 }
+\arguments{
+\item{data}{a data frame with the full sample.}
+
+\item{GroupVar}{a character string specifying the variable in \code{data} 
+which contains the group IDs.}
+
+\item{TimeVar}{an optional character string specifying the variable in 
+\code{data} which contains the time variable.}
+
+\item{Vars}{a character vector with variables names from \code{data}
+for which you would like to listwise delete observations with missing values.}
+}
 \value{
 If \code{TimeVar} is specified then a data frame is returned with 
 three colums. One identifying the \code{GroupVar} and two others specifying 

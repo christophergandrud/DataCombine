@@ -17,6 +17,9 @@ data sets--especially time-series cross-section data--easier. The package is
 continually being developed as I turn lines of code that I frequently use into
 single functions. It currently includes the following functions:
 
+- `CasesTable` function added to report cases after listwise deletion of 
+missing values for time-series cross-sectional data.
+
 - `change`: calculates the absolute, percentage, and proportion change from 
 a specified lag, including within groups.
 
@@ -84,7 +87,8 @@ frame with `Unit`-`Start`-`End` times.
 ## Updates
 
 I will continue to add to the package as I build data sets and run across other
-pesky tasks I do repeatedly that would be simpler if they were a function.
+pesky tasks I do repeatedly that would be simpler if they were completed by
+a single function.
 
 ## Installation
 

@@ -1,6 +1,14 @@
 #' Create reports cases after listwise deletion of missing values for 
 #' time-series cross-sectional data.
 #' 
+#' @param data a data frame with the full sample.
+#' @param GroupVar a character string specifying the variable in \code{data} 
+#' which contains the group IDs.
+#' @param TimeVar an optional character string specifying the variable in 
+#' \code{data} which contains the time variable.
+#' @param Vars a character vector with variables names from \code{data}
+#' for which you would like to listwise delete observations with missing values.
+#' 
 #' @return If \code{TimeVar} is specified then a data frame is returned with 
 #' three colums. One identifying the \code{GroupVar} and two others specifying 
 #' each unique value of \code{GroupVar}'s first and last observation time 
@@ -40,6 +48,14 @@ CasesTable <- function(data, GroupVar, TimeVar, Vars) {
     }
     
     if (!missing(Vars)) {
+        # Determine if Vars exists in data
+        DataNames <- names(data)
+        TestExist <- Vars %in% DataNames
+        
+        if (!isTRUE(TestExist)) {
+            stop(paste(Vars, "was not found in the data frame."),
+                 call. = FALSE)
+        }
         if (missing(TimeVar)) {
             keep_vars <- c(GroupVar, Vars)
         }
