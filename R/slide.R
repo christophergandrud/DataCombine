@@ -70,7 +70,7 @@ slide <- function(data, Var, TimeVar, GroupVar, NewVar, slideBy = -1,
     keepInvalid = FALSE, reminder = TRUE) {
     fake <- total <- FullData <- NULL
     if (!missing(GroupVar) & "data.table" %in% class(data))
-        stop(paste("slide does not support data.tables with with Grouped variables.\n",
+        stop(paste("slide does not support data.tables with Grouped variables.\n",
             "Convert to data.frame and try again."), call. = F)
 
     if (!missing(GroupVar) & "tbl_df" %in% class(data)) {
