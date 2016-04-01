@@ -93,6 +93,6 @@ pesky tasks I do repeatedly that would be simpler if they were a function.
 You can also install the most recent stable version with `install_github` from
 the [devtools](https://github.com/hadley/devtools):
 
-```{S}
+```{r}
 devtools::install_github('christophergandrud/DataCombine')
 ```

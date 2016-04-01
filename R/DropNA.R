@@ -5,15 +5,15 @@
 #'
 #' @param data a data frame object.
 #' @param Var a character vector naming the variables you would like to have
-#' only non-missing (NA) values. If missing, then all NAs will be dropped
-#' from the data frame.
+#' only non-missing (\code{NA}) values. If not specified, then all \code{NA}s
+#' will be dropped from the data frame.
 #' @param message logical. Whether or not to give you a message about the number
 #' of rows that are dropped.
 #'
 #' @examples
 #' # Create data frame
-#' a <- c(1, 2, 3, 4, NA)
-#' b <- c( 1, NA, 3, 4, 5)
+#' a <- c(1:4, NA)
+#' b <- c(1, NA, 3:5)
 #' ABData <- data.frame(a, b)
 #'
 #' # Remove missing values from column a
@@ -21,7 +21,7 @@
 #'
 #' # Remove missing values in columns a and b
 #' ABSubData <- DropNA(ABData, Var = c("a", "b"))
-#' 
+#'
 #' # Remove missing values in all columns of ABDatat
 #' AllSubData <- DropNA(ABData)
 #'
@@ -35,7 +35,9 @@ DropNA <- function(data, Var, message = TRUE)
     # Find term number
     DataNames <- names(data)
     if (missing(Var)) {
-        message('No Var specified. Dropping all NAs from the data frame.\n')
+        if (isTRUE(message)) {
+            message('No Var specified. Dropping all NAs from the data frame.\n')
+        }
         Var <- names(data)
     }
     TestExist <- Var %in% DataNames
@@ -94,25 +96,25 @@ DropNA <- function(data, Var, message = TRUE)
 #' @export
 
 NaVar <- function(data, Var, Stub = 'Miss_', reverse = FALSE, message = TRUE){
-  DataNames <- names(data)
-  TestExist <- Var %in% DataNames
-  if (!all(TestExist)){
-    stop("Variable(s) not found in the data frame.", call. = FALSE)
-  }
-
-  MissNames <- vector()
-  for (i in Var){
-    data[, paste0(Stub, i)] <- 1
-    if (!isTRUE(reverse)){
-      data[, paste0(Stub, i)][!is.na(data[, i])] <- 0
-    } else if (isTRUE(reverse)){
-      data[, paste0(Stub, i)][is.na(data[, i])] <- 0
+    DataNames <- names(data)
+    TestExist <- Var %in% DataNames
+    if (!all(TestExist)){
+        stop("Variable(s) not found in the data frame.", call. = FALSE)
     }
-    MissNames <- append(MissNames, paste0(Stub, i))
-  }
-  if (isTRUE(message)){
-    message('The following missingness variable(s) were created:\n')
-    message(paste(MissNames, collapse = ', '))
-  }
-  return(data)
+
+    MissNames <- vector()
+    for (i in Var){
+        data[, paste0(Stub, i)] <- 1
+        if (!isTRUE(reverse)){
+            data[, paste0(Stub, i)][!is.na(data[, i])] <- 0
+        } else if (isTRUE(reverse)){
+            data[, paste0(Stub, i)][is.na(data[, i])] <- 0
+        }
+            MissNames <- append(MissNames, paste0(Stub, i))
+    }
+    if (isTRUE(message)){
+        message('The following missingness variable(s) were created:\n')
+        message(paste(MissNames, collapse = ', '))
+    }
+    return(data)
 }

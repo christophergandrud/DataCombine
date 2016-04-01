@@ -14,8 +14,8 @@ DropNA(data, Var, message = TRUE)
 \item{data}{a data frame object.}
 
 \item{Var}{a character vector naming the variables you would like to have
-only non-missing (NA) values. If missing, then all NAs will be dropped
-from the data frame.}
+only non-missing (\code{NA}) values. If not specified, then all \code{NA}s
+will be dropped from the data frame.}
 
 \item{message}{logical. Whether or not to give you a message about the number
 of rows that are dropped.}
@@ -26,8 +26,8 @@ values on a given variable(s).
 }
 \examples{
 # Create data frame
-a <- c(1, 2, 3, 4, NA)
-b <- c( 1, NA, 3, 4, 5)
+a <- c(1:4, NA)
+b <- c(1, NA, 3:5)
 ABData <- data.frame(a, b)
 
 # Remove missing values from column a
