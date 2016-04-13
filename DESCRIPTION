@@ -3,7 +3,7 @@ Title: Tools for Easily Combining and Cleaning Data Sets
 Description: Tools for combining and cleaning data sets, particularly
     with grouped and time series data.
 Version: 0.2.21
-Date: 2016-04-01
+Date: 2016-04-13
 Authors@R: c(
     person("Christopher", "Gandrud", email = "christopher.gandrud@gmail.com",
     role = c("aut", "cre"))

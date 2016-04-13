@@ -3,6 +3,9 @@
 - `CasesTable` function added to report cases after listwise deletion of 
 missing values for time-series cross-sectional data.
 
+- Fixed a bug where `CountSpell` would fail if all `SpellVar` values were 
+the same.
+
 - Improved documentation.
 
 ## Version 0.2.20

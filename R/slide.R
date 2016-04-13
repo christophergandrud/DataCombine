@@ -597,6 +597,7 @@ CountSpell <- function(data, TimeVar, SpellVar, GroupVar, NewVar,
         message(paste0("\nSpell count placed in new variable: ",
             NewVar, ".\n"))
     }
+    
     if (!missing(GroupVar)) {
         tempMain <- data.frame()
         for (i in unique(data[, GroupVar])) {
@@ -615,6 +616,7 @@ CountSpell <- function(data, TimeVar, SpellVar, GroupVar, NewVar,
 
 #' Internal function for finding spells for one unit
 #'
+#' @importFrom dplyr arrange_
 #' @noRd
 
 CountSpellOne <- function(data, TimeVar, SpellVar, SpellValue) {
@@ -628,8 +630,13 @@ CountSpellOne <- function(data, TimeVar, SpellVar, SpellValue) {
     if (class(SpellValue) != class(data[, SpellVar]))
         stop("SpellValue must be the same class as SpellVar",
             call. = FALSE)
+    
+    data <- arrange_(data, .dots = TimeVar)
 
-    if (!any(data[, SpellVar] == SpellValue)) {
+    if (all(data[, SpellVar] == SpellValue)) {
+        dataSpell <- data
+        dataSpell$Spell_Count <- 1:nrow(dataSpell)
+    } else if (!any(data[, SpellVar] == SpellValue)) {
         dataSpell <- data
         dataSpell$Spell_Count <- 0
     } else if (any(data[, SpellVar] != SpellValue)) {
