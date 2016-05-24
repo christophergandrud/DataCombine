@@ -10,7 +10,7 @@
 #' @param NewVar a character string specifying the name for the new variable to
 #' place the percentage change in.
 #' @param slideBy numeric value specifying how many rows (time units) to make
-#' the percentage change comparison for. Positive values shift the data up--lead
+#' the change comparison for. Positive values shift the data up--lead
 #' the data.
 #' @param type character string set at either \code{percent} for percentages or
 #' \code{proportion} to find proportions.
