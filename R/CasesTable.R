@@ -52,8 +52,8 @@ CasesTable <- function(data, GroupVar, TimeVar, Vars) {
         DataNames <- names(data)
         TestExist <- Vars %in% DataNames
         
-        if (!isTRUE(TestExist)) {
-            stop(paste(Vars, "was not found in the data frame."),
+        if (!isTRUE(all(TestExist))) {
+            stop(paste("Variables were not found in the data frame.\n\n"),
                  call. = FALSE)
         }
         if (missing(TimeVar)) {

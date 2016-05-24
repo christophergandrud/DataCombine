@@ -263,6 +263,7 @@ shift <- function(VarVect, shiftBy, reminder = TRUE) {
 #' place the slid data in.
 #' @param reminder logical. Whether or not to remind you to order your data by
 #' the \code{GroupVar} and time variable before running \code{slideMA}.
+#' @param ... arguements to pass through.
 #'
 #' @details \code{slideMA} is designed to give you more control over the window
 #' for creating the moving average. Think of the \code{periodBound} and
@@ -292,7 +293,7 @@ shift <- function(VarVect, shiftBy, reminder = TRUE) {
 #' @export
 
 slideMA <- function(data, Var, GroupVar, periodBound = -3, offset = 1,
-    NewVar, reminder = TRUE) {
+    NewVar, reminder = TRUE, ...) {
     slideBy <- NULL
     if (isTRUE(reminder)) {
         if (missing(GroupVar)) {

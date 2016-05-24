@@ -6,7 +6,7 @@
 given variable}
 \usage{
 slideMA(data, Var, GroupVar, periodBound = -3, offset = 1, NewVar,
-  reminder = TRUE)
+  reminder = TRUE, ...)
 }
 \arguments{
 \item{data}{a data frame object.}
@@ -36,6 +36,8 @@ place the slid data in.}
 
 \item{reminder}{logical. Whether or not to remind you to order your data by
 the \code{GroupVar} and time variable before running \code{slideMA}.}
+
+\item{...}{arguements to pass through.}
 }
 \value{
 a data frame
