@@ -21,7 +21,7 @@ treated as one unit.}
 place the percentage change in.}
 
 \item{slideBy}{numeric value specifying how many rows (time units) to make
-the percentage change comparison for. Positive values shift the data up--lead
+the change comparison for. Positive values shift the data up--lead
 the data.}
 
 \item{type}{character string set at either \code{percent} for percentages or
