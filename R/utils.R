@@ -171,7 +171,7 @@ VarDrop <- function(data, Var) {
 #'
 #' @param data1 a data frame. The first data frame to merge.
 #' @param data2 a data frame. The second data frame to merge.
-#' @param by specifications of the columns used for merging. 
+#' @param by specifications of the columns used for merging.
 #' @param Var depricated.
 #' @param dropDups logical. Whether or not to drop duplicated rows based on
 #' \code{Var}. If \code{dropDups = FALSE} then it gives a count of the
@@ -208,7 +208,7 @@ dMerge <- function(data1, data2, by, Var, dropDups = TRUE, dupsOut = FALSE,
         dropDups <- FALSE
     }
     if (!missing(Var)) {
-        warning('Var is depricated. Transfering value to "by" argument.', 
+        warning('Var is depricated. Transfering value to "by" argument.',
                 call. = FALSE)
         by <- Var
     }
@@ -298,7 +298,7 @@ InsertRow <- function(data, NewRow, RowNum = NULL) {
 #'
 #' @examples
 #' Data <- data.frame(ID = c(1, 1, 2, 2), Value = c(1, 2, 3, 4))
-#' 
+#'
 #' FindDups(Data, Vars = 'ID')
 #'
 #' @return a data frame, unless \code{test = TRUE} and there are duplicates.
@@ -316,8 +316,26 @@ FindDups <- function(data, Vars, NotDups = FALSE, test = FALSE, ...) {
         if (numb_dups > 0) {
             out <- dups[, Vars]
         }
-    } 
+    }
     if (isTRUE(NotDups)) out <- data[!duplicated(data[, Vars], ...), ]
 
     if (!isTRUE(test) & numb_dups > 0) return(out)
+}
+
+#' Extract a single column from a data frame (including tbl_df) and return it as
+#' a vector.
+#'
+#' @param data a data frame to extract the column from.
+#' @param Var a character string identifying the column to extract as a vector.
+#'
+#' @source Modified from Tommy O'Dell:
+#' \url{http://stackoverflow.com/a/24730843/1705044}
+#' @return a vector
+#' @export
+
+pull <- function(data, Var){
+    temp_var_name <- Var
+    data[, if(is.name(substitute(temp_var_name)))
+        deparse(substitute(temp_var_name))
+        else temp_var_name, drop = FALSE][[1]]
 }

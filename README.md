@@ -3,7 +3,7 @@ DataCombine
 
 Christopher Gandrud
 
-Version 0.2.21
+Version 0.2.23
 [![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine) [![CRAN Version](http://www.r-pkg.org/badges/version/DataCombine)](http://cran.r-project.org/package=DataCombine) ![CRAN Downloads](http://cranlogs.r-pkg.org/badges/last-month/DataCombine) ![CRAN Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/DataCombine)
 
 
@@ -17,10 +17,10 @@ data sets--especially time-series cross-section data--easier. The package is
 continually being developed as I turn lines of code that I frequently use into
 single functions. It currently includes the following functions:
 
-- `CasesTable` function added to report cases after listwise deletion of 
+- `CasesTable` function added to report cases after list-wise deletion of
 missing values for time-series cross-sectional data.
 
-- `change`: calculates the absolute, percentage, and proportion change from 
+- `change`: calculates the absolute, percentage, and proportion change from
 a specified lag, including within groups.
 
 - `CountSpell`: function that returns a variable counting the spell number

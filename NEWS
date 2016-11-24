@@ -1,16 +1,25 @@
+## Version 0.2.23
+
+- `DropNA` should now be compatible with `tbl_df` data frames.
+
+- Introduced (a largely internal function) `pull` for extracting single columns
+from data frames (including `tbl_df`) and returning them as vectors.
+The function is based on Tommy O'Dell's:
+<http://stackoverflow.com/a/24730843/1705044>.
+
 ## Version 0.2.22
 
 - Fixed a bug in `CasesTable` where multiple variables would cause an error.
 
-- Minor example update and internal code formatting improvements to 
+- Minor example update and internal code formatting improvements to
 `TimeFill`.
 
 ## Version 0.2.21
 
-- `CasesTable` function added to report cases after listwise deletion of 
+- `CasesTable` function added to report cases after listwise deletion of
 missing values for time-series cross-sectional data.
 
-- Fixed a bug where `CountSpell` would fail if all `SpellVar` values were 
+- Fixed a bug where `CountSpell` would fail if all `SpellVar` values were
 the same.
 
 - Improved documentation.

@@ -49,7 +49,7 @@ DropNA <- function(data, Var, message = TRUE)
     if (length(Var) == 1){
         DataNoNA <- data[!is.na(data[, Var]), ]
 
-        DataVar <- data[, Var]
+        DataVar <- pull(data, Var)
         DataNA <- DataVar[is.na(DataVar)]
         TotalDropped <- length(DataNA)
     }
