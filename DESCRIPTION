@@ -1,15 +1,18 @@
 Package: DataCombine
 Title: Tools for Easily Combining and Cleaning Data Sets
 Description: Tools for combining and cleaning data sets, particularly
-    with grouped and time series data.
+    with grouped and time series data. This includes functions for merging
+    data while reporting duplicates, filling in columns with values of a
+    column in another data frame, and creating continuous time data
+    for interupted time series.
 Version: 0.2.23
-Date: 2016-11-24
+Date: 2016-11-25
 Authors@R: c(
     person("Christopher", "Gandrud", email = "christopher.gandrud@gmail.com",
     role = c("aut", "cre"))
     )
 License: GPL (>= 3)
-URL: http://CRAN.R-project.org/package=DataCombine
+URL: https://cran.r-project.org/package=DataCombine
 BugReports: https://github.com/christophergandrud/DataCombine/issues
 Depends:
     R (>= 3.0.2)

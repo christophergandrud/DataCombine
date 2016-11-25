@@ -4,7 +4,7 @@ DataCombine
 Christopher Gandrud
 
 Version 0.2.23
-[![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine) [![CRAN Version](http://www.r-pkg.org/badges/version/DataCombine)](http://cran.r-project.org/package=DataCombine) ![CRAN Downloads](http://cranlogs.r-pkg.org/badges/last-month/DataCombine) ![CRAN Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/DataCombine)
+[![Build Status](https://travis-ci.org/christophergandrud/DataCombine.png)](https://travis-ci.org/christophergandrud/DataCombine) [![CRAN Version](http://www.r-pkg.org/badges/version/DataCombine)](https://cran.r-project.org/package=DataCombine) ![CRAN Downloads](http://cranlogs.r-pkg.org/badges/last-month/DataCombine) ![CRAN Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/DataCombine)
 
 
 Please report any **bugs** or **suggestions** at:
@@ -92,7 +92,7 @@ a single function.
 
 ## Installation
 
-**DataCombine** is on [CRAN](http://cran.r-project.org/).
+**DataCombine** is on [CRAN](https://cran.r-project.org/).
 
 You can also install the most recent stable version with `install_github` from
 the [devtools](https://github.com/hadley/devtools):
